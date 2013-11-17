@@ -63,7 +63,7 @@ public class WootGetter
                 new F.Callback<WS.Response>()
                 {
                     @Override
-                    @Transactional(type = TxType.REQUIRES_NEW) // TODO: Take out transactional scope here - its not needed
+                    //@Transactional(type = TxType.REQUIRES_NEW) // TODO: Take out transactional scope here - its not needed
                     public void invoke(WS.Response response) throws Throwable
                     {
                         try
@@ -82,8 +82,9 @@ public class WootGetter
                         } catch (Exception ex)
                         {
                             Logger.error("Error Refreshing Database: " + ex.toString());
-                            Logger.error("Woot Response status " + response.getBody());
-                            Logger.error("Woot Response " + response.toString());
+                            Logger.error("Woot Response status " + response.getStatusText());
+                            //Logger.error("Woot Response " + response.getBody());
+                            Logger.info("WebServices Async Error: " + "eventType: " + eventType + " site: " + site);
                             ex.printStackTrace();
                         }
                         final long timeTaken = System.currentTimeMillis() - startTime;
