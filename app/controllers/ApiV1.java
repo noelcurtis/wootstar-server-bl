@@ -3,6 +3,7 @@ package controllers;
 import com.google.common.base.Objects;
 import engine.actions.WithMetrics;
 import engine.data.apiv1.Settings;
+import engine.woot.WootReponseBuilder;
 import engine.woot.responses.AllEventsBuilder;
 import engine.woot.responses.EventIdBuilder;
 import engine.woot.responses.EventTypeBuilder;
@@ -51,21 +52,21 @@ public class ApiV1 extends ControllerEx
     @WithMetrics
     private static Result all()
     {
-        AllEventsBuilder b = new AllEventsBuilder();
+        WootReponseBuilder b = new AllEventsBuilder();
         return gzippedOk(b.getResponse());
     }
 
     @WithMetrics
     private static Result byId(String id)
     {
-        EventIdBuilder b = new EventIdBuilder(id);
+        WootReponseBuilder b = new EventIdBuilder(id);
         return ok(b.getResponse());
     }
 
     @WithMetrics
     private static Result byType(String type)
     {
-        EventTypeBuilder b = new EventTypeBuilder(type);
+        WootReponseBuilder b = new EventTypeBuilder(type);
         return ok(b.getResponse());
     }
 }
