@@ -22,6 +22,7 @@ public class ApplicationData extends Model
 
     /**
      * Use to add/update a key value pair
+     *
      * @param key
      * @param value
      */
@@ -44,6 +45,7 @@ public class ApplicationData extends Model
 
     /**
      * Use to find a key in the table
+     *
      * @param key
      * @return
      */
@@ -68,7 +70,7 @@ public class ApplicationData extends Model
     }
 
     // Declare a finder
-    public static Finder<String,ApplicationData> find = new Finder<String,ApplicationData>(
+    public static Finder<String, ApplicationData> find = new Finder<String, ApplicationData>(
             String.class, ApplicationData.class
     );
 }

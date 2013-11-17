@@ -9,25 +9,25 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonIgnoreProperties({"Stats"})
+@JsonIgnoreProperties({"Stats", "EstimatedShipDate", "Artist"})
 @Entity
 public class Offer extends Model
 {
     @javax.persistence.Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="offer_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "offer_seq")
     private String Id;
     private String Features;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Item> Items;
     private String OriginalStartDate;
     private Integer PercentageRemaining;
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="offer_photos")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "offer_photos")
     private List<Photo> Photos;
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<QualityPost> QualityPosts;
     private Integer Rank;
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ShippingMethod> ShippingMethods;
     private String Snippet;
     private Boolean SoldOut;
@@ -40,7 +40,7 @@ public class Offer extends Model
 
     // OfferStats is ignored
     @ManyToOne
-    @JoinColumn(name="event_id", nullable=false)
+    @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
     @JsonIgnore

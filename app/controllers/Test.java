@@ -3,11 +3,9 @@ package controllers;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.TxType;
 import com.avaje.ebean.annotation.Transactional;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Objects;
 import engine.DbHelpers;
-import models.ApplicationData;
 import models.Event;
 import play.Logger;
 import play.libs.F;
@@ -30,7 +28,7 @@ public class Test extends Controller
                 new F.Callback<WS.Response>()
                 {
                     @Override
-                    @Transactional(type= TxType.REQUIRES_NEW)
+                    @Transactional(type = TxType.REQUIRES_NEW)
                     public void invoke(WS.Response response) throws Throwable
                     {
                         try
@@ -44,8 +42,7 @@ public class Test extends Controller
                                 Ebean.save(events); //save all the events
                                 Logger.info("Saving new events end");
                             }
-                        }
-                        catch (Exception ex)
+                        } catch (Exception ex)
                         {
                             Logger.error("Error Refreshing Database: " + ex.toString());
                             Logger.error("Woot Response status " + response.getStatus());
@@ -67,13 +64,11 @@ public class Test extends Controller
         {
             String id = Objects.firstNonNull(requestParams.get("id")[0], "");
             return byId(id);
-        }
-        else if(requestParams.containsKey("eventType"))
+        } else if (requestParams.containsKey("eventType"))
         {
             String type = Objects.firstNonNull(requestParams.get("eventType")[0], "");
             return byType(type);
-        }
-        else
+        } else
         {
             return all();
         }

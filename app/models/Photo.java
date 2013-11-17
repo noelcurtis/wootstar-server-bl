@@ -12,27 +12,29 @@ import java.util.List;
 public class Photo extends Model
 {
     @javax.persistence.Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="photo_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "photo_seq")
     public Long id; // not from Woot
 
     private String Height;
     private String Url;
     private String Width;
 
-    @ManyToMany(cascade= CascadeType.ALL)
-    @JoinTable(name="photo_tags")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "photo_tags")
     private List<Tag> Tags;
 
     @ManyToMany(mappedBy = "Photos")
     private List<Offer> offers;
 
     @JsonIgnore
-    public Long getId() {
+    public Long getId()
+    {
         return id;
     }
 
     @JsonIgnore
-    public void setId(Long id) {
+    public void setId(Long id)
+    {
         this.id = id;
     }
 

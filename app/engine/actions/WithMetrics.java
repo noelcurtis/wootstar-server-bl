@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
 @With(WithMetricsAction.class)
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface WithMetrics {
+public @interface WithMetrics
+{
 
 }

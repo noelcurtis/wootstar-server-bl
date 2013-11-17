@@ -12,7 +12,7 @@ import javax.persistence.GenerationType;
 public class Attribute extends Model
 {
     @javax.persistence.Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="attribute_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attribute_seq")
     private Long id; // not from Woot
 
     private String Key;

@@ -13,7 +13,7 @@ import javax.persistence.Transient;
 public class ShippingMethod extends Model
 {
     @javax.persistence.Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="shipping_method_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shipping_method_seq")
     public Long id; // not from Woot
 
     private String Name;
@@ -24,12 +24,14 @@ public class ShippingMethod extends Model
 
 
     @JsonIgnore
-    public Long getId() {
+    public Long getId()
+    {
         return id;
     }
 
     @JsonIgnore
-    public void setId(Long id) {
+    public void setId(Long id)
+    {
         this.id = id;
     }
 

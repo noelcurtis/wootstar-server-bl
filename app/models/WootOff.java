@@ -13,22 +13,26 @@ public class WootOff extends Event
     private String Subtitle;
 
     @JsonProperty("Subtitle")
-    public String getSubtitle() {
+    public String getSubtitle()
+    {
         return Subtitle;
     }
 
     @JsonProperty("Subtitle")
-    public void setSubtitle(String subtitle) {
+    public void setSubtitle(String subtitle)
+    {
         Subtitle = subtitle;
     }
 
     @JsonProperty("WriteUp")
-    public String getWriteUp() {
+    public String getWriteUp()
+    {
         return WriteUp;
     }
 
     @JsonProperty("WriteUp")
-    public void setWriteUp(String writeUp) {
+    public void setWriteUp(String writeUp)
+    {
         WriteUp = writeUp;
     }
 }

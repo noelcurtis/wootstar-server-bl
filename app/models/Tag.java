@@ -13,7 +13,7 @@ import java.util.List;
 public class Tag extends Model
 {
     @javax.persistence.Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="tag_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tag_seq")
     private Long id; // not from Woot
     private String Info;
 
@@ -21,22 +21,26 @@ public class Tag extends Model
     private List<Photo> photos;
 
     @JsonIgnore
-    public Long getId() {
+    public Long getId()
+    {
         return id;
     }
 
     @JsonIgnore
-    public void setId(Long id) {
+    public void setId(Long id)
+    {
         this.id = id;
     }
 
     @JsonIgnore
-    public String getInfo() {
+    public String getInfo()
+    {
         return Info;
     }
 
     @JsonIgnore
-    public void setInfo(String info) {
+    public void setInfo(String info)
+    {
         this.Info = info;
     }
 

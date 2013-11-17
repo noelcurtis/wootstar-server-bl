@@ -3,7 +3,7 @@ package engine.woot;
 public class WootApiHelpers
 {
     public static final String wootKey = "041deb1d26d3411cbdb35abba0f6f709";
-    private static final String wootUrl = play.Play.application().configuration().getBoolean("testmode.enabled") ? "http://localhost:9000/test/": "http://api.woot.com/2/events.json";
+    public static final String wootUrl = "http://api.woot.com/2/events.json";
 
 //    www.woot.com
 //    wine.woot.com
@@ -65,5 +65,26 @@ public class WootApiHelpers
         {
             return this.toString(); // just to be consistent with the interface
         }
+    }
+
+    public static String getCacheIdentifier(EventType eventType, Site site)
+    {
+        return getIdentifier(eventType, site, "-cache-identifier");
+    }
+
+    public static String getCheckpointIdentifier(EventType eventType, Site site)
+    {
+        return getIdentifier(eventType, site, "-checkpoint-identifier");
+    }
+
+    private static String getIdentifier(EventType eventType, Site site, String identifier)
+    {
+        if (eventType == null && site == null)
+        {
+            return "all-checkpoint-identifier";
+        }
+        String s = site != null ? site.toString() : "";
+        String e = eventType != null ? eventType.toString() : "";
+        return s + e + identifier;
     }
 }

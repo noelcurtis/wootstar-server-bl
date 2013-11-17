@@ -13,7 +13,7 @@ import java.util.Date;
 public class QualityPost extends Model
 {
     @javax.persistence.Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="quality_post_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quality_post_seq")
     public Long id; // not from Woot
 
     private String Avatar;
@@ -22,12 +22,14 @@ public class QualityPost extends Model
     private String Username;
 
     @JsonIgnore
-    public Long getId() {
+    public Long getId()
+    {
         return id;
     }
 
     @JsonIgnore
-    public void setId(Long id) {
+    public void setId(Long id)
+    {
         this.id = id;
     }
 

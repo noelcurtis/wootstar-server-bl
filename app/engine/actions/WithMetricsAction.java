@@ -1,4 +1,5 @@
 package engine.actions;
+
 import com.codahale.metrics.Timer;
 import play.libs.F;
 import play.mvc.Action;
@@ -16,8 +17,7 @@ public class WithMetricsAction extends Action<WithMetrics>
         try
         {
             return delegate.call(ctx);
-        }
-        finally
+        } finally
         {
             context.stop();
         }

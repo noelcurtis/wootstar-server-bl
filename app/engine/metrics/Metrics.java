@@ -11,7 +11,8 @@ import scala.concurrent.duration.Duration;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class Metrics {
+public class Metrics
+{
 
     private final static MetricRegistry metricsRegistry = new MetricRegistry();  // The REGISTERY
 
@@ -75,15 +76,17 @@ public class Metrics {
     {
         int offset = 10;
         Logger.info(String.format("Starting Woot DataGetter in %d seconds...", offset));
-        if (scheduledMetrics!= null && !scheduledMetrics.isCancelled())
+        if (scheduledMetrics != null && !scheduledMetrics.isCancelled())
         {
             Logger.info("May already be started ... ");
             return;
         }
         scheduledMetrics = Akka.system().scheduler().schedule(Duration.create(offset, TimeUnit.SECONDS),
-                Duration.create(10, TimeUnit.MINUTES), new Runnable() {
+                Duration.create(10, TimeUnit.MINUTES), new Runnable()
+        {
             @Override
-            public void run() {
+            public void run()
+            {
 
             }
         }, Akka.system().dispatcher());

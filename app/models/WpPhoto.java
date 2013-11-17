@@ -14,7 +14,7 @@ import javax.persistence.GenerationType;
 public class WpPhoto extends Model
 {
     @javax.persistence.Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="wp_photo_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "wp_photo_seq")
     public Long id; // not from Woot
 
     private String Height;
@@ -22,12 +22,14 @@ public class WpPhoto extends Model
     private String Width;
 
     @JsonIgnore
-    public Long getId() {
+    public Long getId()
+    {
         return id;
     }
 
     @JsonIgnore
-    public void setId(Long id) {
+    public void setId(Long id)
+    {
         this.id = id;
     }
 

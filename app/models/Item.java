@@ -11,7 +11,7 @@ import java.util.List;
 public class Item extends Model
 {
     @javax.persistence.Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="item_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_seq")
     private String Id;
 
     @OneToMany(cascade = CascadeType.ALL)

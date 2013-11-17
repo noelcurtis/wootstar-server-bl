@@ -23,17 +23,20 @@ public class WootPlus extends Event
     private String Text;
 
     @JsonProperty("ManufacturerText")
-    public String getManufacturerText() {
+    public String getManufacturerText()
+    {
         return ManufacturerText;
     }
 
     @JsonProperty("ManufacturerText")
-    public void setManufacturerText(String manufacturerText) {
+    public void setManufacturerText(String manufacturerText)
+    {
         ManufacturerText = manufacturerText;
     }
 
     @JsonIgnore
-    public List<WpPhoto> getPhotos() {
+    public List<WpPhoto> getPhotos()
+    {
         return Photos;
     }
 
@@ -49,28 +52,33 @@ public class WootPlus extends Event
     }
 
     @JsonProperty("Photos")
-    public void setPhotos(List<WpPhoto> photos) {
+    public void setPhotos(List<WpPhoto> photos)
+    {
 
         Photos = photos;
     }
 
     @JsonProperty("Url")
-    public String getUrl() {
+    public String getUrl()
+    {
         return Url;
     }
 
     @JsonProperty("Url")
-    public void setUrl(String url) {
+    public void setUrl(String url)
+    {
         this.Url = url;
     }
 
     @JsonProperty("Text")
-    public String getText() {
+    public String getText()
+    {
         return Text;
     }
 
     @JsonProperty("Text")
-    public void setText(String text) {
+    public void setText(String text)
+    {
         Text = text;
     }
 }

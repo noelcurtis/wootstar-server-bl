@@ -5,24 +5,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import play.Logger;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static engine.WootObjectMapper.WootMapper;
-
-@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="Type")
-@JsonSubTypes({@JsonSubTypes.Type(value=Daily.class, name="Daily"),
-        @JsonSubTypes.Type(value=Moofi.class, name="Moofi"),
-        @JsonSubTypes.Type(value=Reckoning.class, name="Reckoning"),
-        @JsonSubTypes.Type(value=WootOff.class, name="WootOff"),
-        @JsonSubTypes.Type(value=WootPlus.class, name="WootPlus")})
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "Type")
+@JsonSubTypes({@JsonSubTypes.Type(value = Daily.class, name = "Daily"),
+        @JsonSubTypes.Type(value = Moofi.class, name = "Moofi"),
+        @JsonSubTypes.Type(value = Reckoning.class, name = "Reckoning"),
+        @JsonSubTypes.Type(value = WootOff.class, name = "WootOff"),
+        @JsonSubTypes.Type(value = WootPlus.class, name = "WootPlus")})
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity
 public class Event extends Model
 {
@@ -109,7 +104,7 @@ public class Event extends Model
     }
 
     // Declare a finder
-    public static Finder<String,Event> find = new Finder<String,Event>(
+    public static Finder<String, Event> find = new Finder<String, Event>(
             String.class, Event.class
     );
 
