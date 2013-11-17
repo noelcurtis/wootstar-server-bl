@@ -1,4 +1,4 @@
-# README	
+# README wootstar-server-bl (bl: Blue Lable the premium cut)
 
 ## Getting Started	
 *	Download Play 2.2.1, Postgres APP and Redis Server (brew install redis) before you do anything with the application
