@@ -12,7 +12,10 @@ public class Global extends GlobalSettings
     public void onStart(Application app)
     {
         Logger.info("Application startup...");
-        RequestQueue().scheduleRequests();
+        if (app.configuration().getBoolean("datagetter.enabled"))
+        {
+            RequestQueue().scheduleRequests();
+        }
     }
 
     @Override

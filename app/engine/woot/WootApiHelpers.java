@@ -65,6 +65,18 @@ public class WootApiHelpers
         {
             return this.toString(); // just to be consistent with the interface
         }
+
+        public static EventType fromString(String type)
+        {
+            for (EventType e : EventType.values())
+            {
+                if (e.toString().toLowerCase().equals(type.toLowerCase()))
+                {
+                    return e;
+                }
+            }
+            return Daily;
+        }
     }
 
     public static String getCacheIdentifier(EventType eventType, Site site)

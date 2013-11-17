@@ -1,5 +1,7 @@
 package engine;
 
+import com.avaje.ebean.Ebean;
+import com.avaje.ebean.SqlRow;
 import engine.woot.WootApiHelpers;
 import play.Logger;
 import play.db.DB;
@@ -73,6 +75,24 @@ public class DbHelpers
                 connection.close();
             }
         }
+    }
+
+    public static boolean getAdvisoryLock()
+    {
+        Logger.info("Trying to get Advisory Lock");
+        SqlRow lock = Ebean.createSqlQuery("select pg_try_advisory_lock(1)").findUnique();
+        boolean result = lock.getBoolean("pg_try_advisory_lock");
+        Logger.info("Advisory Lock state: " + result);
+        return result;
+    }
+
+    private static boolean releaseAdvisoryLock()
+    {
+        Logger.info("Releasing Advisory Lock");
+        SqlRow lock = Ebean.createSqlQuery("select pg_advisory_unlock(1)").findUnique();
+        boolean result = lock.getBoolean("pg_advisory_unlock");
+        Logger.info("Releasing Lock state: " + result);
+        return result;
     }
 
 }

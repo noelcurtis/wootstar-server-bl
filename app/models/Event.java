@@ -5,9 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import engine.woot.WootApiHelpers;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -115,49 +117,57 @@ public class Event extends Model
         return !foundEvents.isEmpty();
     }
 
-//    @JsonIgnore
-//    public static List<models.Event> getFallbackEvents()
-//    {
-//        List<models.Event> result = new ArrayList<models.Event>();
-//        String eventsAsString = ApplicationData.get(Utils.FallbackEventsDbKey);
-//        if (eventsAsString != null)
-//        {
-//            ObjectMapper om = new ObjectMapper(); // map response
-//            try
-//            {
-//                JsonNode node = om.readTree(eventsAsString);
-//                final List<models.Event> fallbackEvents = om.readValue(node, WootMapper().getTypeFactory().constructCollectionType(List.class, models.Event.class));
-//                if (fallbackEvents != null && !fallbackEvents.isEmpty())
-//                {
-//                    Logger.info("Found fallback events");
-//                    result = fallbackEvents;
-//                }
-//                else
-//                {
-//                    Logger.info("No fallback events");
-//                }
-//            }
-//            catch(Exception ex)
-//            {
-//                Logger.error(ex.toString());
-//            }
-//        }
-//        return result;
-//    }
+    // helper to get all events
+    @JsonIgnore
+    public static List<Event> getAllEvents()
+    {
+        // Get a list of the events
+        List<models.Event> events = models.Event.find.all();
+        return events;
+    }
 
-//    @JsonIgnore
-//    public static models.Event getFallbackEvent(String id)
-//    {
-//        List<models.Event> events = getFallbackEvents();
-//        for (models.Event e : events)
-//        {
-//            if (e.getId().equals(id))
-//            {
-//                Logger.info("Found fallback event with id " + id);
-//                return e;
-//            }
-//        }
-//        Logger.info("No fallback event with id " + id);
-//        return null;
-//    }
+    // helper to get an event by id
+    @JsonIgnore
+    public static Event getEvent(String id)
+    {
+        models.Event foundEvent = models.Event.find.byId(id);
+        return foundEvent;
+    }
+
+    // helper to get events to type
+    @JsonIgnore
+    public static List<Event> getEvents(String type)
+    {
+        List<models.Event> foundEvents = models.Event.find.where().eq("dtype", type).findList();
+        return foundEvents;
+    }
+
+    @JsonIgnore
+    public static List<Event> getEventsBySite(WootApiHelpers.Site site)
+    {
+        return getEvents(null, site);
+    }
+
+    @JsonIgnore
+    public static List<Event> getEventsByType(WootApiHelpers.EventType eventType)
+    {
+        return getEvents(eventType, null);
+    }
+
+    @JsonIgnore
+    public static List<Event> getEvents(WootApiHelpers.EventType eventType, WootApiHelpers.Site site)
+    {
+        List<models.Event> foundEvents = new ArrayList<Event>();
+        if (eventType != null && site != null)
+        {
+            foundEvents = models.Event.find.where().eq("dtype", eventType.getValue()).eq("site", site.getValue()).findList();
+        } else if (eventType != null && site == null)
+        {
+            foundEvents = models.Event.find.where().eq("dtype", eventType.getValue()).findList();
+        } else if (eventType == null && site != null)
+        {
+            foundEvents = models.Event.find.where().eq("site", site.getValue()).findList();
+        }
+        return foundEvents;
+    }
 }

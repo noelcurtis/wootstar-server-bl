@@ -5,6 +5,10 @@
 # Home page
 GET        /                        controllers.Application.index()
 
+# ApiV1
+GET        /apiv1/events            controllers.ApiV1.events
+GET        /apiv1/settings          controllers.ApiV1.settings
+
 # Test
 GET        /test/events        controllers.Test.events
 GET        /test/testsetup          controllers.Test.testSetup
