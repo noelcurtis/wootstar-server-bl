@@ -5,6 +5,7 @@ import engine.actions.WithMetrics;
 import engine.data.apiv1.Settings;
 import engine.woot.responses.AllEventsBuilder;
 import engine.woot.responses.EventIdBuilder;
+import engine.woot.responses.EventTypeBuilder;
 import play.mvc.Result;
 
 import java.util.Map;
@@ -64,6 +65,7 @@ public class ApiV1 extends ControllerEx
     @WithMetrics
     private static Result byType(String type)
     {
-        return ok();
+        EventTypeBuilder b = new EventTypeBuilder(type);
+        return ok(b.getResponse());
     }
 }
