@@ -14,7 +14,7 @@ public class ApiV1 extends ControllerEx
 {
 
     /**
-     * Will return a list of data.apiv1.Settings
+     * Will return a list of data.apiv1.Settingss
      *
      * @return
      */
