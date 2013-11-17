@@ -6,26 +6,26 @@ WootPlus:
 
 ### Possible Woot Sites: 11 Sites in total
 
-www.woot.com
-wine.woot.com
-shirt.woot.com
-sellout.woot.com
-kids.woot.com
-home.woot.com
-sport.woot.com
-tech.woot.com
-pop.woot.com
-tools.woot.com
-accessories.woot.com
+*   www.woot.com
+*   wine.woot.com
+*   shirt.woot.com
+*   sellout.woot.com
+*   kids.woot.com
+*   home.woot.com
+*   sport.woot.com
+*   tech.woot.com
+*   pop.woot.com
+*   tools.woot.com
+*   accessories.woot.com
 
 
 ### Possible Event Types: 5 Event types in total
 
-Daily
-Moofi
-Reckoning
-WootOff
-WootPlus
+*   Daily
+*   Moofi
+*   Reckoning
+*   WootOff
+*   WootPlus
 
 
 ## Methodolody
