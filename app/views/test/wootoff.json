@@ -1,0 +1,68 @@
+[{
+    "Subtitle": "Subtitle of WootOff!",
+    "WriteUp": null,
+    "Type": "WootOff",
+    "Id": "0e82b415-4a51-4cea-b711-69a7800119e3",
+    "Title": "Wine Woot-Off!",
+    "Site": "wine.woot.com",
+    "StartDate": "2012-06-26T05:00:00Z",
+    "EndDate": null,
+    "Offers": [
+        {
+            "Features": null,
+            "Id": "a9fef72d-a193-49c0-b59c-a3e237c445a5",
+            "Items": [
+                {
+                    "Id": "8d2f146a-aa4e-4ab1-bf53-67d00b0b24f6",
+                    "SalePrice": 69.99,
+                    "ListPrice": 120.00,
+                    "Attributes": [],
+                    "PurchaseLimit": 0
+                }
+            ],
+            "Url": "http://www.woot.com/offers/emery-estate-unbridled-cabernet",
+            "PercentageRemaining": 0,
+            "Photos": [
+                {
+                    "Url": "http://d3gqasl9vmjfd8.cloudfront.net/5c5f0a47-d299-44ea-817e-032e7ad26d38.png",
+                    "Width": 1080,
+                    "Height": 410,
+                    "Tags": []
+                },
+                {
+                    "Url": "http://d3gqasl9vmjfd8.cloudfront.net/a0b4deea-4a19-44a9-94dd-23936a1d718e.png",
+                    "Width": 588,
+                    "Height": 441,
+                    "Tags": [
+                        "gallery",
+                        "fullsize-0"
+                    ]
+                },
+                {
+                    "Url": "http://d3gqasl9vmjfd8.cloudfront.net/68aa949f-2f46-4c1b-a24f-1dc28350ba84.png",
+                    "Width": 60,
+                    "Height": 45,
+                    "Tags": [
+                        "gallery",
+                        "thumbnail-0"
+                    ]
+                }
+            ],
+            "ShippingMethods": [
+                {
+                    "Name": "Standard",
+                    "PerOrderAmount": 5.00,
+                    "PerEventAmount": 0.00,
+                    "PerItemAmount": 0.00
+                }
+            ],
+            "SoldOut": true,
+            "Specs": "<ul><li>Alcohol Content&nbsp; 14.6%</li><li>Cases Produced: 1,100</li><li>RS: 0.30</li><li>...</li></ul>",
+            "Subtitle": "It's a weird adjective.",
+            "Teaser": "The word \"unbridled\" doesn't always work with every noun.",
+            "Title": "Emery Estate Unbridled Cabernet",
+            "WriteUp": "At first glance, a phrase like \"unbridled Cabernet\" might sound confusing. But it's a better choice than, say, \"unbridled stomach flu.\" ...",
+            "Stats": null
+        }
+    ]
+}]
