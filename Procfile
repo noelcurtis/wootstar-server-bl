@@ -1,2 +1,2 @@
-web: target/universal/stage/bin/wootstar-server-bl -Dconfig.resource=application.prod.conf
-worker: target/universal/stage/bin/wootstar-server-bl -Dconfig.resource=application.worker.conf
+web: target/universal/stage/bin/wootstar-server-bl -Dhttp.port=${PORT} ${JAVA_OPTS} -Dconfig.resource=application.prod.conf
+worker: target/universal/stage/bin/wootstar-server-bl -Dhttp.port=${PORT} ${JAVA_OPTS} -Dconfig.resource=application.worker.conf
