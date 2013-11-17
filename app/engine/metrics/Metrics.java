@@ -47,7 +47,7 @@ public class Metrics
                     .convertRatesTo(TimeUnit.SECONDS)
                     .convertDurationsTo(TimeUnit.MILLISECONDS)
                     .build();
-            consoleReporter.start(1, TimeUnit.MINUTES);
+            consoleReporter.start(15, TimeUnit.MINUTES);
         }
 
         registerMemoryMetrics();
