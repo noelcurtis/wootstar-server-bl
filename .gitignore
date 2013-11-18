@@ -13,6 +13,5 @@ dist
 /.project
 /RUNNING_PID
 /.settings
-application.conf
 .DS_Store
 dump.rdb
