@@ -14,7 +14,17 @@ public class Global extends GlobalSettings
         Logger.info("Application startup...");
         if (app.configuration().getBoolean("datagetter.enabled"))
         {
-            RequestQueue().scheduleRequests();
+            try
+            {
+                DbHelpers.clearWootData();
+                RequestQueue().scheduleRequests();
+            }
+            catch(Exception ex)
+            {
+                Logger.error(ex.toString());
+                ex.printStackTrace();
+            }
+
         }
     }
 
