@@ -7,6 +7,7 @@ import scala.concurrent.duration.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class WootRequestQueue
@@ -49,8 +50,10 @@ public class WootRequestQueue
         for (final WootRequest r : requests)
         {
             Logger.info("Scheduling request " + r.toString());
+            Random rand = new Random();
+            final int  n = rand.nextInt(10) + 1;
             Cancellable c = Akka.system().scheduler().schedule(
-                    Duration.create(0, TimeUnit.MILLISECONDS), // Initial delay 0 milliseconds
+                    Duration.create(n, TimeUnit.SECONDS), // Initial delay between 0-10 seconds
                     Duration.create(r.interval, TimeUnit.MILLISECONDS), new Runnable()
             {
                 @Override
