@@ -16,7 +16,7 @@ public class Global extends GlobalSettings
         {
             try
             {
-                DbHelpers.clearWootData();
+//                DbHelpers.clearWootData();
                 RequestQueue().scheduleRequests();
             }
             catch(Exception ex)

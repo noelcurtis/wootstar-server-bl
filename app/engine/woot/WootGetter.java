@@ -43,6 +43,7 @@ public class WootGetter
     private WS.WSRequestHolder constructRequest()
     {
         WS.WSRequestHolder requestHolder = WS.url(WootApiHelpers.wootUrl);
+        requestHolder.setTimeout(10000); // timeout set to 10 seconds.
         requestHolder.setQueryParameter("key", WootApiHelpers.wootKey); // set the woot key
         if (eventType != null)
         {
@@ -63,7 +64,7 @@ public class WootGetter
                 new F.Callback<WS.Response>()
                 {
                     @Override
-                    //@Transactional(type = TxType.REQUIRES_NEW) // TODO: Take out transactional scope here - its not needed
+                    @Transactional(type = TxType.REQUIRES_NEW)
                     public void invoke(WS.Response response) throws Throwable
                     {
                         try
