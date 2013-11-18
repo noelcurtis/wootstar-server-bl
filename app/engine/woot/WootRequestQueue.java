@@ -50,10 +50,10 @@ public class WootRequestQueue
         for (final WootRequest r : requests)
         {
             Logger.info("Scheduling request " + r.toString());
-            Random rand = new Random();
-            final int  n = rand.nextInt(10) + 1;
+            //Random rand = new Random();
+           // final int  n = rand.nextInt(10) + 1;
             Cancellable c = Akka.system().scheduler().schedule(
-                    Duration.create(n, TimeUnit.SECONDS), // Initial delay between 0-10 seconds
+                    Duration.create(0, TimeUnit.SECONDS), // Initial delay between 0-10 seconds
                     Duration.create(r.interval, TimeUnit.MILLISECONDS), new Runnable()
             {
                 @Override
