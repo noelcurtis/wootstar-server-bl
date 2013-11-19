@@ -9,3 +9,4 @@
 *   `cp logger-prod.xml logger.xml`
 *   starting postgres `su postgres` `cd /opt` `pg_ctl -D pgdata start -l pglogs/pglog.log`
 *   `../../play start` from application root
+*   `psql -d "wootstar-dev" -U play` as user postgres if you want to connect to the DB
