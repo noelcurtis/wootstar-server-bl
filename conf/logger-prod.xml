@@ -33,7 +33,7 @@
         <appender-ref ref="FILE" />
     </root>
 
-    <root level="debug">
+    <root level="INFO">
         <appender-ref ref="LE" />
     </root>
 
