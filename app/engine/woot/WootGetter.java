@@ -82,7 +82,7 @@ public class WootGetter
                             }
                             else
                             {
-                                Logger.info("Not Found " + events.size() + " events for eventType " + eventType + " site " + site);
+                                Logger.info("No events for eventType " + eventType + " site " + site);
                             }
                         } catch (Exception ex)
                         {
