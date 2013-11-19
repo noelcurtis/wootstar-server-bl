@@ -13,25 +13,16 @@ public class CachedObject
     private final JsonNode json;
     private final engine.data.apiv1.Event[] events;
 
-    public CachedObject(Event event)
+    public CachedObject(engine.data.apiv1.Event event, JsonNode json)
     {
-        engine.data.apiv1.Event mappedEvent = new engine.data.apiv1.Event(event);
-        this.events = new engine.data.apiv1.Event[]{mappedEvent};
-        this.json = WootMapper().valueToTree(mappedEvent);
+        this.events = new engine.data.apiv1.Event[]{event};
+        this.json = json;
     }
 
-    public CachedObject(List<Event> events)
+    public CachedObject(List<engine.data.apiv1.Event> events, JsonNode json)
     {
-        List<engine.data.apiv1.Event> mappedEvents = new ArrayList<engine.data.apiv1.Event>();
-        // map events so they can be rendered in json
-        for (models.Event e : events)
-        {
-            mappedEvents.add(new engine.data.apiv1.Event(e));
-        }
-        // get the events
-        this.events = mappedEvents.toArray(new engine.data.apiv1.Event[]{});
-        // serialize the JSON
-        this.json = WootMapper().valueToTree(this.events);
+        this.events = events.toArray(new engine.data.apiv1.Event[]{});
+        this.json = json;
     }
 
     public engine.data.apiv1.Event[] getEvents()

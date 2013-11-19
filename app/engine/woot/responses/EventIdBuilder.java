@@ -1,9 +1,12 @@
 package engine.woot.responses;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import engine.WootObjectMapper;
 import engine.woot.CachedObject;
 import engine.woot.WootReponseBuilder;
 import models.Event;
+
+import java.util.List;
 
 public class EventIdBuilder implements WootReponseBuilder
 {
@@ -18,7 +21,8 @@ public class EventIdBuilder implements WootReponseBuilder
     public JsonNode getResponse()
     {
         Event foundEvent = Event.getEvent(eventId);
-        CachedObject ob = new CachedObject(foundEvent);
-        return ob.getJson();
+        engine.data.apiv1.Event mappedEvent = new engine.data.apiv1.Event(foundEvent);
+        JsonNode eventAsJson = WootObjectMapper.WootMapper().valueToTree(foundEvent);
+        return eventAsJson;
     }
 }

@@ -9,6 +9,7 @@ import engine.woot.WootReponseBuilder;
 import engine.woot.WootRequest;
 import models.Event;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static engine.woot.WootRequestQueue.RequestQueue;
@@ -23,19 +24,21 @@ public class AllEventsBuilder implements WootReponseBuilder
         List<WootRequest> requests = RequestQueue().getRequests();
 
         ObjectMapper mapper = WootObjectMapper.WootMapper();
-        ArrayNode eventsJson = mapper.createArrayNode();
+        List<engine.data.apiv1.Event> allMappedEvents = new ArrayList<engine.data.apiv1.Event>();
 
         for (WootRequest request : requests)
         {
             // create a new cached object
             List<Event> events = Event.getEvents(request.eventType, request.site);
-            if (!events.isEmpty())
+            List<engine.data.apiv1.Event> mappedEvents = new ArrayList<engine.data.apiv1.Event>();
+            // map events so they can be rendered in json
+            for (models.Event e : events)
             {
-                CachedObject ob = new CachedObject(events);
-                eventsJson.add(ob.getJson());
+                mappedEvents.add(new engine.data.apiv1.Event(e));
             }
-            // get CachedObject from cache
+            allMappedEvents.addAll(mappedEvents);
         }
-        return eventsJson;
+        JsonNode eventsAsJson = WootObjectMapper.WootMapper().valueToTree(allMappedEvents);
+        return eventsAsJson;
     }
 }
