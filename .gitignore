@@ -15,4 +15,6 @@ dist
 /.settings
 .DS_Store
 dump.rdb
+
 application.conf
+conf/logger.xml

@@ -5,7 +5,7 @@ import play.Project._
 object ApplicationBuild extends Build {
 
   val appName         = "wootstar-server-bl"
-  val appVersion      = "1.0"
+  val appVersion      = "1.1"
 
   val appDependencies = Seq(
     // Add your project dependencies here,
@@ -18,7 +18,8 @@ object ApplicationBuild extends Build {
     "com.codahale.metrics" % "metrics-healthchecks" % "3.0.1",
     "com.codahale.metrics" % "metrics-jvm" % "3.0.1",
     "com.codahale.metrics" % "metrics-graphite" % "3.0.1",
-    "com.codahale.metrics" % "metrics-json" % "3.0.1"
+    "com.codahale.metrics" % "metrics-json" % "3.0.1",
+    "com.logentries" % "logentries-appender" % "1.1.20"
   )
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
