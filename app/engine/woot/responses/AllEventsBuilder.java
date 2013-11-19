@@ -29,9 +29,11 @@ public class AllEventsBuilder implements WootReponseBuilder
         {
             // create a new cached object
             List<Event> events = Event.getEvents(request.eventType, request.site);
-            CachedObject ob = new CachedObject(events);
-            eventsJson.add(ob.getJson());
-
+            if (!events.isEmpty())
+            {
+                CachedObject ob = new CachedObject(events);
+                eventsJson.add(ob.getJson());
+            }
             // get CachedObject from cache
         }
         return eventsJson;

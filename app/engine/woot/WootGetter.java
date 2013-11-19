@@ -80,6 +80,10 @@ public class WootGetter
                                 createUpdateCheckpoint(); // create/update the checkpoint
                                 Logger.info("Found " + events.size() + " events for eventType " + eventType + " site " + site);
                             }
+                            else
+                            {
+                                Logger.info("Not Found " + events.size() + " events for eventType " + eventType + " site " + site);
+                            }
                         } catch (Exception ex)
                         {
                             Logger.error("Error Refreshing Database: " + ex.toString());
