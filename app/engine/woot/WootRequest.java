@@ -2,8 +2,7 @@ package engine.woot;
 
 public class WootRequest
 {
-    //public Long interval = 600000L; // interval in milliseconds if not set will make requests with 0 interval
-    public Long interval = 40000l;
+    public Long interval = 600000L; // interval in milliseconds if not set will make requests with 0 interval
     public WootApiHelpers.EventType eventType;
     public WootApiHelpers.Site site;
 
