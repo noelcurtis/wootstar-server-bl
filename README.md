@@ -13,9 +13,14 @@
 *	In the console run `$play dependencies` will get you started with managed dependencies
 *	In the console run `$play idea` will setup the project to be opened with IntelliJ
 *	You are all setup to start working with the project.
+*   Copy `cp application.dev.con to application.conf`
 *	Note the first time you start the application play will ask you to run a DB Migration, please do so. The project will use DB Migrations to manage all DB changes so please do not run SQL to alter the DB manually.
 
 ## [Caching Design](https://github.com/noelcurtis/wootstar-server-bl/blob/master/docs/caching.md)
+
+## [API Documentation] (https://github.com/noelcurtis/wootstar-server-bl/blob/master/docs/api.md)
+
+## [Helpers] (https://github.com/noelcurtis/wootstar-server-bl/blob/master/docs/helpers.md)
 
 
 

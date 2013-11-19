@@ -4,6 +4,6 @@
 *   Error events `/error.*application\s/i`
 
 
-## Deployment
+## Deployment/Production config
 *   `cp application.aws.conf application.conf`
 *   `cp logger-prod.xml logger.xml`

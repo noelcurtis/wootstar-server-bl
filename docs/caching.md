@@ -1,7 +1,12 @@
 ## Caching Design
 
-Daily: 15 minutes
-WootPlus:
+Current Configuration
+
+*   Daily - All - 10min
+*   Moofi - All - 1 Hour
+*   Reckoning - All - 1 Hour
+*   WootOff - All - 7 second
+*   WootPlus - 11 Sites - 10 min
 
 
 ### Possible Woot Sites: 11 Sites in total
