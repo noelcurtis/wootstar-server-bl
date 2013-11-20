@@ -22,7 +22,7 @@ public class EventIdBuilder implements WootReponseBuilder
     {
         Event foundEvent = Event.getEvent(eventId);
         engine.data.apiv1.Event mappedEvent = new engine.data.apiv1.Event(foundEvent);
-        JsonNode eventAsJson = WootObjectMapper.WootMapper().valueToTree(foundEvent);
+        JsonNode eventAsJson = WootObjectMapper.WootMapper().valueToTree(mappedEvent);
         return eventAsJson;
     }
 }
