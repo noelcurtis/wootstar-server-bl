@@ -84,3 +84,21 @@ h1, h2, h3, h4, h5,
     font-weight: 500;
     color: #000;
 }
+
+.neutral
+{
+    color: #46426B;
+    font-weight: bold;
+}
+
+.ok
+{
+    color: #5cb85c;
+    font-weight: bold;
+}
+
+.error
+{
+    color: #D9534F;
+    font-weight: bold;
+}

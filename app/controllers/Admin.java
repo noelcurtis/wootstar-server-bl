@@ -1,6 +1,11 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import engine.Utils;
+import engine.WootObjectMapper;
+import engine.woot.WootApiHelpers;
+import play.libs.F;
+import play.libs.WS;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -24,5 +29,26 @@ public class Admin extends Controller
             ex.printStackTrace();
         }
         return internalServerError(Utils.jsonError());
+    }
+
+    public static F.Promise<Result> apiStatus()
+    {
+        final ObjectNode node = WootObjectMapper.WootMapper().createObjectNode();
+        final F.Promise<Result> resultPromise = WS.url("http://ec2-23-22-201-81.compute-1.amazonaws.com:9000/apiv1/events").get().flatMap(
+                new F.Function<WS.Response, F.Promise<Result>>() {
+                    public F.Promise<Result> apply(WS.Response response) {
+                        node.put("event", true);
+                        return WS.url("http://ec2-23-22-201-81.compute-1.amazonaws.com:9000/apiv1/events").setQueryParameter("type", "Daily").get().map(
+                                new F.Function<WS.Response, Result>() {
+                                    public Result apply(WS.Response response) {
+                                        node.put("type", true);
+                                        return ok(node);
+                                    }
+                                }
+                        );
+                    }
+                }
+        );
+        return resultPromise;
     }
 }

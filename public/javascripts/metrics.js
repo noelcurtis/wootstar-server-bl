@@ -1,6 +1,7 @@
 var colorSet = {ok:"#5cb85c", warn:"#f0ad4e", error:"#d9534f", neutral: "#46426B"}
 
 var allMetrics = null;
+var apiStatus = null;
 
 //  Charts //
 var memoryChart = null;
@@ -9,6 +10,7 @@ var requestRateChart = null;
 
 $(function(){
     requestMetrics();
+    requestStatus();
 });
 
 function populateData()
@@ -175,6 +177,29 @@ function requestMetrics()
     $.getJSON("/admin/metrics", function (data){
         allMetrics = data;
         populateData();
+    });
+}
+
+function requestStatus()
+{
+    $.getJSON("/admin/apistatus", function (data){
+        apiStatus = data;
+        if (apiStatus["event"])
+        {
+            $(".status-event").html("Ok").removeClass(["ok", "error", "neutral"]).addClass("ok");
+        }
+
+        if (apiStatus["type"])
+        {
+            $(".status-type").html("Ok").removeClass(["ok", "error", "neutral"]).addClass("ok");
+        }
+
+        if(apiStatus["type"] && apiStatus["event"])
+        {
+            $(".status-id").html("Ok").removeClass(["ok", "error", "neutral"]).addClass("ok");
+        }
+    }).error(function(){
+        $(".status-event, .status-type, .status-id").html("error").removeClass(["ok", "error", "neutral"]).addClass("error");
     });
 }
 
