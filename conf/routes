@@ -3,18 +3,20 @@
 # ~~~~
 
 # ApiV1
-GET        /apiv1/events          controllers.ApiV1.events
-GET        /apiv1/settings        controllers.ApiV1.settings
+GET        /apiv1/events           controllers.ApiV1.events
+GET        /apiv1/settings         controllers.ApiV1.settings
 
 # Test
-GET        /test/events           controllers.Test.events
-GET        /test/testsetup        controllers.Test.testSetup
+GET        /test/events            controllers.Test.events
+GET        /test/testsetup         controllers.Test.testSetup
 
 
 #Admin
-GET        /admin                 controllers.Admin.index
-GET        /admin/metrics         controllers.Admin.metrics
-GET        /admin/apistatus       controllers.Admin.apiStatus
+GET        /                       controllers.Admin.index
+GET        /admin                  controllers.Admin.index
+GET        /admin/metrics          controllers.Admin.metrics
+GET        /admin/apistatus        controllers.Admin.apiStatus
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file          controllers.Assets.at(path="/public", file)
+GET        /assets/*file           controllers.Assets.at(path="/public", file)
+GET        /robots.txt             controllers.Assets.at(path="/public", file="/other/robots.txt")
