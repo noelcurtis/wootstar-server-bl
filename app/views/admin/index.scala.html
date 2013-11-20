@@ -1,0 +1,69 @@
+@(hostname: String)
+
+@moreJs = @{
+    val route = routes.Assets.at("javascripts/metrics.js")
+    s"<script src='$route' type='text/javascript'></script>"
+}
+
+@main(title = "WootStar Admin", moreJs = moreJs) {
+
+    <h4>@hostname</h4>
+
+    <div class="col-md-4">
+        <div class="box clearfix">
+            <h5>Memory</h5>
+            <div class="pull-left">
+                <canvas class="heap-utilization dash-chart" width="150" height="150"></canvas>
+            </div>
+            <div class="content-right">
+                <div class="title">Heap Utilization</div>
+                <div class="value used-heap"></div>
+                <div class="title">Heap Utilization (MB)</div>
+                <div class="value used-heap-mb"></div>
+                <div class="title">Heap Max (MB)</div>
+                <div class="value max-heap"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="box clearfix">
+            <h5>Throughput</h5>
+            <div class="pull-left" style="margin-top: 5px">
+                <canvas class="request-rate dash-chart" width="150" height="150"></canvas>
+            </div>
+            <div class="content-right">
+                <div class="title">Mean Requests/Minute</div>
+                <div class="value request-minute-mean"></div>
+                <div class="title">Requests/Minute<br>(15 min)</div>
+                <div class="value request-minute-fifteen"></div>
+                <div class="title">Requests/Minute<br>(1 min)</div>
+                <div class="value request-minute-one"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="box clearfix">
+            <h5>Latency</h5>
+            <table style="width: 100%; margin-top: 5px">
+                <tr>
+                    <td>
+                        <div class="title">Mean Response Time</div>
+                        <div class="value response-mean"></div>
+                        <div class="title">Median Response Time</div>
+                        <div class="value response-median"></div>
+                        <div class="title">Max Response Time</div>
+                        <div class="value response-max"></div>
+                    </td>
+                    <td>
+                        <div class="title">95'th Percentile</div>
+                        <div class="value response-ninety-five"></div>
+                        <div class="title">75'th Percentile</div>
+                        <div class="value response-seventy-five"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+}

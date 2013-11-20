@@ -21,7 +21,7 @@ public class Metrics
 
     // Console Reporter //
     private static ConsoleReporter consoleReporter;
-    private static boolean consoleReportedEnabled = true;
+    private static boolean consoleReportedEnabled = false;
     // Console Reporter //
 
     private static ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
