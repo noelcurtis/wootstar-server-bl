@@ -1,6 +1,9 @@
 # README wootstar-server-bl (bl: Blue Lable the premium cut)
 
-## Getting Started	
+## Admin
+Admin page is at: [http://ec2-23-22-201-81.compute-1.amazonaws.com:9000/admin]
+
+## Getting Started
 *	Download Play 2.2.1, Postgres APP and Redis Server (brew install redis) before you do anything with the application
 * 	Setup your database:
 	*	Setup and Startup Postgres APP
