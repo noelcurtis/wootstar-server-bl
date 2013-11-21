@@ -7,6 +7,7 @@ import engine.woot.WootReponseBuilder;
 import engine.woot.responses.AllEventsBuilder;
 import engine.woot.responses.EventIdBuilder;
 import engine.woot.responses.EventTypeBuilder;
+import play.Logger;
 import play.mvc.Result;
 
 import java.util.Map;
@@ -49,7 +50,6 @@ public class ApiV1 extends ControllerEx
         }
     }
 
-    @WithMetrics
     private static Result all()
     {
         WootReponseBuilder b = new AllEventsBuilder();
@@ -63,7 +63,6 @@ public class ApiV1 extends ControllerEx
         }
     }
 
-    @WithMetrics
     private static Result byId(String id)
     {
         WootReponseBuilder b = new EventIdBuilder(id);
@@ -77,7 +76,6 @@ public class ApiV1 extends ControllerEx
         }
     }
 
-    @WithMetrics
     private static Result byType(String type)
     {
         WootReponseBuilder b = new EventTypeBuilder(type);
