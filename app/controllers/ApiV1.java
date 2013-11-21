@@ -53,20 +53,41 @@ public class ApiV1 extends ControllerEx
     private static Result all()
     {
         WootReponseBuilder b = new AllEventsBuilder();
-        return gzippedOk(b.getResponse());
+        if (eTagTest(b.getEtag()))
+        {
+            return noChange(); // no change in data
+        }
+        else
+        {
+            return gzippedOk(b.getResponse(), b.getEtag());
+        }
     }
 
     @WithMetrics
     private static Result byId(String id)
     {
         WootReponseBuilder b = new EventIdBuilder(id);
-        return ok(b.getResponse());
+        if (eTagTest(b.getEtag()))
+        {
+            return noChange(); // no change in data
+        }
+        else
+        {
+            return gzippedOk(b.getResponse(), b.getEtag());
+        }
     }
 
     @WithMetrics
     private static Result byType(String type)
     {
         WootReponseBuilder b = new EventTypeBuilder(type);
-        return ok(b.getResponse());
+        if (eTagTest(b.getEtag()))
+        {
+            return noChange(); // no change in data
+        }
+        else
+        {
+            return gzippedOk(b.getResponse(), b.getEtag());
+        }
     }
 }

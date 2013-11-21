@@ -2,6 +2,7 @@ package engine.woot.responses;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Strings;
+import com.google.common.hash.Hashing;
 import engine.WootObjectMapper;
 import engine.woot.CachedObject;
 import engine.woot.WootApiHelpers;
@@ -21,15 +22,13 @@ import static engine.woot.WootRequestQueue.RequestQueue;
 public class EventTypeBuilder implements WootReponseBuilder
 {
     private final String eventType;
+    private final String etag;
+    private final JsonNode response;
 
     public EventTypeBuilder(String eventType)
     {
         this.eventType = eventType;
-    }
 
-    @Override
-    public JsonNode getResponse()
-    {
         // get all the requests
         List<WootRequest> requests = RequestQueue().getRequests();
         List<engine.data.apiv1.Event> allMappedEvents = new ArrayList<engine.data.apiv1.Event>();
@@ -80,6 +79,19 @@ public class EventTypeBuilder implements WootReponseBuilder
             Logger.error("No events"); // just log an error in case no events
         }
         JsonNode eventsAsJson = WootObjectMapper.WootMapper().valueToTree(allMappedEvents);
-        return eventsAsJson;
+        this.etag = Hashing.sha256().hashString(eventsAsJson.toString()).toString();
+        this.response = eventsAsJson;
+    }
+
+    @Override
+    public JsonNode getResponse()
+    {
+        return response;
+    }
+
+
+    public String getEtag()
+    {
+        return this.etag;
     }
 }

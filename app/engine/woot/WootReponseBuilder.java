@@ -5,4 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 public interface WootReponseBuilder
 {
     public JsonNode getResponse();
+
+    public String getEtag();
 }

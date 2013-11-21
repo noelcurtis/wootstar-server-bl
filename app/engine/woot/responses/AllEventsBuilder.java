@@ -2,6 +2,7 @@ package engine.woot.responses;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Strings;
+import com.google.common.hash.Hashing;
 import engine.WootObjectMapper;
 import engine.woot.CachedObject;
 import engine.woot.WootApiHelpers;
@@ -17,8 +18,10 @@ import static engine.woot.WootRequestQueue.RequestQueue;
 
 public class AllEventsBuilder implements WootReponseBuilder
 {
-    @Override
-    public JsonNode getResponse()
+    private final String etag;
+    private final JsonNode response;
+
+    public AllEventsBuilder()
     {
         // get all the requests
         List<WootRequest> requests = RequestQueue().getRequests();
@@ -67,6 +70,18 @@ public class AllEventsBuilder implements WootReponseBuilder
         }
 
         JsonNode eventsAsJson = WootObjectMapper.WootMapper().valueToTree(allMappedEvents);
-        return eventsAsJson;
+        this.etag = Hashing.sha256().hashString(eventsAsJson.toString()).toString();
+        this.response = eventsAsJson;
+    }
+
+    @Override
+    public JsonNode getResponse()
+    {
+        return this.response;
+    }
+
+    public String getEtag()
+    {
+        return this.etag;
     }
 }
