@@ -1,6 +1,7 @@
 package engine.actions;
 
 import com.codahale.metrics.Timer;
+import play.Logger;
 import play.libs.F;
 import play.mvc.Action;
 import play.mvc.Http;
@@ -16,6 +17,7 @@ public class WithMetricsAction extends Action<WithMetrics>
         final Timer.Context context = WootStarMetrics().getAllRequestsTimer().time();
         try
         {
+            Logger.info(ctx.request().toString());
             return delegate.call(ctx);
         } finally
         {
