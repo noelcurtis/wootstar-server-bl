@@ -39,7 +39,7 @@ public class ControllerEx extends Controller
         {
             Logger.error(ex.toString());
         }
-        return ok(Utils.jsonError());
+        return internalServerError();
     }
 
     protected static Result byteArrayOk(byte[] result)

@@ -28,7 +28,7 @@ public class Admin extends Controller
         {
             ex.printStackTrace();
         }
-        return internalServerError(Utils.jsonError());
+        return internalServerError(Utils.jsonError("check logs"));
     }
 
     public static F.Promise<Result> apiStatus()

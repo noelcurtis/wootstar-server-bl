@@ -1,6 +1,7 @@
 package engine.woot.responses;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.base.Strings;
 import com.google.common.hash.Hashing;
 import engine.WootObjectMapper;
@@ -11,6 +12,7 @@ import engine.woot.WootRequest;
 import models.ApplicationData;
 import models.Event;
 import play.Logger;
+import play.libs.Json;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,11 +78,18 @@ public class EventTypeBuilder implements WootReponseBuilder
 
         if (allMappedEvents.isEmpty())
         {
-            Logger.error("No events"); // just log an error in case no events
+            ObjectNode result = Json.newObject();
+            result.put("status", "ok");
+            result.put("message", "events for " + eventType + " not found");
+            this.response = result;
+            this.etag = null;
         }
-        JsonNode eventsAsJson = WootObjectMapper.WootMapper().valueToTree(allMappedEvents);
-        this.etag = Hashing.sha256().hashString(eventsAsJson.toString()).toString();
-        this.response = eventsAsJson;
+        else
+        {
+            JsonNode eventsAsJson = WootObjectMapper.WootMapper().valueToTree(allMappedEvents);
+            this.etag = Hashing.sha256().hashString(eventsAsJson.toString()).toString();
+            this.response = eventsAsJson;
+        }
     }
 
     @Override

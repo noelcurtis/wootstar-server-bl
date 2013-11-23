@@ -18,19 +18,16 @@ public class Utils
     {
         Logger.info("Rendering No Change");
         ObjectNode result = Json.newObject();
-        result.put("data", "no change");
+        result.put("status", "ok");
+        result.put("message", "no change");
         return result;
     }
 
-    public static JsonNode jsonError()
-    {
-        return jsonError("no results");
-    }
-
-    public static JsonNode jsonError(String error)
+    public static JsonNode jsonError(String message)
     {
         ObjectNode result = Json.newObject();
-        result.put("error", error);
+        result.put("status", "error");
+        result.put("message", message);
         return result;
     }
 
