@@ -25,4 +25,18 @@ public class WootRequest
         return " interval " + interval + " eventType " + eventType + " site " + site;
     }
 
+    public String getId()
+    {
+        StringBuilder sb = new StringBuilder();
+        if (eventType != null)
+        {
+            sb.append(eventType.toString());
+        }
+        if(site != null)
+        {
+            sb.append("." + site.toString());
+        }
+        return sb.toString();
+    }
+
 }

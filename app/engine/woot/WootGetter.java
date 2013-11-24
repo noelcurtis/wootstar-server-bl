@@ -3,6 +3,7 @@ package engine.woot;
 import com.avaje.ebean.Ebean;
 import com.avaje.ebean.TxType;
 import com.avaje.ebean.annotation.Transactional;
+import com.codahale.metrics.Timer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import engine.DbHelpers;
 import models.ApplicationData;
@@ -15,21 +16,19 @@ import java.util.Date;
 import java.util.List;
 
 import static engine.WootObjectMapper.WootMapper;
+import static engine.metrics.Metrics.WootStarMetrics;
 
 public class WootGetter
 {
-    private WootApiHelpers.Site site;
-    private WootApiHelpers.EventType eventType;
+    private final WootApiHelpers.Site site;
+    private final WootApiHelpers.EventType eventType;
+    private final WootRequest wootRequest;
 
     public WootGetter(WootRequest request)
     {
-        this(request.eventType, request.site);
-    }
-
-    public WootGetter(WootApiHelpers.EventType eventType, WootApiHelpers.Site site)
-    {
-        this.site = site;
-        this.eventType = eventType;
+        this.wootRequest = request;
+        this.site = request.site;
+        this.eventType = request.eventType;
     }
 
     private void createUpdateCheckpoint()
@@ -58,6 +57,7 @@ public class WootGetter
 
     public void getEvents()
     {
+        final Timer.Context context = WootStarMetrics().getWootGetterTimer(wootRequest).time();
         final long startTime = System.currentTimeMillis();
         Logger.info("WebServices Async Start: " + "eventType: " + eventType + " site: " + site);
         constructRequest().get().onRedeem(
@@ -84,7 +84,8 @@ public class WootGetter
                             {
                                 Logger.info("No events for eventType " + eventType + " site " + site);
                             }
-                        } catch (Exception ex)
+                        }
+                        catch (Exception ex)
                         {
                             Logger.error("Error Refreshing Database: " + ex.toString());
                             Logger.error("Woot Response status " + response.getStatusText());
@@ -92,8 +93,12 @@ public class WootGetter
                             Logger.info("WebServices Async Error: " + "eventType: " + eventType + " site: " + site);
                             ex.printStackTrace();
                         }
-                        final long timeTaken = System.currentTimeMillis() - startTime;
-                        Logger.info("Getting and saving events took: {" + timeTaken + "}ms");
+                        finally
+                        {
+                            context.stop();
+                            final long timeTaken = System.currentTimeMillis() - startTime;
+                            Logger.info("WebServices Async Start: " + "eventType: " + eventType + " site: " + site + " took: {" + timeTaken + "}ms");
+                        }
                     }
                 });
     }

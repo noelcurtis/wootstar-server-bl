@@ -4,6 +4,7 @@ import play.Application;
 import play.GlobalSettings;
 import play.Logger;
 
+import static engine.metrics.Metrics.WootStarMetrics;
 import static engine.woot.WootRequestQueue.RequestQueue;
 
 public class Global extends GlobalSettings
@@ -16,7 +17,7 @@ public class Global extends GlobalSettings
         {
             try
             {
-//                DbHelpers.clearWootData();
+                WootStarMetrics();
                 RequestQueue().scheduleRequests();
             }
             catch(Exception ex)

@@ -16,7 +16,7 @@ $(function(){
 function populateData()
 {
     drawMemoryChart(allMetrics);
-    populateLatency(allMetrics);
+    populateLatency(allMetrics, "allrequests-timer");
     drawRequestRateChart(allMetrics);
 }
 
@@ -160,16 +160,16 @@ function drawRequestRateChart(allMetrics)
     $(".request-minute-one").html(requestPerMinuteOne);
 }
 
-function populateLatency(allMetrics)
+function populateLatency(allMetrics, timerId)
 {
-    var meanR = convertNanoToSeconds(allMetrics["timers"]["allrequests.timer"]["snapshot"]["mean"]);
-    var medianR = convertNanoToSeconds(allMetrics["timers"]["allrequests.timer"]["snapshot"]["median"])
-    $(".response-mean").html(meanR + " sec").css("color", getLatencyColor(meanR));
-    $(".response-median").html(medianR + " sec").css("color", getLatencyColor(medianR));
-    $(".response-max").html(convertNanoToSeconds(allMetrics["timers"]["allrequests.timer"]["snapshot"]["max"]) + " sec");
+    var meanR = convertNanoToSeconds(allMetrics["timers"][timerId.replace("-", ".")]["snapshot"]["mean"]);
+    var medianR = convertNanoToSeconds(allMetrics["timers"][timerId.replace("-", ".")]["snapshot"]["median"])
+    $("." + timerId +" .response-mean").html(meanR + " sec").css("color", getLatencyColor(meanR));
+    $("." + timerId +" .response-median").html(medianR + " sec").css("color", getLatencyColor(medianR));
+    $("." + timerId +" .response-max").html(convertNanoToSeconds(allMetrics["timers"][timerId.replace("-", ".")]["snapshot"]["max"]) + " sec");
 
-    $(".response-seventy-five").html(convertNanoToSeconds(allMetrics["timers"]["allrequests.timer"]["snapshot"]["75thPercentile"]) + " sec");
-    $(".response-ninety-five").html(convertNanoToSeconds(allMetrics["timers"]["allrequests.timer"]["snapshot"]["95thPercentile"]) + " sec");
+    $("." + timerId +" .response-seventy-five").html(convertNanoToSeconds(allMetrics["timers"][timerId.replace("-", ".")]["snapshot"]["75thPercentile"]) + " sec");
+    $("." + timerId +" .response-ninety-five").html(convertNanoToSeconds(allMetrics["timers"][timerId.replace("-", ".")]["snapshot"]["95thPercentile"]) + " sec");
 }
 
 function requestMetrics()

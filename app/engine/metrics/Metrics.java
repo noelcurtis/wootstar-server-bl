@@ -4,10 +4,12 @@ import akka.actor.Cancellable;
 import com.codahale.metrics.*;
 import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import engine.woot.WootRequest;
 import play.Logger;
 import play.libs.Akka;
 import scala.concurrent.duration.Duration;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +20,7 @@ public class Metrics
 
     private final static MemoryUsageGaugeSet memoryUsageGaugeSet = new MemoryUsageGaugeSet(); // Memory Guage Set for the JVM
     private static Timer allRequestsTimer; // Timer used to time Controller actions see @WithMetrics
+    private final Map<String, Timer> wootGetterTimers; // Timers for Woot Getters
 
     // Console Reporter //
     private static ConsoleReporter consoleReporter;
@@ -28,18 +31,19 @@ public class Metrics
 
     private static Cancellable scheduledMetrics; // scheduled metrics cancellable
 
-    private static Metrics _sharedInstance; // shared instance for Singleton
+    private static Metrics _sharedInstance = null; // shared instance for Singleton
 
     public static Metrics WootStarMetrics()
     {
         if (_sharedInstance == null)
         {
+            Logger.info("Initiating metrics");
             _sharedInstance = new Metrics();
         }
         return _sharedInstance;
     }
 
-    public Metrics()
+    protected Metrics()
     {
         if (consoleReportedEnabled)
         {
@@ -50,6 +54,7 @@ public class Metrics
             consoleReporter.start(15, TimeUnit.MINUTES);
         }
 
+        wootGetterTimers = new HashMap<String, Timer>();
         registerMemoryMetrics();
         registerTimers();
     }
@@ -113,6 +118,21 @@ public class Metrics
     public Timer getAllRequestsTimer()
     {
         return allRequestsTimer;
+    }
+
+    public Timer getWootGetterTimer(WootRequest request)
+    {
+        Timer timer = wootGetterTimers.get(request.getId());
+        if (timer != null)
+        {
+            return  timer;
+        }
+        else
+        {
+            timer = metricsRegistry.timer(MetricRegistry.name("wootRequest", request.getId()));
+            wootGetterTimers.put(request.getId(), timer);
+        }
+        return timer;
     }
 
 }
