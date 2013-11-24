@@ -64,7 +64,7 @@ public class WootGetter
                 new F.Callback<WS.Response>()
                 {
                     @Override
-                    //@Transactional(type = TxType.REQUIRES_NEW)
+                    @Transactional(type = TxType.REQUIRES_NEW)
                     public void invoke(WS.Response response) throws Throwable
                     {
                         try
