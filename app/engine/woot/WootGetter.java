@@ -57,7 +57,6 @@ public class WootGetter
 
     public void getEvents()
     {
-        final Timer.Context context = WootStarMetrics().getWootGetterTimer(wootRequest).time();
         final long startTime = System.currentTimeMillis();
         Logger.info("WebServices Async Start: " + "eventType: " + eventType + " site: " + site);
         constructRequest().get().onRedeem(
@@ -95,7 +94,6 @@ public class WootGetter
                         }
                         finally
                         {
-                            context.stop();
                             final long timeTaken = System.currentTimeMillis() - startTime;
                             Logger.info("WebServices Async Start: " + "eventType: " + eventType + " site: " + site + " took: {" + timeTaken + "}ms");
                         }
