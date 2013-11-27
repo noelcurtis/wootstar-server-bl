@@ -1,6 +1,6 @@
 ## Helpers
 
-*   To start play in prod `$play start`
+*   To start play in prod `play clean start`
 *   Error events `/error.*application\s/i`
 
 
