@@ -28,7 +28,7 @@ Admin page is at: [http://wootstar-lb-1-510642144.us-east-1.elb.amazonaws.com/ad
 *   When submitting an API request please include the following header `name=Authorization, value=Sha256(application.secret)`
 *   You must encode application.secret at UTF-8, this should be default encoding for most hashing libraries
 *   You might be able to use the following
-*   `   -(NSString*)sha256HashFor:(NSString*)input
+*   `-(NSString*)sha256HashFor:(NSString*)input
         {
             const char* str = [input UTF8String];
             unsigned char result[CC_SHA256_DIGEST_LENGTH];
@@ -40,8 +40,7 @@ Admin page is at: [http://wootstar-lb-1-510642144.us-east-1.elb.amazonaws.com/ad
                 [ret appendFormat:@"%02x",result[i]];
             }
             return ret;
-        }
-    `
+        }`
 *   Your output value of Sha256(application.secret) should be ab67d454e9def183dccf82040d213c8e5c63469d6ff90ec54ddee699ba298518 -- to be remove from doc shortly
 
 
