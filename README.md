@@ -28,8 +28,7 @@ Admin page is at: [http://wootstar-lb-1-510642144.us-east-1.elb.amazonaws.com/ad
 *   When submitting an API request please include the following header `name=Authorization, value=Sha256(application.secret)`
 *   You must encode application.secret at UTF-8, this should be default encoding for most hashing libraries
 *   You might be able to use the following
-    `
-        -(NSString*)sha256HashFor:(NSString*)input
+    `   -(NSString*)sha256HashFor:(NSString*)input
         {
             const char* str = [input UTF8String];
             unsigned char result[CC_SHA256_DIGEST_LENGTH];
