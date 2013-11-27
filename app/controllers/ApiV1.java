@@ -33,7 +33,6 @@ public class ApiV1 extends ControllerEx
      *
      * @return
      */
-    @Secured
     @WithMetrics
     public static Result events()
     {
