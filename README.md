@@ -1,7 +1,7 @@
 # README wootstar-server-bl (bl: Blue Label the premium cut)
 
 ## Admin
-Admin page is at: [http://ec2-23-22-201-81.compute-1.amazonaws.com:9000/admin]
+Admin page is at: [http://wootstar-lb-1-510642144.us-east-1.elb.amazonaws.com/admin]
 
 ## Getting Started
 *	Download Play 2.2.1
