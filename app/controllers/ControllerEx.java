@@ -18,7 +18,6 @@ public class ControllerEx extends Controller
         return gzippedOk(node, null);
     }
 
-
     protected static Result gzippedOk(JsonNode node, String etag)
     {
         try
