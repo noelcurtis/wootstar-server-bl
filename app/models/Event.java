@@ -30,6 +30,20 @@ public class Event extends Model
     private Date EndDate;
     private String Title;
 
+    @Override
+    @JsonIgnore
+    public boolean equals(Object object)
+    {
+        boolean isEqual = false;
+
+        if (object != null && object instanceof Event)
+        {
+            isEqual = this.Id == ((Event) object).Id;
+        }
+
+        return isEqual;
+    }
+
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
     private List<Offer> Offers;
 

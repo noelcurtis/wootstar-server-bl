@@ -1,9 +1,7 @@
 package engine.woot;
 
-import com.avaje.ebean.Ebean;
 import com.avaje.ebean.TxType;
 import com.avaje.ebean.annotation.Transactional;
-import com.codahale.metrics.Timer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import engine.DbHelpers;
 import models.ApplicationData;
@@ -16,13 +14,12 @@ import java.util.Date;
 import java.util.List;
 
 import static engine.WootObjectMapper.WootMapper;
-import static engine.metrics.Metrics.WootStarMetrics;
 
 public class WootGetter
 {
-    private final WootApiHelpers.Site site;
-    private final WootApiHelpers.EventType eventType;
-    private final WootRequest wootRequest;
+    protected final WootApiHelpers.Site site;
+    protected final WootApiHelpers.EventType eventType;
+    protected final WootRequest wootRequest;
 
     public WootGetter(WootRequest request)
     {
@@ -31,7 +28,7 @@ public class WootGetter
         this.eventType = request.eventType;
     }
 
-    private void createUpdateCheckpoint()
+    protected void createUpdateCheckpoint()
     {
         Date dt = new Date();
         final String id = WootApiHelpers.getCheckpointIdentifier(eventType, site);
@@ -39,7 +36,7 @@ public class WootGetter
         ApplicationData.add(id , Long.toString(dt.getTime()));
     }
 
-    private WS.WSRequestHolder constructRequest()
+    protected WS.WSRequestHolder constructRequest()
     {
         WS.WSRequestHolder requestHolder = WS.url(WootApiHelpers.wootUrl);
         requestHolder.setTimeout(10000); // timeout set to 10 seconds.
@@ -99,14 +96,14 @@ public class WootGetter
                         {
                             Logger.error("Error Refreshing Database: " + ex.toString());
                             Logger.error("Woot Response status " + response.getStatusText());
-                            //Logger.error("Woot Response " + response.getBody());
+                            Logger.debug("Woot Response " + response.getBody());
                             Logger.info("WebServices Async Error: " + "eventType: " + eventType + " site: " + site);
                             ex.printStackTrace();
                         }
                         finally
                         {
                             final long timeTaken = System.currentTimeMillis() - startTime;
-                            Logger.info("WebServices Async Start: " + "eventType: " + eventType + " site: " + site + " took: {" + timeTaken + "}ms");
+                            Logger.info("WebServices Async End: " + "eventType: " + eventType + " site: " + site + " took: {" + timeTaken + "}ms");
                         }
                     }
                 });

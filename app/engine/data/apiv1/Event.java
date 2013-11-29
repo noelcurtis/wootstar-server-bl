@@ -1,5 +1,6 @@
 package engine.data.apiv1;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import engine.Utils;
 import models.WootOff;
@@ -77,5 +78,19 @@ public class Event
                 MainPhoto = ((WootPlus) dataEvent).getPhotos().get(0).getUrl();
             }
         }
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean equals(Object object)
+    {
+        boolean isEqual = false;
+
+        if (object != null && object instanceof Event)
+        {
+            isEqual = this.Id == ((Event) object).Id;
+        }
+
+        return isEqual;
     }
 }

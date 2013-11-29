@@ -7,7 +7,6 @@ import scala.concurrent.duration.Duration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class WootRequestQueue
@@ -57,8 +56,25 @@ public class WootRequestQueue
                 @Override
                 public void run()
                 {
-                    WootGetter g = new WootGetter(r);
-                    g.getEvents(); // get events
+                    try
+                    {
+                        WootGetter g;
+                        if (r.eventType == WootApiHelpers.EventType.WootOff)
+                        {
+                            g = new WootOffGetter(r);
+                        }
+                        else
+                        {
+                            g = new WootGetter(r);
+                        }
+                        g.getEvents(); // get events
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.error("Error scheduling requests " + ex.toString());
+                        ex.printStackTrace();
+                    }
+
                 }
             }, Akka.system().dispatcher());
             activeRequests.add(c);

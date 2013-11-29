@@ -1,13 +1,9 @@
 package engine.woot;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import models.Event;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import static engine.WootObjectMapper.WootMapper;
 
 public class CachedObject
 {

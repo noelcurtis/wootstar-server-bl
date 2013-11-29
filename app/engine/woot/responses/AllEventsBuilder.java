@@ -11,6 +11,7 @@ import engine.woot.WootReponseBuilder;
 import engine.woot.WootRequest;
 import models.ApplicationData;
 import models.Event;
+import models.WootOff;
 import play.Logger;
 import play.libs.Json;
 
@@ -52,13 +53,25 @@ public class AllEventsBuilder implements WootReponseBuilder
             else
             {
                 Logger.debug("Creating cached object for eventType" + request.eventType + " site " + request.site);
-                // create a new cached object
-                List<Event> events = Event.getEvents(request.eventType, request.site);
+                List<Event> wootOffs =  WootOff.getAllEvents(); // WootOff events are not stored in the DB
+                List<Event> other =  Event.getEvents(request.eventType, request.site); //  Get all the other events from the DB
+
+                List<Event> allEvents = new ArrayList<Event>();
+                allEvents.addAll(wootOffs);
+                allEvents.addAll(other);
                 List<engine.data.apiv1.Event> mappedEvents = new ArrayList<engine.data.apiv1.Event>();
                 // map events so they can be rendered in json
-                for (models.Event e : events)
+                for (models.Event e : allEvents)
                 {
-                    mappedEvents.add(new engine.data.apiv1.Event(e));
+                    engine.data.apiv1.Event mappedEvent = new engine.data.apiv1.Event(e);
+                    if (!mappedEvents.contains(mappedEvent))
+                    {
+                        mappedEvents.add(mappedEvent);
+                    }
+                    else
+                    {
+                        Logger.debug("Duplicate event id " + mappedEvent.Id);
+                    }
                 }
                 // create a new cached object
                 play.cache.Cache.set(cacheIdentifier, new CachedObject(mappedEvents, null, checkpoint));
@@ -76,6 +89,7 @@ public class AllEventsBuilder implements WootReponseBuilder
         }
         else
         {
+            Logger.info("Responding with events count: " + allMappedEvents.size());
             JsonNode eventsAsJson = WootObjectMapper.WootMapper().valueToTree(allMappedEvents);
             this.etag = Hashing.sha256().hashString(eventsAsJson.toString()).toString();
             this.response = eventsAsJson;

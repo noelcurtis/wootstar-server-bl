@@ -1,14 +1,12 @@
 package controllers;
 
 import com.google.common.base.Objects;
-import engine.actions.Secured;
 import engine.actions.WithMetrics;
 import engine.data.apiv1.Settings;
 import engine.woot.WootReponseBuilder;
 import engine.woot.responses.AllEventsBuilder;
 import engine.woot.responses.EventIdBuilder;
 import engine.woot.responses.EventTypeBuilder;
-import play.Logger;
 import play.mvc.Result;
 
 import java.util.Map;

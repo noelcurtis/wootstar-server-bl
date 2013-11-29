@@ -3,14 +3,11 @@ package engine.woot.responses;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.hash.Hashing;
-import engine.Utils;
 import engine.WootObjectMapper;
-import engine.woot.CachedObject;
 import engine.woot.WootReponseBuilder;
 import models.Event;
+import models.WootOff;
 import play.libs.Json;
-
-import java.util.List;
 
 public class EventIdBuilder implements WootReponseBuilder
 {
@@ -21,7 +18,11 @@ public class EventIdBuilder implements WootReponseBuilder
     public EventIdBuilder(String eventId)
     {
         this.eventId = eventId;
-        Event foundEvent = Event.getEvent(eventId);
+        Event foundEvent = WootOff.getEvent(eventId); // first try and get a WootOff event
+        if (foundEvent == null)
+        {
+            foundEvent = Event.getEvent(eventId); // try and get from Event DB
+        }
         engine.data.apiv1.Event mappedEvent = new engine.data.apiv1.Event(foundEvent, false);
         if (mappedEvent != null)
         {
