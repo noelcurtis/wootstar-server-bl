@@ -74,7 +74,18 @@ public class WootGetter
                             {
                                 DbHelpers.clearWootData(eventType, site);
                                 Logger.info("Saving new events start");
-                                Ebean.save(events); //save all the events
+                                for(Event e : events)
+                                {
+                                    try
+                                    {
+                                        e.save();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Logger.error("Error Saving event " + ex.toString());
+                                        ex.printStackTrace();
+                                    }
+                                }
                                 Logger.info("Saving new events end");
                                 createUpdateCheckpoint(); // create/update the checkpoint
                                 Logger.info("Found " + events.size() + " events for eventType " + eventType + " site " + site);
