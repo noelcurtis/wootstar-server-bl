@@ -36,8 +36,7 @@ public class AllEventsBuilder implements WootReponseBuilder
         {
             String cacheIdentifier = WootApiHelpers.getCacheIdentifier(request.eventType, request.site);
             // get the checkpoint id
-            //CachedObject co = (CachedObject)play.cache.Cache.get(cacheIdentifier);
-            CachedObject co = null;
+            CachedObject co = (CachedObject)play.cache.Cache.get(cacheIdentifier);
             // check the key to see if fresh
             String checkpointIdentifier = WootApiHelpers.getCheckpointIdentifier(request.eventType, request.site);
             String dt = (String)Cache.get(checkpointIdentifier);
