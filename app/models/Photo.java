@@ -2,28 +2,28 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import play.db.ebean.Model;
+//import play.db.ebean.Model;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class Photo extends Model
+//@Entity
+public class Photo
 {
-    @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "photo_seq")
+    //@javax.persistence.Id
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "photo_seq")
     public Long id; // not from Woot
 
     private String Height;
     private String Url;
     private String Width;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "photo_tags")
+    //@ManyToMany(cascade = CascadeType.ALL)
+    //@JoinTable(name = "photo_tags")
     private List<Tag> Tags;
 
-    @ManyToMany(mappedBy = "Photos")
+    //@ManyToMany(mappedBy = "Photos")
     private List<Offer> offers;
 
     @JsonIgnore

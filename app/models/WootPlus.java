@@ -3,20 +3,20 @@ package models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+//import javax.persistence.CascadeType;
+//import javax.persistence.DiscriminatorValue;
+//import javax.persistence.Entity;
+//import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
-@DiscriminatorValue("WootPlus")
-@Entity
+//@DiscriminatorValue("WootPlus")
+//@Entity
 public class WootPlus extends Event
 {
     private String ManufacturerText;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    //@OneToMany(cascade = CascadeType.ALL)
     private List<WpPhoto> Photos;
 
     private String Url;

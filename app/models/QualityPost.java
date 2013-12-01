@@ -2,18 +2,18 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import play.db.ebean.Model;
+//import play.db.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+//import javax.persistence.Entity;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
 import java.util.Date;
 
-@Entity
-public class QualityPost extends Model
+//@Entity
+public class QualityPost
 {
-    @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quality_post_seq")
+    //@javax.persistence.Id
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quality_post_seq")
     public Long id; // not from Woot
 
     private String Avatar;

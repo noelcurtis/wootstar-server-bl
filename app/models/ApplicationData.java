@@ -3,15 +3,15 @@ package models;
 import com.avaje.ebean.Ebean;
 import com.google.common.base.Strings;
 import play.Logger;
-import play.db.ebean.Model;
+//import play.db.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+//import javax.persistence.Entity;
+//import javax.persistence.Id;
 
-@Entity
-public class ApplicationData extends Model
+//@Entity
+public class ApplicationData
 {
-    @Id
+    //@Id
     private String datakey;
     private String datavalue;
 
@@ -28,19 +28,19 @@ public class ApplicationData extends Model
      */
     public static void add(String key, String value)
     {
-        if (!Strings.isNullOrEmpty(key) && !Strings.isNullOrEmpty(value))
-        {
-            ApplicationData found = ApplicationData.find.byId(key);
-            if (found != null)
-            {
-                Ebean.delete(found);
-            }
-            ApplicationData newData = new ApplicationData();
-            newData.datakey = key;
-            newData.datavalue = value;
-            Logger.info("Creating new pair, key " + key);
-            newData.save();
-        }
+//        if (!Strings.isNullOrEmpty(key) && !Strings.isNullOrEmpty(value))
+//        {
+//            ApplicationData found = ApplicationData.find.byId(key);
+//            if (found != null)
+//            {
+//                Ebean.delete(found);
+//            }
+//            ApplicationData newData = new ApplicationData();
+//            newData.datakey = key;
+//            newData.datavalue = value;
+//            Logger.info("Creating new pair, key " + key);
+//            newData.save();
+//        }
     }
 
     /**
@@ -51,11 +51,11 @@ public class ApplicationData extends Model
      */
     public static String get(String key)
     {
-        ApplicationData found = ApplicationData.find.byId(key);
-        if (found != null)
-        {
-            return found.getDatavalue();
-        }
+//        ApplicationData found = ApplicationData.find.byId(key);
+//        if (found != null)
+//        {
+//            return found.getDatavalue();
+//        }
         return null;
     }
 
@@ -69,8 +69,8 @@ public class ApplicationData extends Model
         return datavalue;
     }
 
-    // Declare a finder
-    public static Finder<String, ApplicationData> find = new Finder<String, ApplicationData>(
-            String.class, ApplicationData.class
-    );
+//    // Declare a finder
+//    public static Finder<String, ApplicationData> find = new Finder<String, ApplicationData>(
+//            String.class, ApplicationData.class
+//    );
 }

@@ -2,19 +2,19 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import play.db.ebean.Model;
+//import play.db.ebean.Model;
 
-import javax.persistence.*;
+//import javax.persistence.*;
 import java.util.List;
 
-@Entity
-public class Item extends Model
+//@Entity
+public class Item
 {
-    @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_seq")
+    //@javax.persistence.Id
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_seq")
     private String Id;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    //@OneToMany(cascade = CascadeType.ALL)
     private List<Attribute> Attributes;
 
     private Double ListPrice;

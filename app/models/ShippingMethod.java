@@ -2,24 +2,24 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import play.db.ebean.Model;
+//import play.db.ebean.Model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Transient;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Transient;
 
-@Entity
-public class ShippingMethod extends Model
+//@Entity
+public class ShippingMethod
 {
-    @javax.persistence.Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shipping_method_seq")
+    //@javax.persistence.Id
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shipping_method_seq")
     public Long id; // not from Woot
 
     private String Name;
     private String PerItemAmount;
     private String PerOrderAmount;
-    @Transient
+    //@Transient
     private String PerEventAmount;
 
 
