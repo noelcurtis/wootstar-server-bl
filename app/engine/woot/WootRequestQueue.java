@@ -58,15 +58,7 @@ public class WootRequestQueue
                 {
                     try
                     {
-                        WootGetter g;
-                        if (r.eventType == WootApiHelpers.EventType.WootOff)
-                        {
-                            g = new WootOffGetter(r);
-                        }
-                        else
-                        {
-                            g = new WootGetter(r);
-                        }
+                        WootGetterZ g = new WootGetterZ(r);
                         g.getEvents(); // get events
                     }
                     catch (Exception ex)

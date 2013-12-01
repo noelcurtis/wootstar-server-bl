@@ -1,5 +1,7 @@
 package engine.woot;
 
+import models.*;
+
 public class WootApiHelpers
 {
     public static final String wootKey = "041deb1d26d3411cbdb35abba0f6f709";
@@ -77,11 +79,49 @@ public class WootApiHelpers
             }
             return Daily;
         }
+
+        public static boolean oIsInstanceOfEventType(Object o, EventType eventType)
+        {
+            switch (eventType)
+            {
+                case Daily:
+                {
+                    if(o.getClass().toString().equals(Daily.class.toString())) return true;
+                    break;
+                }
+                case Moofi:
+                {
+                    if(o.getClass().toString().equals(Moofi.class.toString())) return true;
+                    break;
+                }
+                case Reckoning:
+                {
+                    if(o.getClass().toString().equals(Reckoning.class.toString())) return true;
+                    break;
+                }
+                case WootOff:
+                {
+                    if(o.getClass().toString().equals(WootOff.class.toString())) return true;
+                    break;
+                }
+                case WootPlus:
+                {
+                    if(o.getClass().toString().equals(WootPlus.class.toString())) return true;
+                    break;
+                }
+            }
+            return false;
+        }
     }
 
     public static String getCacheIdentifier(EventType eventType, Site site)
     {
         return getIdentifier(eventType, site, "-cache-identifier");
+    }
+
+    public static String getDbIdentifier(EventType eventType, Site site)
+    {
+        return getIdentifier(eventType, site, "-db-identifier");
     }
 
     public static String getCheckpointIdentifier(EventType eventType, Site site)
@@ -93,7 +133,7 @@ public class WootApiHelpers
     {
         if (eventType == null && site == null)
         {
-            return "all-checkpoint-identifier";
+            return "all";
         }
         String s = site != null ? site.toString() : "";
         String e = eventType != null ? eventType.toString() : "";

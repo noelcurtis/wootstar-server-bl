@@ -18,6 +18,7 @@ import static engine.WootObjectMapper.WootMapper;
 /**
  * The WootOff getter only works to get All WootOff events for now.
  */
+@Deprecated
 public class WootOffGetter extends WootGetter
 {
     public WootOffGetter(WootRequest request) throws Exception
@@ -56,6 +57,7 @@ public class WootOffGetter extends WootGetter
                         }
                         catch (Exception ex)
                         {
+                            Logger.error("Error Refreshing Database: " + ex.toString());
                             Logger.error("Woot Response status " + response.getStatusText());
                             Logger.debug("Woot Response " + response.getBody());
                             Logger.info("WebServices Async Error: " + "eventType: " + eventType + " site: " + site);

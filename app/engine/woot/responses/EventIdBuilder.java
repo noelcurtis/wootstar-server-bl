@@ -6,6 +6,7 @@ import com.google.common.hash.Hashing;
 import engine.WootObjectMapper;
 import engine.woot.WootReponseBuilder;
 import models.Event;
+import models.EventsHelper;
 import models.WootOff;
 import play.libs.Json;
 
@@ -18,14 +19,10 @@ public class EventIdBuilder implements WootReponseBuilder
     public EventIdBuilder(String eventId)
     {
         this.eventId = eventId;
-        Event foundEvent = WootOff.getEvent(eventId); // first try and get a WootOff event
-        if (foundEvent == null)
+        Event foundEvent = EventsHelper.getEventById(this.eventId);
+        if (foundEvent != null)
         {
-            foundEvent = Event.getEvent(eventId); // try and get from Event DB
-        }
-        engine.data.apiv1.Event mappedEvent = new engine.data.apiv1.Event(foundEvent, false);
-        if (mappedEvent != null)
-        {
+            engine.data.apiv1.Event mappedEvent = new engine.data.apiv1.Event(foundEvent, false);
             JsonNode eventAsJson = WootObjectMapper.WootMapper().valueToTree(mappedEvent);
             this.etag = Hashing.sha256().hashString(eventAsJson.toString()).toString();
             this.response = eventAsJson;

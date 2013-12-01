@@ -22,7 +22,7 @@ public class WootRequest
     @Override
     public String toString()
     {
-        return " interval " + interval + " eventType " + eventType + " site " + site;
+        return "interval " + interval + " eventType " + eventType + " site " + site;
     }
 
     public String getId()

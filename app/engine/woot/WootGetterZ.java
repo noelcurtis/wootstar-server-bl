@@ -1,12 +1,10 @@
 package engine.woot;
 
-import com.avaje.ebean.TxType;
-import com.avaje.ebean.annotation.Transactional;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import engine.DbHelpers;
-import models.ApplicationData;
 import models.Event;
+import models.EventsHelper;
 import play.Logger;
+import play.cache.Cache;
 import play.libs.F;
 import play.libs.WS;
 
@@ -15,14 +13,13 @@ import java.util.List;
 
 import static engine.WootObjectMapper.WootMapper;
 
-@Deprecated
-public class WootGetter
+public class WootGetterZ
 {
     protected final WootApiHelpers.Site site;
     protected final WootApiHelpers.EventType eventType;
     protected final WootRequest wootRequest;
 
-    public WootGetter(WootRequest request)
+    public WootGetterZ(WootRequest request)
     {
         this.wootRequest = request;
         this.site = request.site;
@@ -34,7 +31,7 @@ public class WootGetter
         Date dt = new Date();
         final String id = WootApiHelpers.getCheckpointIdentifier(eventType, site);
         Logger.info("Creating update checkpoint for {" + id + "}");
-        ApplicationData.add(id , Long.toString(dt.getTime()));
+        Cache.set(id, Long.toString(dt.getTime()));
     }
 
     protected WS.WSRequestHolder constructRequest()
@@ -61,41 +58,21 @@ public class WootGetter
                 new F.Callback<WS.Response>()
                 {
                     @Override
-                    @Transactional(type = TxType.REQUIRES_NEW)
                     public void invoke(WS.Response response) throws Throwable
                     {
                         try
                         {
+                            final long responseTimer = System.currentTimeMillis() - startTime;
+                            Logger.info("WebServices Async Recieved Response: " + "eventType: " + eventType + " site: " + site + " took: {" + responseTimer + "}ms");
                             final ObjectMapper om = new ObjectMapper(); // map response
                             final List<Event> events = om.readValue(response.getBody(), WootMapper().getTypeFactory().constructCollectionType(List.class, Event.class));
-                            if (!events.isEmpty())
-                            {
-                                DbHelpers.clearWootData(eventType, site);
-                                Logger.info("Saving new events start");
-                                for(Event e : events)
-                                {
-                                    try
-                                    {
-                                        e.save();
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Logger.error("Error Saving event " + ex.toString());
-                                        ex.printStackTrace();
-                                    }
-                                }
-                                Logger.info("Saving new events end");
-                                createUpdateCheckpoint(); // create/update the checkpoint
-                                Logger.info("Found " + events.size() + " events for eventType " + eventType + " site " + site);
-                            }
-                            else
-                            {
-                                Logger.info("No events for eventType " + eventType + " site " + site);
-                            }
+
+                            EventsHelper.saveEvents(events, wootRequest);
+                            createUpdateCheckpoint(); // create/update the checkpoint
                         }
                         catch (Exception ex)
                         {
-                            Logger.error("Error Refreshing Database: " + ex.toString());
+                            Logger.error("Error Refreshing Events: " + ex.toString());
                             Logger.error("Woot Response status " + response.getStatusText());
                             Logger.debug("Woot Response " + response.getBody());
                             Logger.info("WebServices Async Error: " + "eventType: " + eventType + " site: " + site);

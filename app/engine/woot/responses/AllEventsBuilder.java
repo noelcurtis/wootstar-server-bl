@@ -11,8 +11,10 @@ import engine.woot.WootReponseBuilder;
 import engine.woot.WootRequest;
 import models.ApplicationData;
 import models.Event;
+import models.EventsHelper;
 import models.WootOff;
 import play.Logger;
+import play.cache.Cache;
 import play.libs.Json;
 
 import java.util.*;
@@ -34,10 +36,11 @@ public class AllEventsBuilder implements WootReponseBuilder
         {
             String cacheIdentifier = WootApiHelpers.getCacheIdentifier(request.eventType, request.site);
             // get the checkpoint id
-            CachedObject co = (CachedObject)play.cache.Cache.get(cacheIdentifier);
+            //CachedObject co = (CachedObject)play.cache.Cache.get(cacheIdentifier);
+            CachedObject co = null;
             // check the key to see if fresh
             String checkpointIdentifier = WootApiHelpers.getCheckpointIdentifier(request.eventType, request.site);
-            String dt = ApplicationData.get(checkpointIdentifier);
+            String dt = (String)Cache.get(checkpointIdentifier);
             Date checkpoint = null;
             if (!Strings.isNullOrEmpty(dt))
             {
@@ -47,18 +50,13 @@ public class AllEventsBuilder implements WootReponseBuilder
             // see if there is a checkpoint
             if (co != null && co.getTimestamp() != null && checkpoint != null && !checkpoint.after(co.getTimestamp()))
             {
-                Logger.debug("Serving cached events for eventType" + request.eventType + " site " + request.site);
+                Logger.debug("Serving cached events for eventType " + request.eventType + " site " + request.site);
                 allMappedEvents.addAll(Arrays.asList(co.getEvents()));
             }
             else
             {
-                Logger.debug("Creating cached object for eventType" + request.eventType + " site " + request.site);
-                List<Event> wootOffs =  WootOff.getAllEvents(); // WootOff events are not stored in the DB
-                List<Event> other =  Event.getEvents(request.eventType, request.site); //  Get all the other events from the DB
-
-                List<Event> allEvents = new ArrayList<Event>();
-                allEvents.addAll(wootOffs);
-                allEvents.addAll(other);
+                Logger.debug("Creating cached object for eventType " + request.eventType + " site " + request.site);
+                List<Event> allEvents =  EventsHelper.getEvents(request.eventType, request.site);
                 List<engine.data.apiv1.Event> mappedEvents = new ArrayList<engine.data.apiv1.Event>();
                 // map events so they can be rendered in json
                 for (models.Event e : allEvents)
@@ -71,6 +69,7 @@ public class AllEventsBuilder implements WootReponseBuilder
                     else
                     {
                         Logger.debug("Duplicate event id " + mappedEvent.Id);
+                        mappedEvents.add(mappedEvent);
                     }
                 }
                 // create a new cached object
@@ -81,19 +80,13 @@ public class AllEventsBuilder implements WootReponseBuilder
 
         if (allMappedEvents.isEmpty())
         {
-            ObjectNode result = Json.newObject();
-            result.put("status", "ok");
-            result.put("message", "no events found");
-            this.response = result;
-            this.etag = null;
+            Logger.info("No events for request {all events}");
         }
-        else
-        {
-            Logger.info("Responding with events count: " + allMappedEvents.size());
-            JsonNode eventsAsJson = WootObjectMapper.WootMapper().valueToTree(allMappedEvents);
-            this.etag = Hashing.sha256().hashString(eventsAsJson.toString()).toString();
-            this.response = eventsAsJson;
-        }
+
+        Logger.info("Responding with events count: " + allMappedEvents.size());
+        JsonNode eventsAsJson = WootObjectMapper.WootMapper().valueToTree(allMappedEvents);
+        this.etag = Hashing.sha256().hashString(eventsAsJson.toString()).toString();
+        this.response = eventsAsJson;
     }
 
     @Override
