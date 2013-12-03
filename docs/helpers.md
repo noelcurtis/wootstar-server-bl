@@ -28,6 +28,14 @@
 *   ../../play start
 
 
+## Servers
+*   ssh -i EC2-KeyPair.pem ec2-user@ec2-54-204-52-123.compute-1.amazonaws.com
+*   ssh -i EC2-KeyPair.pem ec2-user@ec2-54-242-187-163.compute-1.amazonaws.com
+*   ssh -i EC2-KeyPair.pem ec2-user@ec2-54-205-84-125.compute-1.amazonaws.com
+
+
+*   ssh -i EC2-KeyPair.pem ec2-user@ec2-54-226-138-137.compute-1.amazonaws.com
+
 
 
 Header host
