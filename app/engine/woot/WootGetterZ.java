@@ -8,6 +8,7 @@ import play.cache.Cache;
 import play.libs.F;
 import play.libs.WS;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -67,7 +68,7 @@ public class WootGetterZ
                             final ObjectMapper om = new ObjectMapper(); // map response
                             final List<Event> events = om.readValue(response.getBody(), WootMapper().getTypeFactory().constructCollectionType(List.class, Event.class));
 
-                            EventsHelper.saveEvents(events, wootRequest);
+                            EventsHelper.saveEventsRedis(new ArrayList<Event>(events), wootRequest);
                             createUpdateCheckpoint(); // create/update the checkpoint
                         }
                         catch (Exception ex)

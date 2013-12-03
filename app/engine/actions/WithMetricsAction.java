@@ -20,15 +20,6 @@ public class WithMetricsAction extends Action<WithMetrics>
         try
         {
             Logger.info(ctx.request().toString());
-            Map<String, String[]> headers = ctx.request().headers();
-            for(String k : headers.keySet())
-            {
-                Logger.info("Header " + k);
-                for(String v : headers.get(k))
-                {
-                    Logger.info("Value " + v);
-                }
-            }
             return delegate.call(ctx);
         } finally
         {

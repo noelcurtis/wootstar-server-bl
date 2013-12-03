@@ -7,10 +7,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 //import javax.persistence.GeneratedValue;
 //import javax.persistence.GenerationType;
 //import javax.persistence.ManyToMany;
+import java.io.Serializable;
 import java.util.List;
 
 //@Entity
-public class Tag
+public class Tag implements Serializable
 {
     //@javax.persistence.Id
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tag_seq")

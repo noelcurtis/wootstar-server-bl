@@ -6,12 +6,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 //import play.db.ebean.Model;
 
 //import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @JsonIgnoreProperties({"Stats", "EstimatedShipDate", "Artist"})
 //@Entity
-public class Offer
+public class Offer implements Serializable
 {
     //@javax.persistence.Id
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "offer_seq")

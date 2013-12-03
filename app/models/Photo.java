@@ -5,11 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 //import play.db.ebean.Model;
 
 //import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 //@Entity
-public class Photo
+public class Photo implements Serializable
 {
     //@javax.persistence.Id
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "photo_seq")

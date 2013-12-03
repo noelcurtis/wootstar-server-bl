@@ -5,12 +5,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 //import play.db.ebean.Model;
 
 import javax.persistence.Entity;
+import java.io.Serializable;
 //import javax.persistence.GeneratedValue;
 //import javax.persistence.GenerationType;
 //import javax.persistence.Transient;
 
 //@Entity
-public class ShippingMethod
+public class ShippingMethod implements Serializable
 {
     //@javax.persistence.Id
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "shipping_method_seq")

@@ -30,3 +30,15 @@ Header host
 [info] application - Header User-Agent
 [info] application - Value NING/1.0
 [info] application - Responding with events count: 10
+
+
+//            Map<String, String[]> headers = ctx.request().headers();
+//            for(String k : headers.keySet())
+//            {
+//                Logger.info("Header " + k);
+//                for(String v : headers.get(k))
+//                {
+//                    Logger.info("Value " + v);
+//                }
+//            }
+

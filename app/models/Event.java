@@ -9,6 +9,7 @@ import engine.woot.WootApiHelpers;
 //import play.db.ebean.Model;
 
 //import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
         @JsonSubTypes.Type(value = WootPlus.class, name = "WootPlus")})
 //@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //@Entity
-public class Event
+public class Event implements Serializable
 {
     //@javax.persistence.Id
     private String Id;

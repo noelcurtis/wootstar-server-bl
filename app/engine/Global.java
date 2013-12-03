@@ -34,5 +34,6 @@ public class Global extends GlobalSettings
     {
         Logger.info("Application shutdown...");
         RequestQueue().cancelRequests();
+        JedisManager.SharedJedisManager().getPool().destroy();
     }
 }

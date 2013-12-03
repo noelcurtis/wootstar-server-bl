@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.hash.Hashing;
+import org.apache.commons.codec.binary.Base64;
 import play.Logger;
 import play.libs.Json;
 
@@ -113,5 +114,30 @@ public class Utils
     public static String createETag(String value)
     {
         return "\"" + Hashing.sha256().hashString(value).toString() + "\"";
+    }
+
+    /**
+     * Write the object to a Base64 string.
+     */
+    public static String serializeToString(Serializable o) throws IOException
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(baos);
+        oos.writeObject(o);
+        oos.close();
+        return new String(Base64.encodeBase64(baos.toByteArray()));
+    }
+
+    /**
+     * Read the object from Base64 string.
+     */
+    public static Object deserializeFromString(String s) throws IOException, ClassNotFoundException
+    {
+        byte[] data = Base64.decodeBase64(s.getBytes());
+        ObjectInputStream ois = new ObjectInputStream(
+                new ByteArrayInputStream(data));
+        Object o = ois.readObject();
+        ois.close();
+        return o;
     }
 }

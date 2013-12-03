@@ -12,7 +12,7 @@ object ApplicationBuild extends Build {
     javaCore,
     javaJdbc,
     javaEbean,
-    "redis.clients" % "jedis" % "2.0.0",
+    "redis.clients" % "jedis" % "2.1.0",
     "postgresql" % "postgresql" % "9.1-901-1.jdbc4",
     "com.codahale.metrics" % "metrics-core" % "3.0.1",
     "com.codahale.metrics" % "metrics-healthchecks" % "3.0.1",

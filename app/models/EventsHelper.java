@@ -1,17 +1,69 @@
 package models;
 
+import engine.Utils;
 import engine.woot.WootApiHelpers;
 import engine.woot.WootRequest;
 import engine.woot.WootRequestQueue;
 import play.Logger;
 import play.cache.Cache;
+import redis.clients.jedis.Jedis;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static engine.JedisManager.SharedJedisManager;
+
 public class EventsHelper
 {
-    public static void saveEvents(List<Event> events, WootRequest request)
+    public static void saveEventsRedis(ArrayList<Event> events, WootRequest request)
+    {
+        Jedis jedis = SharedJedisManager().getPool().getResource();
+        try
+        {
+            if(events == null)
+            {
+                events = new ArrayList<Event>();
+            }
+            Logger.info("Saving events for request {" + request.toString() + "} count: " + events.size());
+            jedis.set(WootApiHelpers.getDbIdentifier(request.eventType, request.site), Utils.serializeToString(events));
+        }
+        catch (Exception ex)
+        {
+            Logger.error("Error saving Events to Redis for " + request.toString());
+        }
+        finally
+        {
+            SharedJedisManager().getPool().returnResource(jedis);
+        }
+    }
+
+    public static List<Event> getEventsRedis(WootRequest request)
+    {
+        Jedis jedis = SharedJedisManager().getPool().getResource();
+        try
+        {
+            String found =  jedis.get(WootApiHelpers.getDbIdentifier(request.eventType, request.site));
+            ArrayList<Event> foundEvents = (ArrayList<Event>)Utils.deserializeFromString(found);
+            if (foundEvents != null)
+            {
+                return foundEvents;
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.error("Error getting Events from Redis for " + request.toString());
+            Logger.info(ex.toString());
+            ex.printStackTrace();
+        }
+        finally
+        {
+            SharedJedisManager().getPool().returnResource(jedis);
+        }
+        return new ArrayList<Event>();
+    }
+
+    public static void saveEvents(ArrayList<Event> events, WootRequest request) throws IOException
     {
         if(events == null)
         {
@@ -23,20 +75,29 @@ public class EventsHelper
 
     public static List<Event> getEvents(WootRequest request)
     {
-        List<Event> foundEvents = (List<Event>)Cache.get(WootApiHelpers.getDbIdentifier(request.eventType, request.site));
-        if (foundEvents != null)
+        try
         {
-            return foundEvents;
+            ArrayList<Event> foundEvents = (ArrayList<Event>)Cache.get(WootApiHelpers.getDbIdentifier(request.eventType, request.site));
+            if (foundEvents != null)
+            {
+                return foundEvents;
+            }
         }
+        catch (Exception ex)
+        {
+            Logger.info(ex.toString());
+            ex.printStackTrace();
+        }
+
         return new ArrayList<Event>();
     }
 
     public static List<Event> getAllEvents()
     {
-        List<Event> results = new ArrayList<Event>();
+        ArrayList<Event> results = new ArrayList<Event>();
         for (WootRequest request : WootRequestQueue.RequestQueue().getRequests())
         {
-            results.addAll(getEvents(request));
+            results.addAll(getEventsRedis(request));
         }
         return results;
     }

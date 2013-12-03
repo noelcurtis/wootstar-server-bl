@@ -7,10 +7,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 //import javax.persistence.Entity;
 //import javax.persistence.GeneratedValue;
 //import javax.persistence.GenerationType;
+import java.io.Serializable;
 import java.util.Date;
 
 //@Entity
-public class QualityPost
+public class QualityPost implements Serializable
 {
     //@javax.persistence.Id
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "quality_post_seq")

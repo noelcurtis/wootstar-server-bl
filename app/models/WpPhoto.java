@@ -3,6 +3,8 @@ package models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.io.Serializable;
 //import play.db.ebean.Model;
 //
 //import javax.persistence.Entity;
@@ -11,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 //@Entity
 @JsonIgnoreProperties({"Tags"})
-public class WpPhoto
+public class WpPhoto implements Serializable
 {
     //@javax.persistence.Id
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "wp_photo_seq")
