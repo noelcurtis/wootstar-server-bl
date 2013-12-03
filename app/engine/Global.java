@@ -12,6 +12,7 @@ public class Global extends GlobalSettings
     @Override
     public void onStart(Application app)
     {
+        JedisManager.SharedJedisManager();
         Logger.info("Application startup...");
         if (app.configuration().getBoolean("datagetter.enabled"))
         {

@@ -28,11 +28,11 @@ public class JedisManager
 
     private JedisManager()
     {
+        Logger.info("Initializing Jedis");
         String host = Play.application().configuration().getString("redis.host");
         String port = Play.application().configuration().getString("redis.port");
         JedisPoolConfig pc = new JedisPoolConfig();
-        //pc.setMaxActive(3);
-        //pc.setMaxIdle(2);
+        pc.setMinIdle(2);
         pool = new JedisPool(pc, host, Utils.toInt(port, "0"), 20000);
     }
 

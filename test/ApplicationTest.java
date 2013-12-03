@@ -50,7 +50,7 @@ public class ApplicationTest {
     @Test
     public void loadTest() throws Exception
     {
-        int interval = 1000;
+        int interval = 100;
         int offset = 10;
         int limit = 10000;
         String endpoint = "http://wootstar-lb-1-510642144.us-east-1.elb.amazonaws.com/apiv1/events";
@@ -60,6 +60,7 @@ public class ApplicationTest {
         {
                 Thread.sleep(interval); // wait
                 WS.WSRequestHolder wsHolder= WS.url(endpoint);
+                final long time = System.currentTimeMillis();
                 wsHolder.get().map(new Function<WS.Response, Object>()
                 {
                     @Override
@@ -75,6 +76,7 @@ public class ApplicationTest {
                             System.out.println("Failed: " + response.getStatus());
                             r.failedRequests++;
                         }
+                        System.out.println("took: " + (System.currentTimeMillis()- time) +  "ms");
                         return null;
                     }
                 });
