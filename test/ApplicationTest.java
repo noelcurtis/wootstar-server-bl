@@ -50,7 +50,7 @@ public class ApplicationTest {
     @Test
     public void loadTest() throws Exception
     {
-        int interval = 500;
+        int interval = 300;
         int offset = 10;
         int limit = 10000;
         String endpoint = "http://wootstar-lb-1-510642144.us-east-1.elb.amazonaws.com/apiv1/events";

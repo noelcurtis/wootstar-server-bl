@@ -30,10 +30,10 @@ public class WootRequestQueue
         activeRequests = new ArrayList<Cancellable>();
         requests = new ArrayList<WootRequest>();
 
+        requests.add(new WootRequest(7000l, WootApiHelpers.EventType.WootOff, null)); // 7 second refresh cycle
         requests.add(new WootRequest(WootApiHelpers.EventType.Daily, null)); // 10 min refresh cycle
         requests.add(new WootRequest(3600000l, WootApiHelpers.EventType.Moofi, null)); // 1 hour refresh cycle
         requests.add(new WootRequest(3600000l, WootApiHelpers.EventType.Reckoning, null)); // 1 hour refresh cycle
-        requests.add(new WootRequest(7000l, WootApiHelpers.EventType.WootOff, null)); // 7 second refresh cycle
 
         // woot plus all sites individually
         for (WootApiHelpers.Site s : WootApiHelpers.Site.values())
