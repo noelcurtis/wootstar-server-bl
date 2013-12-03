@@ -65,6 +65,10 @@ public class Event
         {
             this.WriteUp = ((WootOff) dataEvent).getWriteUp();
             this.Subtitle = ((WootOff) dataEvent).getSubtitle();
+            if (!this.Offers.isEmpty())
+            {
+                this.Title = this.Offers.get(0).Title; // set event title to offer title
+            }
         }
 
         if (dataEvent instanceof WootPlus)
