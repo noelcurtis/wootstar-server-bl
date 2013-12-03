@@ -50,7 +50,7 @@ public class WootRequestQueue
         {
             Logger.info("Scheduling request " + r.toString());
             Cancellable c = Akka.system().scheduler().schedule(
-                    Duration.create(60, TimeUnit.SECONDS),
+                    Duration.create(4, TimeUnit.MINUTES),
                     Duration.create(r.interval, TimeUnit.MILLISECONDS), new Runnable()
             {
                 @Override
