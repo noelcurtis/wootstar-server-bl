@@ -29,10 +29,7 @@ public class WootGetterZ
 
     protected void createUpdateCheckpoint()
     {
-        Date dt = new Date();
-        final String id = WootApiHelpers.getCheckpointIdentifier(eventType, site);
-        Logger.info("Creating update checkpoint for {" + id + "}");
-        Cache.set(id, Long.toString(dt.getTime()));
+        EventsHelper.setEventsCheckpointRedis(wootRequest);
     }
 
     protected WS.WSRequestHolder constructRequest()

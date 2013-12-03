@@ -20,7 +20,7 @@ public class Metrics
 
     private final static MemoryUsageGaugeSet memoryUsageGaugeSet = new MemoryUsageGaugeSet(); // Memory Guage Set for the JVM
     private static Timer allRequestsTimer; // Timer used to time Controller actions see @WithMetrics
-    private final Map<String, Timer> wootGetterTimers; // Timers for Woot Getters
+    private final Map<String, Timer> otherTimers; // Timers for Woot Getters
 
     // Console Reporter //
     private static ConsoleReporter consoleReporter;
@@ -54,7 +54,7 @@ public class Metrics
             consoleReporter.start(15, TimeUnit.MINUTES);
         }
 
-        wootGetterTimers = new HashMap<String, Timer>();
+        otherTimers = new HashMap<String, Timer>();
         registerMemoryMetrics();
         registerTimers();
     }
@@ -120,17 +120,17 @@ public class Metrics
         return allRequestsTimer;
     }
 
-    public Timer getWootGetterTimer(WootRequest request)
+    public Timer getWootGetterTimer(String timerName)
     {
-        Timer timer = wootGetterTimers.get(request.getId());
+        Timer timer = otherTimers.get(timerName);
         if (timer != null)
         {
             return  timer;
         }
         else
         {
-            timer = metricsRegistry.timer(MetricRegistry.name("wootRequest", request.getId()));
-            wootGetterTimers.put(request.getId(), timer);
+            timer = metricsRegistry.timer(MetricRegistry.name("other-timer", timerName));
+            otherTimers.put(timerName, timer);
         }
         return timer;
     }

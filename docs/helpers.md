@@ -12,6 +12,21 @@
 *   `psql -d "wootstar-dev" -U play` as user postgres if you want to connect to the DB
 *   `rm /opt/wootstar/play-2.2.1/apps/wootstar-server-bl/RUNNING_PID` remove pid lock file
 
+## Server Setup
+*   sudo yum install java-devel
+*   sudo yum install git
+*   cd /opt
+*   sudo wget http://downloads.typesafe.com/play/2.2.1/play-2.2.1.zip
+*   sudo unzip play-2.2.1.zip
+*   sudo chown -R ec2-user:ec2-user play-2.2.1
+*   cd play-2.2.1
+*   mkdir apps
+*   cd apps
+*   git clone https://github.com/noelcurtis/wootstar-server-bl.git
+*   cd wootstar-server-bl
+*   cp conf/application.aws.conf conf/application.conf
+*   ../../play start
+
 
 
 

@@ -133,14 +133,11 @@ public class Utils
      */
     public static Object deserializeFromString(String s) throws IOException, ClassNotFoundException
     {
-        long ct = System.currentTimeMillis();
         byte[] data = Base64.decodeBase64(s.getBytes());
         ObjectInputStream ois = new ObjectInputStream(
                 new ByteArrayInputStream(data));
         Object o = ois.readObject();
         ois.close();
-        long diff = System.currentTimeMillis() - ct;
-        Logger.info("Deserialization took: {" + diff + "ms}");
         return o;
     }
 }
