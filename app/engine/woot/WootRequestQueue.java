@@ -46,11 +46,12 @@ public class WootRequestQueue
 
     public void scheduleRequests()
     {
+        int t = 0;
         for (final WootRequest r : requests)
         {
             Logger.info("Scheduling request " + r.toString());
             Cancellable c = Akka.system().scheduler().schedule(
-                    Duration.create(4, TimeUnit.MINUTES),
+                    Duration.create(t, TimeUnit.MINUTES),
                     Duration.create(r.interval, TimeUnit.MILLISECONDS), new Runnable()
             {
                 @Override
@@ -70,6 +71,7 @@ public class WootRequestQueue
                 }
             }, Akka.system().dispatcher());
             activeRequests.add(c);
+            t +=4; // increment for 4 minute offset
         }
     }
 
