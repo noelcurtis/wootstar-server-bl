@@ -47,7 +47,7 @@ public class Utils
     public static ByteArrayOutputStream gzip(final String input)
             throws IOException
     {
-        Logger.info("Gzip content: start");
+        Logger.debug("Gzip content: start");
         final InputStream inputStream = new ByteArrayInputStream(input.getBytes());
         final ByteArrayOutputStream stringOutputStream = new ByteArrayOutputStream((int) (input.length() * 0.75));
         final OutputStream gzipOutputStream = new GZIPOutputStream(stringOutputStream);
@@ -61,7 +61,7 @@ public class Utils
 
         inputStream.close();
         gzipOutputStream.close();
-        Logger.info("Gzip content: end");
+        Logger.debug("Gzip content: end");
         return stringOutputStream;
     }
 
@@ -133,11 +133,14 @@ public class Utils
      */
     public static Object deserializeFromString(String s) throws IOException, ClassNotFoundException
     {
+        long ct = System.currentTimeMillis();
         byte[] data = Base64.decodeBase64(s.getBytes());
         ObjectInputStream ois = new ObjectInputStream(
                 new ByteArrayInputStream(data));
         Object o = ois.readObject();
         ois.close();
+        long diff = System.currentTimeMillis() - ct;
+        Logger.info("Deserialization took: {" + diff + "ms}");
         return o;
     }
 }

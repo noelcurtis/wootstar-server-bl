@@ -43,7 +43,10 @@ public class EventsHelper
         Jedis jedis = SharedJedisManager().getPool().getResource();
         try
         {
+            long ct = System.currentTimeMillis();
             String found =  jedis.get(WootApiHelpers.getDbIdentifier(request.eventType, request.site));
+            long diff = System.currentTimeMillis() - ct;
+            Logger.info("Getting events from Redis took: {" + diff + "ms}");
             ArrayList<Event> foundEvents = (ArrayList<Event>)Utils.deserializeFromString(found);
             if (foundEvents != null)
             {
