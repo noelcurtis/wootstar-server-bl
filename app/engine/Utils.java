@@ -44,6 +44,12 @@ public class Utils
         return Integer.parseInt(id.or(defaultValue));
     }
 
+    public static double toDouble(String value, String defaultValue)
+    {
+        Optional<String> id = Optional.of(value);
+        return Double.parseDouble(id.or(defaultValue));
+    }
+
     public static ByteArrayOutputStream gzip(final String input)
             throws IOException
     {
@@ -107,7 +113,7 @@ public class Utils
     public static String cleanStringOfHtmlTags(String value)
     {
         value = Strings.nullToEmpty(value);
-        String cleaned = value.replaceAll("<.>|</.>", "").replaceAll("\r\n", " ");
+        String cleaned = value.replaceAll("<.>|</.>", "").replaceAll("\r\n", " ").replaceAll("<em>", "").replaceAll("&npsb;", "");
         return cleaned;
     }
 
@@ -133,6 +139,8 @@ public class Utils
      */
     public static Object deserializeFromString(String s) throws IOException, ClassNotFoundException
     {
+        if (Strings.isNullOrEmpty(s)) return null;
+
         byte[] data = Base64.decodeBase64(s.getBytes());
         ObjectInputStream ois = new ObjectInputStream(
                 new ByteArrayInputStream(data));

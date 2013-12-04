@@ -3,12 +3,9 @@ package engine.data.apiv1;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import engine.Utils;
-import models.WootOff;
-import models.WootPlus;
+import models.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Event
@@ -21,10 +18,10 @@ public class Event
     public String Type;
     public List<Offer> Offers;
     // WootOff
-    public String WriteUp;
-    public String Subtitle;
+    //public String WriteUp;
+    //public String Subtitle;
     // WootPlus
-    public String ManufacturerText;
+    //public String ManufacturerText;
     public String Url;
     public String Text;
 
@@ -55,7 +52,9 @@ public class Event
                     Offers.add(new Offer(o));
                     if (o.getPhotos() != null && !(o.getPhotos().isEmpty()))
                     {
-                        this.MainPhoto = o.getPhotos().get(0).getUrl();
+                        List<Photo> photos = o.getPhotos();
+                        Collections.sort(photos, new PhotoComparitor());
+                        this.MainPhoto = photos.get(0).getUrl();
                     }
                 }
             }
@@ -63,8 +62,8 @@ public class Event
 
         if (dataEvent instanceof WootOff)
         {
-            this.WriteUp = ((WootOff) dataEvent).getWriteUp();
-            this.Subtitle = ((WootOff) dataEvent).getSubtitle();
+            //this.WriteUp = ((WootOff) dataEvent).getWriteUp();
+            //this.Subtitle = ((WootOff) dataEvent).getSubtitle();
             if (!this.Offers.isEmpty())
             {
                 this.Title = this.Offers.get(0).Title; // set event title to offer title
@@ -73,14 +72,29 @@ public class Event
 
         if (dataEvent instanceof WootPlus)
         {
-            this.ManufacturerText = ((WootPlus) dataEvent).getManufacturerText();
+            //this.ManufacturerText = ((WootPlus) dataEvent).getManufacturerText();
             this.Url = ((WootPlus) dataEvent).getUrl();
             this.Text = Utils.cleanStringOfHtmlTags(((WootPlus) dataEvent).getText());
             // if main photo is still not set for some reason
             if (((WootPlus) dataEvent).getPhotos() != null && !((WootPlus) dataEvent).getPhotos().isEmpty())
             {
-                MainPhoto = ((WootPlus) dataEvent).getPhotos().get(0).getUrl();
+                List<WpPhoto> photos = ((WootPlus) dataEvent).getPhotos();
+                Collections.sort(photos, new PhotoComparitor());
+                this.MainPhoto = photos.get(0).getUrl();
             }
+        }
+    }
+
+    private class PhotoComparitor implements Comparator<Photograph>
+    {
+        @Override
+        public int compare(Photograph x, Photograph y) {
+            final double xArea = x.getArea();
+            final double yArea = y.getArea();
+
+            return xArea < yArea ? -1
+                    : xArea > yArea ? 1
+                    : 0;
         }
     }
 

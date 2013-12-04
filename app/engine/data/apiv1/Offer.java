@@ -15,14 +15,14 @@ public class Offer
     public String Id;
     public Double ListPrice;
     public String MainPhoto;
-    public String OriginalStartDate;
+    //public String OriginalStartDate;
     public Integer PercentageRemaining;
     public List<String> Photos;
-    public List<QualityPost> QualityPosts;
+    //public List<QualityPost> QualityPosts;
     public Integer Rank;
     public Double SalePrice;
-    public List<ShippingMethod> ShippingMethods;
-    public String Snippet;
+    //public List<ShippingMethod> ShippingMethods;
+    //public String Snippet;
     public Boolean SoldOut;
     public String Specs;
     public String Teaser;
@@ -55,13 +55,13 @@ public class Offer
             {
                 MainPhoto = photos.get(0).getUrl();
             }
-            OriginalStartDate = offerModel.getOriginalStartDate();
+            //OriginalStartDate = offerModel.getOriginalStartDate();
             PercentageRemaining = offerModel.getPercentageRemaining();
-            QualityPosts = offerModel.getQualityPosts();
+            //QualityPosts = offerModel.getQualityPosts();
             Rank = offerModel.getRank();
             SalePrice = firstItem.getSalePrice();
-            ShippingMethods = offerModel.getShippingMethods();
-            Snippet = offerModel.getSnippet();
+            //ShippingMethods = offerModel.getShippingMethods();
+            //Snippet = offerModel.getSnippet();
             SoldOut = offerModel.getSoldOut();
             Specs = offerModel.getSpecs();
             Teaser = offerModel.getTeaser();

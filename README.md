@@ -44,7 +44,6 @@ Admin page is at: [http://wootstar-lb-1-510642144.us-east-1.elb.amazonaws.com/ad
             return ret;
         }
 ```
-*   Your output value of Sha256(application.secret) should be ab67d454e9def183dccf82040d213c8e5c63469d6ff90ec54ddee699ba298518 -- to be remove from doc shortly
 
 
 ## [Caching Design](https://github.com/noelcurtis/wootstar-server-bl/blob/master/docs/caching.md)

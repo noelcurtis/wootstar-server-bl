@@ -2,6 +2,7 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import engine.Utils;
 //import play.db.ebean.Model;
 
 //import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //@Entity
-public class Photo implements Serializable
+public class Photo implements Serializable, Photograph
 {
     //@javax.persistence.Id
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "photo_seq")
@@ -98,5 +99,11 @@ public class Photo implements Serializable
             tag.setInfo(t);
             this.Tags.add(tag);
         }
+    }
+
+    @JsonIgnore
+    public double getArea()
+    {
+        return Utils.toDouble(getHeight(), "0") * Utils.toDouble(getWidth(), "0");
     }
 }

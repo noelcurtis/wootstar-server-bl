@@ -76,4 +76,22 @@ public class JedisManager
         }
         return null;
     }
+
+    public void flush()
+    {
+        Jedis jedis = SharedJedisManager().getPool().getResource();
+        try
+        {
+            jedis.flushAll();
+            jedis.flushDB();
+        }
+        catch (Exception ex)
+        {
+            Logger.error("Error flushing DB");
+        }
+        finally
+        {
+            SharedJedisManager().getPool().returnResource(jedis);
+        }
+    }
 }

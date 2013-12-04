@@ -3,6 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import engine.Utils;
 import engine.WootObjectMapper;
+import play.Logger;
 import play.libs.F;
 import play.libs.WS;
 import play.mvc.Controller;
@@ -32,12 +33,15 @@ public class Admin extends Controller
 
     public static F.Promise<Result> apiStatus()
     {
+        final String endpoint = play.Play.isDev() ? "http://localhost:9000/apiv1/events" : "http://wootstar-lb-1-510642144.us-east-1.elb.amazonaws.com/apiv1/events";
+        final String auth = "hello:7805a2d65710e365ae645a8157bf4687d3922ee46146d1ea889b2ea8beec2188";
         final ObjectNode node = WootObjectMapper.WootMapper().createObjectNode();
-        final F.Promise<Result> resultPromise = WS.url("http://wootstar-lb-1-510642144.us-east-1.elb.amazonaws.com/apiv1/events").get().flatMap(
+
+        final F.Promise<Result> resultPromise = WS.url(endpoint).setHeader("Authorization", auth).get().flatMap(
                 new F.Function<WS.Response, F.Promise<Result>>() {
                     public F.Promise<Result> apply(WS.Response response) {
                         node.put("event", true);
-                        return WS.url("http://wootstar-lb-1-510642144.us-east-1.elb.amazonaws.com/apiv1/events").setQueryParameter("type", "Daily").get().map(
+                        return WS.url(endpoint).setHeader("Authorization", auth).setQueryParameter("type", "Daily").get().map(
                                 new F.Function<WS.Response, Result>() {
                                     public Result apply(WS.Response response) {
                                         node.put("type", true);

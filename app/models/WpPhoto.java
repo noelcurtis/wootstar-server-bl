@@ -3,6 +3,7 @@ package models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import engine.Utils;
 
 import java.io.Serializable;
 //import play.db.ebean.Model;
@@ -13,7 +14,7 @@ import java.io.Serializable;
 
 //@Entity
 @JsonIgnoreProperties({"Tags"})
-public class WpPhoto implements Serializable
+public class WpPhoto implements Serializable, Photograph
 {
     //@javax.persistence.Id
     //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "wp_photo_seq")
@@ -69,5 +70,11 @@ public class WpPhoto implements Serializable
     public void setWidth(String width)
     {
         Width = width;
+    }
+
+    @JsonIgnore
+    public double getArea()
+    {
+        return Utils.toDouble(getHeight(), "0") * Utils.toDouble(getWidth(), "0");
     }
 }

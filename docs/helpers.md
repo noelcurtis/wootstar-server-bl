@@ -36,6 +36,9 @@
 
 *   ssh -i EC2-KeyPair.pem ec2-user@ec2-54-226-138-137.compute-1.amazonaws.com
 
+## Test Hash
+*   hello:7805a2d65710e365ae645a8157bf4687d3922ee46146d1ea889b2ea8beec2188
+
 
 
 Header host

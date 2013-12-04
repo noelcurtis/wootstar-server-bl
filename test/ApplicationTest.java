@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.base.Charsets;
+import com.google.common.hash.Hashing;
+import engine.Utils;
+import engine.actions.SecuredAction;
 import org.junit.*;
 
 import play.libs.WS;
@@ -28,23 +32,24 @@ import static org.fest.assertions.Assertions.*;
 */
 public class ApplicationTest {
 
-//    @Test
-//    public void simpleCheck() {
-//        int a = 1 + 1;
-//        assertThat(a).isEqualTo(2);
-//    }
-//
-//    @Test
-//    public void renderTemplate() {
-//        Content html = views.html.index.render("Your new application is ready.");
-//        assertThat(contentType(html)).isEqualTo("text/html");
-//        assertThat(contentAsString(html)).contains("Your new application is ready.");
-//    }
-
     private class Results
     {
         public int succesfulRequests = 0;
         public int failedRequests = 0;
+    }
+
+    @Test
+    public void cleanHtmlTest()
+    {
+        String testHtml = "<p>Hello whats up\r\n, tags are going to be taken off</p><p>How do you do</p>";
+        System.out.println(Utils.cleanStringOfHtmlTags(testHtml));
+    }
+
+    @Test
+    public void testSecured()
+    {
+        String hashed = Hashing.sha256().newHasher().putString("hello" + "qBPExhPs?C[?LZ]t2;rU8;vG[rpJF9dBBjNEwJU>@LpQ;Zs3c3DOQ]e9A^8bF;s<", Charsets.UTF_8).hash().toString();
+        assertThat(SecuredAction.isSecure("hello:" + hashed, "qBPExhPs?C[?LZ]t2;rU8;vG[rpJF9dBBjNEwJU>@LpQ;Zs3c3DOQ]e9A^8bF;s<"));
     }
 
     @Test

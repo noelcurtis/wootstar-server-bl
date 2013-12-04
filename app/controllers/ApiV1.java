@@ -1,6 +1,7 @@
 package controllers;
 
 import com.google.common.base.Objects;
+import engine.actions.Secured;
 import engine.actions.WithMetrics;
 import engine.data.apiv1.Settings;
 import engine.woot.WootReponseBuilder;
@@ -31,6 +32,7 @@ public class ApiV1 extends ControllerEx
      *
      * @return
      */
+    @Secured
     @WithMetrics
     public static Result events()
     {
