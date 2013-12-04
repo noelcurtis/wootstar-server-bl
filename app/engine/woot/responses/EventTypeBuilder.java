@@ -57,7 +57,7 @@ public class EventTypeBuilder implements WootReponseBuilder
                 else
                 {
                     Logger.debug("Creating cached object for eventType " + request.eventType + " site " + request.site);
-                    List<Event> allEvents =  EventsHelper.getEvents(request.eventType, request.site);
+                    List<Event> allEvents =  EventsHelper.getEventsRedis(request);
                     List<engine.data.apiv1.Event> mappedEvents = new ArrayList<engine.data.apiv1.Event>();
                     // map events so they can be rendered in json
                     for (models.Event e : allEvents)

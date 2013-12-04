@@ -18,6 +18,7 @@ import static engine.JedisManager.SharedJedisManager;
 
 public class EventsHelper
 {
+    @Deprecated
     public static Date getEventsCheckpoint(WootRequest request)
     {
         String checkpointIdentifier = WootApiHelpers.getCheckpointIdentifier(request.eventType, request.site);
@@ -30,6 +31,7 @@ public class EventsHelper
         return checkpoint;
     }
 
+    @Deprecated
     public static void setEventsCheckpoint(WootRequest request)
     {
         Date dt = new Date();
@@ -106,6 +108,7 @@ public class EventsHelper
         return new ArrayList<Event>();
     }
 
+    @Deprecated
     public static void saveEvents(ArrayList<Event> events, WootRequest request) throws IOException
     {
         if(events == null)
@@ -116,6 +119,7 @@ public class EventsHelper
         Cache.set(WootApiHelpers.getDbIdentifier(request.eventType, request.site), events);
     }
 
+    @Deprecated
     public static List<Event> getEvents(WootRequest request)
     {
         try
@@ -162,11 +166,6 @@ public class EventsHelper
         return null;
     }
 
-    public static List<Event> getEventsBySite(WootApiHelpers.Site site)
-    {
-        return filterEventsBySite(site, getAllEvents());
-    }
-
     public static List<Event> filterEventsBySite(WootApiHelpers.Site site, List<Event> allEvents)
     {
         List<Event> results = new ArrayList<Event>();
@@ -180,11 +179,6 @@ public class EventsHelper
         return results;
     }
 
-    public static List<Event> getEventsByType(WootApiHelpers.EventType eventType)
-    {
-        return filterEventsByType(eventType, getAllEvents());
-    }
-
     public static List<Event> filterEventsByType(WootApiHelpers.EventType eventType, List<Event> allEvents)
     {
         List<Event> results = new ArrayList<Event>();
@@ -196,11 +190,6 @@ public class EventsHelper
             }
         }
         return results;
-    }
-
-    public static List<Event> getEvents(WootApiHelpers.EventType eventType, WootApiHelpers.Site site)
-    {
-        return filterEvents(eventType, site, getAllEvents());
     }
 
     public static List<Event> filterEvents(WootApiHelpers.EventType eventType, WootApiHelpers.Site site, List<Event> allEvents)

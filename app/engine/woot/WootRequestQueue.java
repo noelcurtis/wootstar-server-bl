@@ -3,6 +3,7 @@ package engine.woot;
 import akka.actor.Cancellable;
 import engine.JedisManager;
 import play.Logger;
+import play.Play;
 import play.libs.Akka;
 import scala.concurrent.duration.Duration;
 
@@ -48,7 +49,6 @@ public class WootRequestQueue
     public void scheduleRequests()
     {
         //JedisManager.SharedJedisManager().flush();
-
         int t = 0;
         for (final WootRequest r : requests)
         {
@@ -74,7 +74,10 @@ public class WootRequestQueue
                 }
             }, Akka.system().dispatcher());
             activeRequests.add(c);
-            t +=4; // increment for 4 minute offset
+            if (Play.isProd())
+            {
+                t +=4; // increment for 4 minute offset so updates are distributed in production.
+            }
         }
     }
 
