@@ -47,7 +47,7 @@ public class WootRequestQueue
 
     public void scheduleRequests()
     {
-        JedisManager.SharedJedisManager().flush();
+        //JedisManager.SharedJedisManager().flush();
 
         int t = 0;
         for (final WootRequest r : requests)

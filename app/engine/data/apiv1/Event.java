@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import engine.Utils;
 import models.*;
+import play.Logger;
 
 import java.util.*;
 
@@ -54,7 +55,7 @@ public class Event
                     {
                         List<Photo> photos = o.getPhotos();
                         Collections.sort(photos, new PhotoComparitor());
-                        this.MainPhoto = photos.get(0).getUrl();
+                        this.MainPhoto = photos.get(photos.size() - 1).getUrl();
                     }
                 }
             }
@@ -80,7 +81,7 @@ public class Event
             {
                 List<WpPhoto> photos = ((WootPlus) dataEvent).getPhotos();
                 Collections.sort(photos, new PhotoComparitor());
-                this.MainPhoto = photos.get(0).getUrl();
+                this.MainPhoto = photos.get(photos.size() - 1).getUrl();
             }
         }
     }
