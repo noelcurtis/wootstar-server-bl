@@ -9,10 +9,6 @@ GET        /                       controllers.Application.index
 GET        /apiv1/events           controllers.ApiV1.events
 GET        /apiv1/settings         controllers.ApiV1.settings
 
-# Test
-GET        /test/events            controllers.Test.events
-GET        /test/testsetup         controllers.Test.testSetup
-
 #Admin
 GET        /admin                  controllers.Admin.index
 GET        /admin/metrics          controllers.Admin.metrics

@@ -59,6 +59,7 @@ public class ApplicationTest {
         int offset = 10;
         int limit = 10000;
         String endpoint = "http://wootstar-lb-1-510642144.us-east-1.elb.amazonaws.com/apiv1/events";
+        final String auth = "hello:7805a2d65710e365ae645a8157bf4687d3922ee46146d1ea889b2ea8beec2188";
         final Results r = new Results();
 
         for (int i=0; i< limit; i++)
@@ -66,7 +67,7 @@ public class ApplicationTest {
                 Thread.sleep(interval); // wait
                 WS.WSRequestHolder wsHolder= WS.url(endpoint);
                 final long time = System.currentTimeMillis();
-                wsHolder.get().map(new Function<WS.Response, Object>()
+                wsHolder.setHeader("Authorization", auth).get().map(new Function<WS.Response, Object>()
                 {
                     @Override
                     public Object apply(WS.Response response) throws Throwable

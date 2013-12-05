@@ -21,41 +21,6 @@ import static engine.WootObjectMapper.WootMapper;
 
 public class Test extends Controller
 {
-    public static Result testSetup()
-    {
-        final long startTime = System.currentTimeMillis();
-        WS.url("http://localhost:9000/test/events").get().onRedeem(
-                new F.Callback<WS.Response>()
-                {
-                    @Override
-                    @Transactional(type = TxType.REQUIRES_NEW)
-                    public void invoke(WS.Response response) throws Throwable
-                    {
-                        try
-                        {
-                            ObjectMapper om = new ObjectMapper(); // map response
-                            List<Event> events = om.readValue(response.getBody(), WootMapper().getTypeFactory().constructCollectionType(List.class, Event.class));
-                            if (!events.isEmpty())
-                            {
-                                DbHelpers.clearWootData(); // clear the database
-                                Logger.info("Saving new events start");
-                                Ebean.save(events); //save all the events
-                                Logger.info("Saving new events end");
-                            }
-                        } catch (Exception ex)
-                        {
-                            Logger.error("Error Refreshing Database: " + ex.toString());
-                            Logger.error("Woot Response status " + response.getStatus());
-                            Logger.error("Woot Response " + response.toString());
-                            ex.printStackTrace();
-                        }
-                        final long timeTaken = System.currentTimeMillis() - startTime;
-                        Logger.info("Getting and saving events took: {" + timeTaken + "}ms");
-                    }
-                });
-        return ok("Run 'select count(*) from event;' in your DB, there should be 101 events. Check the play logs for errors if any!");
-    }
-
     public static Result events()
     {
         response().setContentType("application/json");
