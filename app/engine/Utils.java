@@ -10,6 +10,7 @@ import play.Logger;
 import play.libs.Json;
 
 import java.io.*;
+import java.util.Map;
 import java.util.zip.GZIPOutputStream;
 
 
@@ -147,5 +148,10 @@ public class Utils
         Object o = ois.readObject();
         ois.close();
         return o;
+    }
+
+    public static String headersToString(Map<String, String[]> headers) throws Exception
+    {
+        return WootObjectMapper.WootMapper().writeValueAsString(headers);
     }
 }

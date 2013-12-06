@@ -3,6 +3,7 @@ package controllers;
 import com.google.common.base.Objects;
 import engine.actions.Secured;
 import engine.actions.WithMetrics;
+import engine.actions.WithSsl;
 import engine.data.apiv1.Settings;
 import engine.woot.WootReponseBuilder;
 import engine.woot.responses.AllEventsBuilder;
@@ -20,6 +21,7 @@ public class ApiV1 extends ControllerEx
      *
      * @return
      */
+    @WithSsl
     public static Result settings()
     {
         return gzippedOk(Settings.getSettings());
@@ -32,6 +34,7 @@ public class ApiV1 extends ControllerEx
      *
      * @return
      */
+    @WithSsl
     @Secured
     @WithMetrics
     public static Result events()

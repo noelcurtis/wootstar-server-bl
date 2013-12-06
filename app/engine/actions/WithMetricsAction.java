@@ -7,8 +7,6 @@ import play.mvc.Action;
 import play.mvc.Http;
 import play.mvc.SimpleResult;
 
-import java.util.Map;
-
 import static engine.metrics.Metrics.WootStarMetrics;
 
 public class WithMetricsAction extends Action<WithMetrics>

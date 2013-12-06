@@ -3,6 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import engine.Utils;
 import engine.WootObjectMapper;
+import engine.actions.WithSsl;
 import play.Logger;
 import play.libs.F;
 import play.libs.WS;
@@ -13,11 +14,13 @@ import static engine.metrics.Metrics.WootStarMetrics;
 
 public class Admin extends Controller
 {
+    @WithSsl
     public static Result index()
     {
         return ok(views.html.admin.index.render(Utils.getHostName()));
     }
 
+    @WithSsl
     public static Result metrics()
     {
         try

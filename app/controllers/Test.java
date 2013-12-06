@@ -6,6 +6,7 @@ import com.avaje.ebean.annotation.Transactional;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Objects;
 import engine.DbHelpers;
+import engine.actions.WithSsl;
 import models.Event;
 import play.Logger;
 import play.libs.F;
@@ -21,6 +22,7 @@ import static engine.WootObjectMapper.WootMapper;
 
 public class Test extends Controller
 {
+    @WithSsl
     public static Result events()
     {
         response().setContentType("application/json");
@@ -39,17 +41,20 @@ public class Test extends Controller
         }
     }
 
+    @WithSsl
     private static Result all()
     {
         File f = new File("app/views/test/events_no_wootoff.json");
         return ok(f, true);
     }
 
+    @WithSsl
     private static Result byId(String id)
     {
         return ok("");
     }
 
+    @WithSsl
     private static Result byType(String type)
     {
         if (type.equals("WootOff"))
