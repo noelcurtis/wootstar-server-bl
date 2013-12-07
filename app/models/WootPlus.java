@@ -1,6 +1,7 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 //import javax.persistence.CascadeType;
@@ -12,6 +13,7 @@ import java.util.List;
 
 //@DiscriminatorValue("WootPlus")
 //@Entity
+@JsonIgnoreProperties({"Subtitle", "DiscussionUrl"})
 public class WootPlus extends Event
 {
     private String ManufacturerText;

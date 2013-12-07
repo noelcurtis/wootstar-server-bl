@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonIgnoreProperties({"Stats", "EstimatedShipDate", "Artist"})
+@JsonIgnoreProperties({"Stats", "EstimatedShipDate", "Artist", "DiscussionUrl", "WineryDetails"})
 //@Entity
 public class Offer implements Serializable
 {
