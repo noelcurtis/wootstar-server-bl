@@ -37,7 +37,7 @@ public class Admin extends Controller
     @WithSsl
     public static F.Promise<Result> apiStatus()
     {
-        final String endpoint = play.Play.isDev() ? "http://localhost:9000/apiv1/events" : "https://www.wootstar.com/apiv1/events";
+        final String endpoint = play.Play.isDev() ? "http://localhost:9000/apiv1/events" : "https://wootstar.com/apiv1/events";
         final String auth = "hello:7805a2d65710e365ae645a8157bf4687d3922ee46146d1ea889b2ea8beec2188";
         final ObjectNode node = WootObjectMapper.WootMapper().createObjectNode();
 
