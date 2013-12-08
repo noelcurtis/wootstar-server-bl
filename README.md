@@ -43,6 +43,13 @@ Admin page is at: [http://wootstar-lb-1-510642144.us-east-1.elb.amazonaws.com/ad
 
 ## [Helpers] (https://github.com/noelcurtis/wootstar-server-bl/blob/master/docs/helpers.md)
 
+## [Commands You Might Need]
+*   `play start` starts play, you can then `Cntrl + c` to stop play
+*   If play is already started and you want to find its process id `ps aux | grep play`, you can use `kill -9 pid` pid: play process id to kill play
+*   `redis-server` use to start Redis
+*   `git fetch` followed by `git pull origin master` will update your `master` branch
+*   `git add .` followed by `git commit -am "Some Message about your change"` will commit your changes, after you commit use `git push origin master` to push your changes into the `master` branch
+
 
 
 
