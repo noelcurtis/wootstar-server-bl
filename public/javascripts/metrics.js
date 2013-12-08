@@ -10,7 +10,7 @@ var requestRateChart = null;
 
 $(function(){
     requestMetrics();
-    requestStatus();
+    //requestStatus();
 });
 
 function populateData()
