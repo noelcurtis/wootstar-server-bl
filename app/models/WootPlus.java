@@ -4,21 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-//import javax.persistence.CascadeType;
-//import javax.persistence.DiscriminatorValue;
-//import javax.persistence.Entity;
-//import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
-//@DiscriminatorValue("WootPlus")
-//@Entity
+
 @JsonIgnoreProperties({"Subtitle", "DiscussionUrl"})
 public class WootPlus extends Event
 {
     private String ManufacturerText;
 
-    //@OneToMany(cascade = CascadeType.ALL)
     private List<WpPhoto> Photos;
 
     private String Url;

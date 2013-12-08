@@ -4,17 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
-//import play.db.ebean.Model;
 
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-
-//@Entity
 public class Attribute implements Serializable
 {
-    //@javax.persistence.Id
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attribute_seq")
     private Long id; // not from Woot
 
     private String Key;

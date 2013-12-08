@@ -2,17 +2,12 @@ package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Strings;
 import engine.woot.WootApiHelpers;
 import play.cache.Cache;
 
-//import javax.persistence.DiscriminatorValue;
-//import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
-//@DiscriminatorValue("WootOff")
-//@Entity
 public class WootOff extends Event
 {
     private String WriteUp;

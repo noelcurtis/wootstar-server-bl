@@ -55,10 +55,10 @@ public class ApplicationTest {
     @Test
     public void loadTest() throws Exception
     {
-        int interval = 300;
+        int interval = 20000;
         int offset = 10;
         int limit = 10000;
-        String endpoint = "http://wootstar-lb-1-510642144.us-east-1.elb.amazonaws.com/apiv1/events";
+        String endpoint = "https://www.wootstar.com/apiv1/events";
         final String auth = "hello:7805a2d65710e365ae645a8157bf4687d3922ee46146d1ea889b2ea8beec2188";
         final Results r = new Results();
 

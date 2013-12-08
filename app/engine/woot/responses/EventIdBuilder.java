@@ -7,7 +7,6 @@ import engine.WootObjectMapper;
 import engine.woot.WootReponseBuilder;
 import models.Event;
 import models.EventsHelper;
-import models.WootOff;
 import play.libs.Json;
 
 public class EventIdBuilder implements WootReponseBuilder

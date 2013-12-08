@@ -6,18 +6,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import engine.Utils;
 
 import java.io.Serializable;
-//import play.db.ebean.Model;
-//
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
 
-//@Entity
 @JsonIgnoreProperties({"Tags"})
 public class WpPhoto implements Serializable, Photograph
 {
-    //@javax.persistence.Id
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "wp_photo_seq")
     public Long id; // not from Woot
 
     private String Height;

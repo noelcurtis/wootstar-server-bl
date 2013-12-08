@@ -1,15 +1,10 @@
 package engine;
 
-import com.google.common.base.Strings;
-import engine.woot.WootApiHelpers;
-import models.Event;
 import play.Logger;
 import play.Play;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
-
-import java.util.ArrayList;
 
 public class JedisManager
 {

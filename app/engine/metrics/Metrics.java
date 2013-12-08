@@ -4,7 +4,6 @@ import akka.actor.Cancellable;
 import com.codahale.metrics.*;
 import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import engine.woot.WootRequest;
 import play.Logger;
 import play.libs.Akka;
 import scala.concurrent.duration.Duration;

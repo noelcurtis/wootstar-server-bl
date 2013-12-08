@@ -1,23 +1,20 @@
 package engine.woot.responses;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.common.base.Strings;
 import com.google.common.hash.Hashing;
 import engine.WootObjectMapper;
 import engine.woot.CachedObject;
 import engine.woot.WootApiHelpers;
 import engine.woot.WootReponseBuilder;
 import engine.woot.WootRequest;
-import models.ApplicationData;
 import models.Event;
 import models.EventsHelper;
-import models.WootOff;
 import play.Logger;
-import play.cache.Cache;
-import play.libs.Json;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 import static engine.woot.WootRequestQueue.RequestQueue;
 

@@ -1,6 +1,5 @@
 package controllers;
 
-import engine.actions.Secured;
 import engine.actions.WithSsl;
 import play.mvc.Result;
 

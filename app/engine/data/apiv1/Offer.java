@@ -3,8 +3,6 @@ package engine.data.apiv1;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import models.Item;
 import models.Photo;
-import models.QualityPost;
-import models.ShippingMethod;
 
 import java.util.List;
 

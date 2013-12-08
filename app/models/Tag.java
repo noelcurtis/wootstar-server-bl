@@ -1,24 +1,14 @@
 package models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-//import play.db.ebean.Model;
 
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.ManyToMany;
 import java.io.Serializable;
 import java.util.List;
 
-//@Entity
 public class Tag implements Serializable
 {
-    //@javax.persistence.Id
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tag_seq")
     private Long id; // not from Woot
     private String Info;
-
-    //@ManyToMany(mappedBy = "Tags")
     private List<Photo> photos;
 
     @JsonIgnore

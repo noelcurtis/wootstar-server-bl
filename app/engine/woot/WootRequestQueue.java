@@ -1,7 +1,6 @@
 package engine.woot;
 
 import akka.actor.Cancellable;
-import engine.JedisManager;
 import play.Logger;
 import play.Play;
 import play.libs.Akka;

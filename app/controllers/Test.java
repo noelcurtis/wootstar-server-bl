@@ -1,24 +1,12 @@
 package controllers;
 
-import com.avaje.ebean.Ebean;
-import com.avaje.ebean.TxType;
-import com.avaje.ebean.annotation.Transactional;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Objects;
-import engine.DbHelpers;
 import engine.actions.WithSsl;
-import models.Event;
-import play.Logger;
-import play.libs.F;
-import play.libs.WS;
 import play.mvc.Controller;
 import play.mvc.Result;
 
 import java.io.File;
-import java.util.List;
 import java.util.Map;
-
-import static engine.WootObjectMapper.WootMapper;
 
 public class Test extends Controller
 {

@@ -3,29 +3,21 @@ package models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import engine.Utils;
-//import play.db.ebean.Model;
 
-//import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Entity
 public class Photo implements Serializable, Photograph
 {
-    //@javax.persistence.Id
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "photo_seq")
     public Long id; // not from Woot
 
     private String Height;
     private String Url;
     private String Width;
 
-    //@ManyToMany(cascade = CascadeType.ALL)
-    //@JoinTable(name = "photo_tags")
     private List<Tag> Tags;
 
-    //@ManyToMany(mappedBy = "Photos")
     private List<Offer> offers;
 
     @JsonIgnore
@@ -40,7 +32,6 @@ public class Photo implements Serializable, Photograph
         this.id = id;
     }
 
-    //@JsonProperty("Height")
     @JsonIgnore
     public String getHeight()
     {
@@ -65,7 +56,6 @@ public class Photo implements Serializable, Photograph
         Url = url;
     }
 
-    //@JsonProperty("Width")
     @JsonIgnore
     public String getWidth()
     {

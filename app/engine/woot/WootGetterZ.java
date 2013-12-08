@@ -4,12 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Event;
 import models.EventsHelper;
 import play.Logger;
-import play.cache.Cache;
 import play.libs.F;
 import play.libs.WS;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static engine.WootObjectMapper.WootMapper;

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import engine.Utils;
 import engine.WootObjectMapper;
 import engine.actions.WithSsl;
-import play.Logger;
 import play.libs.F;
 import play.libs.WS;
 import play.mvc.Controller;
