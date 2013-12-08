@@ -25,7 +25,7 @@ public class ControllerEx extends Controller
             ByteArrayOutputStream gzip = Utils.gzip(node.toString());
             response().setHeader(CONTENT_ENCODING, "gzip");
             response().setHeader(CONTENT_LENGTH, gzip.size() + "");
-            response().setHeader(CACHE_CONTROL, "max-age=36000"); // 10 min
+            //response().setHeader(CACHE_CONTROL, "max-age=36000"); // 10 min
             if (!Strings.isNullOrEmpty(etag))
             {
                 response().setHeader("ETag", etag);
