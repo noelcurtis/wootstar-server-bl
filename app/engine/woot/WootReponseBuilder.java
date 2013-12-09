@@ -7,4 +7,6 @@ public interface WootReponseBuilder
     public JsonNode getResponse();
 
     public String getEtag();
+
+    public boolean isError();
 }

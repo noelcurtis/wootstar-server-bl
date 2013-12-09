@@ -1,0 +1,73 @@
+{
+    "settings": {
+        "site_details": [
+            {
+                "site": "www.woot.com",
+                "color": "669510",
+                "cell_title": "woot!",
+                "woot_plus_title": "woot+"
+            },
+            {
+                "type": "Moofi",
+                "site": "www.woot.com",
+                "color": "669510",
+                "cell_title": "moofi!",
+                "woot_plus_title": "moofi+"
+            },
+            {
+                "site": "tech.woot.com",
+                "color": "108487",
+                "cell_title": "tech!",
+                "woot_plus_title": "tech+"
+            },
+            {
+                "site": "home.woot.com",
+                "color": "d35500",
+                "cell_title": "home!",
+                "woot_plus_title": "home+"
+            },
+            {
+                "site": "sport.woot.com",
+                "color": "6abb01",
+                "cell_title": "sport!",
+                "woot_plus_title": "sport+"
+            },
+            {
+                "site": "kids.woot.com",
+                "color": "ffb510",
+                "cell_title": "kids!",
+                "woot_plus_title": "kids+"
+            },
+            {
+                "site": "shirt.woot.com",
+                "color": "0071b0",
+                "cell_title": "shirt!",
+                "woot_plus_title": "shirt+"
+            },
+            {
+                "site": "wine.woot.com",
+                "color": "891b28",
+                "cell_title": "wine!",
+                "woot_plus_title": "wine+"
+            },
+            {
+                "site": "sellout.woot.com",
+                "color": "467c32",
+                "cell_title": "sellout!",
+                "woot_plus_title": "sellout+"
+            },
+            {
+                "site": "tools.woot.com",
+                "color": "ff8500",
+                "cell_title": "tools & garden!",
+                "woot_plus_title": "tools & garden+"
+            },
+            {
+                "site": "accessories.woot.com",
+                "color": "6230aa",
+                "cell_title": "accessories & watches!",
+                "woot_plus_title": "accessories & watches+"
+            }
+        ]
+    }
+}

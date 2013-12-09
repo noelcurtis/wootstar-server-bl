@@ -129,6 +129,11 @@ public class WootApiHelpers
         return getIdentifier(eventType, site, "-checkpoint-identifier");
     }
 
+    public static String getSettingsIdentifier()
+    {
+        return "css-settings";
+    }
+
     private static String getIdentifier(EventType eventType, Site site, String identifier)
     {
         if (eventType == null && site == null)

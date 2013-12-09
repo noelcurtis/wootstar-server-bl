@@ -96,4 +96,9 @@ public class EventTypeBuilder implements WootReponseBuilder
     {
         return this.etag;
     }
+
+    public boolean isError()
+    {
+        return false;
+    }
 }

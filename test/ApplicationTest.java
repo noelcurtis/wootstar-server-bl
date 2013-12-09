@@ -41,7 +41,7 @@ public class ApplicationTest {
     @Test
     public void cleanHtmlTest()
     {
-        String testHtml = "<p>Hello whats up\r\n, tags are going to be taken off</p><p>How do you do</p>";
+        String testHtml = "<p>Hello whats up\r\n, tags are going to be taken off</p><p>How do you do</p><br/><em>";
         System.out.println(Utils.cleanStringOfHtmlTags(testHtml));
     }
 
@@ -52,7 +52,7 @@ public class ApplicationTest {
         assertThat(SecuredAction.isSecure("hello:" + hashed, "qBPExhPs?C[?LZ]t2;rU8;vG[rpJF9dBBjNEwJU>@LpQ;Zs3c3DOQ]e9A^8bF;s<"));
     }
 
-    @Test
+    //@Test
     public void loadTest() throws Exception
     {
         int interval = 20000;

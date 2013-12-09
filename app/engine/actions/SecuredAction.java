@@ -29,7 +29,7 @@ public class SecuredAction extends Action<Secured>
 
         Logger.error("Authentication Failure, someone might be trying to hack the API");
         Logger.info(Utils.headersToString(ctx.request().headers()));
-        SimpleResult authError = ok(Utils.jsonError("authentication failure"));
+        SimpleResult authError = unauthorized(Utils.jsonError("authentication failure"));
         return F.Promise.pure(authError);
     }
 

@@ -4,7 +4,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import engine.JedisManager;
 import engine.WootObjectMapper;
+import engine.woot.WootApiHelpers;
+import play.Logger;
+import play.cache.Cache;
+
+import static engine.JedisManager.SharedJedisManager;
 
 public class Settings
 {
@@ -13,7 +19,7 @@ public class Settings
 
     }
 
-    public static JsonNode getSettings()
+    public static JsonNode defaultSettings()
     {
         ObjectMapper mapper = WootObjectMapper.WootMapper();
         ArrayNode siteDetails = mapper.createArrayNode();
@@ -103,5 +109,29 @@ public class Settings
         resultsWrapper.put("settings", results);
 
         return resultsWrapper;
+    }
+
+    public static JsonNode getSettings()
+    {
+        JsonNode defaultSettings = defaultSettings();
+        String customSettings = SharedJedisManager().get(WootApiHelpers.getSettingsIdentifier());
+        if (customSettings != null)
+        {
+            try
+            {
+                return WootObjectMapper.WootMapper().readTree(customSettings);
+            }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+                Logger.error("Error processing JSON ", ex.toString());
+            }
+        }
+        return defaultSettings;
+    }
+
+    public static void setSettings(JsonNode settings)
+    {
+        SharedJedisManager().set(WootApiHelpers.getSettingsIdentifier(), settings.toString());
     }
 }

@@ -1,5 +1,6 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Objects;
 import engine.actions.Secured;
 import engine.actions.WithMetrics;
@@ -9,6 +10,7 @@ import engine.woot.WootReponseBuilder;
 import engine.woot.responses.AllEventsBuilder;
 import engine.woot.responses.EventIdBuilder;
 import engine.woot.responses.EventTypeBuilder;
+import play.mvc.Http;
 import play.mvc.Result;
 
 import java.util.Map;
@@ -22,9 +24,20 @@ public class ApiV1 extends ControllerEx
      * @return
      */
     @WithSsl
+    @Secured
     public static Result settings()
     {
         return gzippedOk(Settings.getSettings());
+    }
+
+    @WithSsl
+    @Secured
+    public static Result updateSettings()
+    {
+        Http.Request r = request();
+        JsonNode settings = r.body().asJson();
+        Settings.setSettings(settings);
+        return ok(settings);
     }
 
     /**
@@ -63,6 +76,10 @@ public class ApiV1 extends ControllerEx
         }
         else
         {
+            if (b.isError())
+            {
+                return internalServerError(b.getResponse());
+            }
             return gzippedOk(b.getResponse(), b.getEtag());
         }
     }
@@ -76,6 +93,10 @@ public class ApiV1 extends ControllerEx
         }
         else
         {
+            if (b.isError())
+            {
+                return internalServerError(b.getResponse());
+            }
             return gzippedOk(b.getResponse(), b.getEtag());
         }
     }
@@ -89,6 +110,10 @@ public class ApiV1 extends ControllerEx
         }
         else
         {
+            if (b.isError())
+            {
+                return internalServerError(b.getResponse());
+            }
             return gzippedOk(b.getResponse(), b.getEtag());
         }
     }

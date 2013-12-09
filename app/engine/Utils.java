@@ -114,7 +114,7 @@ public class Utils
     public static String cleanStringOfHtmlTags(String value)
     {
         value = Strings.nullToEmpty(value);
-        String cleaned = value.replaceAll("<.>|</.>", "").replaceAll("\r\n", " ").replaceAll("<em>", "").replaceAll("&npsb;", "");
+        String cleaned = value.replaceAll("<.*>|<.*/>", "").replaceAll("\r\n", " ").replaceAll("<em>", "");
         return cleaned;
     }
 

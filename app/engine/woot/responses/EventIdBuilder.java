@@ -14,6 +14,7 @@ public class EventIdBuilder implements WootReponseBuilder
     private final String eventId;
     private final String etag;
     private final JsonNode response;
+    private boolean isError = false;
 
     public EventIdBuilder(String eventId)
     {
@@ -33,6 +34,7 @@ public class EventIdBuilder implements WootReponseBuilder
             result.put("message", "event with " + eventId + " not found");
             this.response = result;
             this.etag = null;
+            isError = true;
         }
     }
 
@@ -45,5 +47,10 @@ public class EventIdBuilder implements WootReponseBuilder
     public String getEtag()
     {
         return this.etag;
+    }
+
+    public boolean isError()
+    {
+        return isError;
     }
 }
