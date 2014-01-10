@@ -17,6 +17,7 @@ function populateData()
 {
     drawMemoryChart(allMetrics);
     populateLatency(allMetrics, "allrequests-timer");
+    populateLatency(allMetrics, "otherTimer-redisGetEvents");
     drawRequestRateChart(allMetrics);
 }
 
@@ -162,6 +163,7 @@ function drawRequestRateChart(allMetrics)
 
 function populateLatency(allMetrics, timerId)
 {
+    if (typeof allMetrics["timers"][timerId.replace("-", ".")] == 'undefined') return;
     var meanR = convertNanoToSeconds(allMetrics["timers"][timerId.replace("-", ".")]["snapshot"]["mean"]);
     var medianR = convertNanoToSeconds(allMetrics["timers"][timerId.replace("-", ".")]["snapshot"]["median"])
     $("." + timerId +" .response-mean").html(meanR + " sec").css("color", getLatencyColor(meanR));

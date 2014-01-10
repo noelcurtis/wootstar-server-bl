@@ -1,5 +1,6 @@
 package engine.woot.responses;
 
+import com.codahale.metrics.Timer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.hash.Hashing;
 import engine.WootObjectMapper;
@@ -16,6 +17,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import static engine.metrics.Metrics.WootStarMetrics;
 import static engine.woot.WootRequestQueue.RequestQueue;
 
 public class AllEventsBuilder implements WootReponseBuilder

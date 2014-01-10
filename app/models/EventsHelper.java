@@ -1,5 +1,6 @@
 package models;
 
+import com.codahale.metrics.Timer;
 import com.google.common.base.Strings;
 import engine.Utils;
 import engine.woot.WootApiHelpers;
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 import static engine.JedisManager.SharedJedisManager;
+import static engine.metrics.Metrics.WootStarMetrics;
 
 public class EventsHelper
 {
@@ -63,6 +65,7 @@ public class EventsHelper
 
     public static void saveEventsRedis(ArrayList<Event> events, WootRequest request)
     {
+        final Timer.Context context = WootStarMetrics().getTimer(WootApiHelpers.redisSaveEventsTimer).time(); // start timer
         Jedis jedis = SharedJedisManager().getPool().getResource();
         try
         {
@@ -80,11 +83,13 @@ public class EventsHelper
         finally
         {
             SharedJedisManager().getPool().returnResource(jedis);
+            context.stop();
         }
     }
 
     public static List<Event> getEventsRedis(WootRequest request)
     {
+        final Timer.Context context = WootStarMetrics().getTimer(WootApiHelpers.redisGetEventsTimer).time(); // start timer
         Jedis jedis = SharedJedisManager().getPool().getResource();
         try
         {
@@ -104,6 +109,7 @@ public class EventsHelper
         finally
         {
             SharedJedisManager().getPool().returnResource(jedis);
+            context.stop();
         }
         return new ArrayList<Event>();
     }

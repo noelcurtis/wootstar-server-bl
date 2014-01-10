@@ -119,7 +119,7 @@ public class Metrics
         return allRequestsTimer;
     }
 
-    public Timer getWootGetterTimer(String timerName)
+    public Timer getTimer(String timerName)
     {
         Timer timer = otherTimers.get(timerName);
         if (timer != null)
@@ -128,7 +128,7 @@ public class Metrics
         }
         else
         {
-            timer = metricsRegistry.timer(MetricRegistry.name("other-timer", timerName));
+            timer = metricsRegistry.timer(MetricRegistry.name("otherTimer", timerName));
             otherTimers.put(timerName, timer);
         }
         return timer;

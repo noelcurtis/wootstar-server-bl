@@ -6,6 +6,8 @@ public class WootApiHelpers
 {
     public static final String wootKey = "041deb1d26d3411cbdb35abba0f6f709";
     public static final String wootUrl = "http://api.woot.com/2/events.json";
+    public static final String redisGetEventsTimer = "redisGetEvents"; // name of the timer used to time retrieval of events from redis
+    public static final String redisSaveEventsTimer = "redisSaveEvents"; // name of timer used to time save of events to redis
 
 //    www.woot.com
 //    wine.woot.com
