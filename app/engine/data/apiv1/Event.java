@@ -49,13 +49,15 @@ public class Event
                 Offers = new ArrayList<Offer>();
                 for (models.Offer o : dataOffers)
                 {
-                    Offers.add(new Offer(o));
-                    if (o.getPhotos() != null && !(o.getPhotos().isEmpty()))
-                    {
-                        List<Photo> photos = o.getPhotos();
-                        Collections.sort(photos, new PhotoComparitor());
-                        this.MainPhoto = photos.get(photos.size() - 1).getUrl();
-                    }
+                    Offer offer = new Offer(o);
+                    Offers.add(offer);
+//                    if (o.getPhotos() != null && !(o.getPhotos().isEmpty()))
+//                    {
+//                        List<Photo> photos = o.getPhotos();
+//                        Collections.sort(photos, new PhotoComparitor());
+//                        this.MainPhoto = photos.get(photos.size() - 1).getUrl();
+//                    }
+                    this.MainPhoto = offer.MainPhoto;
                 }
             }
         }
