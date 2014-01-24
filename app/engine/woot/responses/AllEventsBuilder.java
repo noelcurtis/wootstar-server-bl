@@ -33,6 +33,8 @@ public class AllEventsBuilder implements WootReponseBuilder
 
         for (WootRequest request : requests)
         {
+            // Count a call
+            WootStarMetrics().getCacheHitRatioGuage().incrementCalls();
             String cacheIdentifier = WootApiHelpers.getCacheIdentifier(request.eventType, request.site);
             // get the checkpoint id
             CachedObject co = (CachedObject)play.cache.Cache.get(cacheIdentifier);
@@ -44,6 +46,8 @@ public class AllEventsBuilder implements WootReponseBuilder
             {
                 Logger.debug("Serving cached events for eventType " + request.eventType + " site " + request.site);
                 allMappedEvents.addAll(Arrays.asList(co.getEvents()));
+                // Count a cache hit
+                WootStarMetrics().getCacheHitRatioGuage().incrementHits();
             }
             else
             {

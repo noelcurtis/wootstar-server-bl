@@ -6,6 +6,7 @@ var apiStatus = null;
 //  Charts //
 var memoryChart = null;
 var requestRateChart = null;
+var cacheHitChart = null;
 //  Charts //
 
 $(function(){
@@ -16,9 +17,40 @@ $(function(){
 function populateData()
 {
     drawMemoryChart(allMetrics);
+    drawCacheHitRatioChart(allMetrics);
     populateLatency(allMetrics, "allrequests-timer");
     populateLatency(allMetrics, "otherTimer-redisGetEvents");
     drawRequestRateChart(allMetrics);
+}
+
+function drawCacheHitRatioChart(allMetrics)
+{
+    var cacheHitRatio = Math.round(allMetrics["gauges"]["application.cache-hits"].value * 100);
+    $(".hits").html(allMetrics["counters"]["hits.counter"].count);
+    $(".calls").html(allMetrics["counters"]["calls.counter"].count);
+    $(".cache-hit-ratio").html(cacheHitRatio + "%");
+    if (cacheHitChart == null)
+    {
+        var ctx = $(".cache-hit-chart").get(0).getContext("2d");
+        cacheHitChart = new Chart(ctx);
+
+        var c = colorSet.ok;
+        if (cacheHitRatio < 50)
+        {
+            c = colorSet.warn;
+        }
+        var data = [
+            {
+                value: cacheHitRatio,
+                color: c
+            },
+            {
+                value: 100 - cacheHitRatio,
+                color: colorSet.neutral
+            }
+        ];
+        cacheHitChart.Doughnut(data);
+    }
 }
 
 function drawMemoryChart(allMetrics)

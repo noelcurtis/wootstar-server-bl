@@ -20,6 +20,7 @@ public class Metrics
     private final static MemoryUsageGaugeSet memoryUsageGaugeSet = new MemoryUsageGaugeSet(); // Memory Guage Set for the JVM
     private static Timer allRequestsTimer; // Timer used to time Controller actions see @WithMetrics
     private final Map<String, Timer> otherTimers; // Timers for Woot Getters
+    private final CacheHitRatio cacheHitRatioGuage;
 
     // Console Reporter //
     private static ConsoleReporter consoleReporter;
@@ -54,6 +55,8 @@ public class Metrics
         }
 
         otherTimers = new HashMap<String, Timer>();
+        cacheHitRatioGuage = new CacheHitRatio(metricsRegistry.counter(MetricRegistry.name("hits", "counter")), metricsRegistry.counter(MetricRegistry.name("calls", "counter")));
+        metricsRegistry.register(MetricRegistry.name("application", "cache-hits"), cacheHitRatioGuage);
         registerMemoryMetrics();
         registerTimers();
     }
@@ -132,6 +135,11 @@ public class Metrics
             otherTimers.put(timerName, timer);
         }
         return timer;
+    }
+
+    public CacheHitRatio getCacheHitRatioGuage()
+    {
+        return cacheHitRatioGuage;
     }
 
 }
