@@ -41,11 +41,11 @@ public class ApplicationTest {
     @Test
     public void cleanHtmlTest()
     {
-        String testHtml = "<p>Hello whats up\r\n, tags are going to be taken off</p><p>How do you do</p><br/><em>";
+        String testHtml = "<p>HOLY ****!!! These shirts are so graphic, you can't take them anywhere! They're so graphic, Chris Rock blushes when he sees them! These tees are really graphic!!</p>";
         System.out.println(Utils.cleanStringOfHtmlTags(testHtml));
     }
 
-    @Test
+    //@Test
     public void testSecured()
     {
         String hashed = Hashing.sha256().newHasher().putString("hello" + "qBPExhPs?C[?LZ]t2;rU8;vG[rpJF9dBBjNEwJU>@LpQ;Zs3c3DOQ]e9A^8bF;s<", Charsets.UTF_8).hash().toString();
