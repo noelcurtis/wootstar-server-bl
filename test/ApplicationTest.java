@@ -38,7 +38,7 @@ public class ApplicationTest {
         public int failedRequests = 0;
     }
 
-    @Test
+    //@Test
     public void cleanHtmlTest()
     {
         String testHtml = "<p>HOLY ****!!! These shirts are so graphic, you can't take them anywhere! They're so graphic, Chris Rock blushes when he sees them! These tees are really graphic!!</p>";
@@ -52,12 +52,12 @@ public class ApplicationTest {
         assertThat(SecuredAction.isSecure("hello:" + hashed, "qBPExhPs?C[?LZ]t2;rU8;vG[rpJF9dBBjNEwJU>@LpQ;Zs3c3DOQ]e9A^8bF;s<"));
     }
 
-    //@Test
+    @Test
     public void loadTest() throws Exception
     {
-        int interval = 20000;
+        int interval = 1000;
         int offset = 10;
-        int limit = 10000;
+        int limit = 1;
         String endpoint = "https://www.wootstar.com/apiv1/events";
         final String auth = "hello:7805a2d65710e365ae645a8157bf4687d3922ee46146d1ea889b2ea8beec2188";
         final Results r = new Results();
@@ -74,13 +74,13 @@ public class ApplicationTest {
                     {
                         if (response.getStatus() == Http.Status.OK)
                         {
-                            System.out.println("Success " + r.succesfulRequests + " Failed " + r.failedRequests);
                             r.succesfulRequests++;
+                            System.out.println("Success " + r.succesfulRequests + " Failed " + r.failedRequests);
                         }
                         else
                         {
-                            System.out.println("Failed: " + response.getStatus());
                             r.failedRequests++;
+                            System.out.println("Failed: " + response.getStatus());
                         }
                         System.out.println("took: " + (System.currentTimeMillis()- time) +  "ms");
                         return null;
