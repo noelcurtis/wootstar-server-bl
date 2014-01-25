@@ -26,6 +26,7 @@ public class Event
     public String Text;
 
     public String MainPhoto;
+    public int SortOrder = Utils.defaultSortOrder;
 
     public Event(models.Event dataEvent)
     {
@@ -40,6 +41,7 @@ public class Event
         this.EndDate = dataEvent.getEndDate();
         this.Title = dataEvent.getTitle();
         this.Type = dataEvent.getClass().getSimpleName().toString();
+        this.SortOrder = Utils.getEventSortOrder(this.Site);
 
         if ((!(dataEvent instanceof WootPlus) && ignoreOffers) || !ignoreOffers) // offers ignored for WootPlus events.
         {

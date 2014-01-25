@@ -5,17 +5,38 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.hash.Hashing;
+import models.*;
 import org.apache.commons.codec.binary.Base64;
 import play.Logger;
 import play.libs.Json;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;
 
 
 public class Utils
 {
+    public static final int defaultSortOrder = 99999999;
+
+    public static final Map<String, Integer> eventSortOrder;
+    static
+    {
+        eventSortOrder = new HashMap<String, Integer>();
+        eventSortOrder.put("www.woot.com", 1);
+        eventSortOrder.put("wine.woot.com", 10);
+        eventSortOrder.put("shirt.woot.com", 3);
+        eventSortOrder.put("sellout.woot.com", 7);
+        eventSortOrder.put("kids.woot.com", 9);
+        eventSortOrder.put("home.woot.com",2);
+        eventSortOrder.put("sport.woot.com", 4);
+        eventSortOrder.put("tech.woot.com", 6);
+        eventSortOrder.put("pop.woot.com", 11);
+        eventSortOrder.put("tools.woot.com", 8);
+        eventSortOrder.put("accessories.woot.com", 5);
+    }
+
     public static JsonNode jsonNoChange()
     {
         Logger.info("Rendering No Change");
@@ -153,5 +174,14 @@ public class Utils
     public static String headersToString(Map<String, String[]> headers) throws Exception
     {
         return WootObjectMapper.WootMapper().writeValueAsString(headers);
+    }
+
+    public static int getEventSortOrder(String site)
+    {
+        if(eventSortOrder.containsKey(site))
+        {
+            return eventSortOrder.get(site);
+        }
+        return defaultSortOrder;
     }
 }
