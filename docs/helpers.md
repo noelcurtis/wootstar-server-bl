@@ -27,6 +27,11 @@
 *   cp conf/application.aws.conf conf/application.conf
 *   ../../play start
 
+## Keystore information
+Using keystore-file : /Users/noelcurtis/keystore.ImportKey
+One certificate, no chain.
+Key and certificate stored.
+Alias:importkey  Password:importkey
 
 ## Servers
 *   ssh -i EC2-KeyPair.pem ec2-user@ec2-54-204-52-123.compute-1.amazonaws.com
