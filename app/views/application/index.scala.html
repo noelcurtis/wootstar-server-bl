@@ -1,6 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -10,10 +8,34 @@
     </head>
     <body>
 
-        <p class="logo"><img src="@routes.Assets.at("images/logo.png")" /></p>
-        <p class="headline">A slick new way to monitor <a href="https://www.woot.com">woot</a> swag on the iPhone.</p>
-        <p class="app-store"><a href="https://itunes.apple.com/us/app/wootstar-woot-deals/id497312407?mt=8"><img src="@routes.Assets.at("images/app_store.png")" /></a></p>
-        <p align="center">For support: <a href="mailto:&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#119;&#111;&#111;&#116;&#115;&#116;&#097;&#114;&#046;&#099;&#111;&#109;">&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#119;&#111;&#111;&#116;&#115;&#116;&#097;&#114;&#046;&#099;&#111;&#109;</a></p>
+        <section class="r1">
+            <div class="content">
+                <img src="@routes.Assets.at("images/logo_large.png")">
+                <h1><a href="#getwootstar">Now Available for iOS 7</a></h1>
+            </div>
+        </section>
+        <section class="r2">
+            <div class="content">
+                <img src="@routes.Assets.at("images/devices.jpg")">
+                <p>Track Woot deals on your iPad, iPad mini, and iPhone...</p>
+                <p>...anywhere, anytime.</p>
+            </div>
+        </section>
+        <section class="r3">
+            <div class="content">
+                <img src="@routes.Assets.at("images/sites.png")">
+                <p>Get all the goodies you want from all the sites you love...</p>
+                <p>...including <br>Woot Plus.</p>
+            </div>
+        </section>
+        <section class="r4">
+            <div class="content">
+                <a id="getwootstar"></a>
+                <h1><a href="https://itunes.apple.com/us/app/wootstar-woot-deals/id497312407?mt=8">Get wootstar now.</a></h1>
+                <a href="https://itunes.apple.com/us/app/wootstar-woot-deals/id497312407?mt=8"><img src="@routes.Assets.at("images/app_store.png")"></a>
+                <h3>For support: <a href="mailto:&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#119;&#111;&#111;&#116;&#115;&#116;&#097;&#114;&#046;&#099;&#111;&#109;">&#115;&#117;&#112;&#112;&#111;&#114;&#116;&#064;&#119;&#111;&#111;&#116;&#115;&#116;&#097;&#114;&#046;&#099;&#111;&#109;</a>
+            </div>
+        </section>
 
         @*Place all Javascript at the end so page loads faster*@
         <script type="text/javascript">
