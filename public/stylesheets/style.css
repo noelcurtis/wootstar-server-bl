@@ -38,7 +38,7 @@ h1 {
 .r4 {
     box-sizing: border-box;
     height: 900px;
-    padding: 80px 0;
+    padding: 65px 0;
     width: auto;
 }
 
@@ -85,6 +85,31 @@ h1 {
     text-align: center;
 }
 
+.scroll-up:hover,
+.scroll-down:hover
+{
+    cursor: pointer;
+}
+
+.scroll-down
+{
+    color: #FFFFFF;
+    font-size: 35px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+
+.scroll-up
+{
+    display: none;
+    color: #FFFFFF;
+    font-size: 35px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+}
 
 /*
 body {
