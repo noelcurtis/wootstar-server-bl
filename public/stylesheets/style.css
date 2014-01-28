@@ -89,6 +89,7 @@ h1 {
 .scroll-down:hover
 {
     cursor: pointer;
+    color: #ffba00;
 }
 
 .scroll-down
