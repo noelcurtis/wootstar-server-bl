@@ -38,14 +38,14 @@ RETVAL=0
 
 start() {
 	echo -n "Starting Play service: "
-	cd ${APPLICATION_PATH}
-	rm -f ${APPLICATION_PATH}/RUNNING_PID
-	echo -n "Runing clean compile stage"
-	su -s /bin/sh $USER -c "${PLAY} clean compile stage > /dev/null"
-    echo -n "Runing the app"
-    su -s /bin/sh $USER -c "${APPLICATION_PATH}/target/universal/stage/bin/wootstar-server-bl > /dev/null"
-	echo -n "Done!"
-	RETVAL=$?
+    cd ${APPLICATION_PATH}
+    rm -f ${APPLICATION_PATH}/RUNNING_PID
+    echo -n "clean compile stage ..."
+    su -s /bin/sh $USER -c "${PLAY} clean compile stage"
+    echo -n "running the app ..."
+    su -s /bin/sh $USER -c "${APPLICATION_PATH}/target/universal/stage/bin/wootstar-server-bl &"
+    echo -n "Done!"
+    RETVAL=$?
 
 	if [ $RETVAL -eq 0 ]; then
 		echo_success
