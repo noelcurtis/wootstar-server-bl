@@ -26,6 +26,8 @@ object ApplicationBuild extends Build {
     // Add your own project settings here
     //resolvers += "Maven repository" at "http://morphia.googlecode.com/svn/mavenrepo/",
     //resolvers += "MongoDb Java Driver Repository" at "http://repo1.maven.org/maven2/org/mongodb/mongo-java-driver/"
+
+    sources in doc in Compile := List()
   )
 
 }

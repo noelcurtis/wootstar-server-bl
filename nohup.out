@@ -1,0 +1,8 @@
+[0m[[0minfo[0m] [0mLoading global plugins from /Users/noelcurtis/.sbt/0.13/plugins[0m
+[0m[[0minfo[0m] [0mLoading project definition from /Users/noelcurtis/Workspace/Runtime/play-2.2.1/apps/wootstar-server-bl/project[0m
+[0m[[0minfo[0m] [0mSet current project to wootstar-server-bl (in build file:/Users/noelcurtis/Workspace/Runtime/play-2.2.1/apps/wootstar-server-bl/)[0m
+[32m
+(Starting server. Type Ctrl+D to exit logs, the server will remain in background)
+[0m
+[0m[[31merror[0m] [0mjava.io.IOException: Input/output error[0m
+[0m[[31merror[0m] [0mUse 'last' for the full log.[0m
