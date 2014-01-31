@@ -57,7 +57,7 @@ start() {
 stop() {
 	echo -n "Shutting down Play service: "
 	cd ${APPLICATION_PATH}
-	${PLAY} stop > /dev/null
+	${PLAY} stop
 
 	RETVAL=$?
 
