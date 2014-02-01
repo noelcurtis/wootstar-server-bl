@@ -11,8 +11,15 @@ var cacheHitChart = null;
 
 $(function(){
     requestMetrics();
-    //requestStatus();
 });
+
+function requestMetrics()
+{
+    $.getJSON("/admin/metrics", function (data){
+        allMetrics = data;
+        populateData();
+    });
+}
 
 function populateData()
 {
@@ -204,14 +211,6 @@ function populateLatency(allMetrics, timerId)
 
     $("." + timerId +" .response-seventy-five").html(convertNanoToSeconds(allMetrics["timers"][timerId.replace("-", ".")]["snapshot"]["75thPercentile"]) + " sec");
     $("." + timerId +" .response-ninety-five").html(convertNanoToSeconds(allMetrics["timers"][timerId.replace("-", ".")]["snapshot"]["95thPercentile"]) + " sec");
-}
-
-function requestMetrics()
-{
-    $.getJSON("/admin/metrics", function (data){
-        allMetrics = data;
-        populateData();
-    });
 }
 
 function requestStatus()
