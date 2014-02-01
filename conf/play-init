@@ -48,6 +48,7 @@ start() {
     cp $APPS_PATH/wootstar-server-bl/conf/application.aws.conf $APPS_PATH/wootstar-server-bl/conf/application.conf
     cp $APPS_PATH/wootstar-server-bl/conf/logger-prod.xml $APPS_PATH/wootstar-server-bl/conf/logger.xml
     echo "clean compile stage ..."
+    cd ${APPLICATION_PATH}
     su -s /bin/sh $USER -c "${PLAY} clean compile stage"
     echo "running the app ..."
     su -s /bin/sh $USER -c "${APPLICATION_PATH}/target/universal/stage/bin/wootstar-server-bl &"
