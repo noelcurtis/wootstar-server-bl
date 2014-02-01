@@ -41,7 +41,7 @@ start() {
 	echo -n "Starting Play service: "
     cd ${APPLICATION_PATH}
     echo -n "Removing old application"
-    rm -f ${APPLICATION_PATH}
+    rm -rf ${APPLICATION_PATH}
     echo -n "Cloning the repo"
     su -s /bin/sh $USER -c "git clone git@github.com:noelcurtis/wootstar-server-bl.git $APPS_PATH/wootstar-server-bl"
     echo -n "Setting up config"
