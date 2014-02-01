@@ -57,4 +57,7 @@ aws autoscaling describe-scheduled-actions --auto-scaling-group-name wootstar-bl
 # See if your scheduled scaling happened
 aws autoscaling describe-scaling-activities --auto-scaling-group-name wootstar-bl-node-group
 
+# Delete a scheduled scaling
+aws autoscaling delete-scheduled-action --auto-scaling-group-name wootstar-bl-node-group --scheduled-action-name Daily-ScaleUP
+
 
