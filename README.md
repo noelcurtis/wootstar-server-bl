@@ -37,7 +37,7 @@ Admin page is at: [http://wootstar-lb-1-510642144.us-east-1.elb.amazonaws.com/ad
 ```
 
 
-## [Server Setup](https://github.com/noelcurtis/wootstar-server-bl/blob/master/docs/aws-nodes.md)
+## [Server Setup](https://github.com/noelcurtis/wootstar-server-bl/blob/master/docs/aws-notes.md)
 
 ## [Caching Design](https://github.com/noelcurtis/wootstar-server-bl/blob/master/docs/caching.md)
 
