@@ -45,7 +45,7 @@ start() {
     echo "Cloning the repo"
     su -s /bin/sh $USER -c "git clone git@github.com:noelcurtis/wootstar-server-bl.git"
     echo "Setting up config"
-    cp $APPS_PATH/wootstar-server-bl/conf/application.aws.conf $APPS_PATH/wootstar-server-bl/conf/application.conf
+    cp $APPS_PATH/wootstar-server-bl/conf/application.node.aws.conf $APPS_PATH/wootstar-server-bl/conf/application.conf
     cp $APPS_PATH/wootstar-server-bl/conf/logger-prod.xml $APPS_PATH/wootstar-server-bl/conf/logger.xml
     echo "clean compile stage ..."
     cd ${APPLICATION_PATH}
@@ -63,7 +63,7 @@ start() {
 	echo
 }
 stop() {
-	echo -n "Shutting down Play service: "
+	echo "Shutting down Play service... "
 	cd ${APPLICATION_PATH}
 	${PLAY} stop
 
@@ -77,7 +77,6 @@ stop() {
 	echo
 }
 status() {
-	${PLAY} status
 	RETVAL=$?
 }
 clean() {
