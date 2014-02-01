@@ -53,12 +53,6 @@ public class Event
                 {
                     Offer offer = new Offer(o);
                     Offers.add(offer);
-//                    if (o.getPhotos() != null && !(o.getPhotos().isEmpty()))
-//                    {
-//                        List<Photo> photos = o.getPhotos();
-//                        Collections.sort(photos, new PhotoComparitor());
-//                        this.MainPhoto = photos.get(photos.size() - 1).getUrl();
-//                    }
                     this.MainPhoto = offer.MainPhoto;
                 }
             }
@@ -83,8 +77,13 @@ public class Event
             if (((WootPlus) dataEvent).getPhotos() != null && !((WootPlus) dataEvent).getPhotos().isEmpty())
             {
                 List<WpPhoto> photos = ((WootPlus) dataEvent).getPhotos();
-                Collections.sort(photos, new PhotoComparitor());
-                this.MainPhoto = photos.get(photos.size() - 1).getUrl();
+                WpPhoto chosenOne = Utils.getDefaultImage(photos);
+                if (chosenOne == null)
+                {
+                    Collections.sort(photos, new PhotoComparitor());
+                    chosenOne = photos.get(photos.size() - 1);
+                }
+                this.MainPhoto = chosenOne.getUrl();
             }
         }
     }

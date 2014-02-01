@@ -12,6 +12,7 @@ import play.libs.Json;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;
 
@@ -19,6 +20,9 @@ import java.util.zip.GZIPOutputStream;
 public class Utils
 {
     public static final int defaultSortOrder = 99999999;
+
+    public static final int defaultWidth = 368;
+    public static final int defaultHeight = 276;
 
     public static final Map<String, Integer> eventSortOrder;
     static
@@ -135,7 +139,7 @@ public class Utils
     public static String cleanStringOfHtmlTags(String value)
     {
         value = Strings.nullToEmpty(value);
-        String cleaned = value.replaceAll("<p>|</p>", "").replaceAll("\r\n", " ").replaceAll("<em>|</em>", "");
+        String cleaned = value.replaceAll("<p>|</p>", "").replaceAll("\r\n", " ").replaceAll("<em>|</em>", "").replaceAll("<div class=\"event-text\">|</div>", "");
         return cleaned;
     }
 
@@ -183,5 +187,18 @@ public class Utils
             return eventSortOrder.get(site);
         }
         return defaultSortOrder;
+    }
+
+    public static WpPhoto getDefaultImage(List<WpPhoto> photos)
+    {
+        for (WpPhoto p : photos)
+        {
+            if (Utils.toDouble(p.getWidth(), "0") == defaultWidth &&
+                    Utils.toDouble(p.getHeight(), "0") == defaultHeight)
+            {
+                return p;
+            }
+        }
+        return null;
     }
 }

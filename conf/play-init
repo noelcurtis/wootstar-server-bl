@@ -64,8 +64,7 @@ start() {
 }
 stop() {
 	echo "Shutting down Play service... "
-	cd ${APPLICATION_PATH}
-	${PLAY} stop
+	ps -ef | grep play | awk '{print $2}' | xargs kill
 
 	RETVAL=$?
 
@@ -80,7 +79,7 @@ status() {
 	RETVAL=$?
 }
 clean() {
-        rm -f ${APPLICATION_PATH}/RUNNING_PID
+        rm -f ${APPLICATION_PATH}/target/universal/stage/RUNNING_PID
 }
 case "$1" in
 	start)
