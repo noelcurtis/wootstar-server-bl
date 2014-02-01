@@ -38,20 +38,20 @@ APPS_PATH=/opt/play/apps
 RETVAL=0
 
 start() {
-	echo -n "Starting Play service: "
-    cd ${APPLICATION_PATH}
-    echo -n "Removing old application"
+	echo "Starting Play service ..."
+    cd ${APPS_PATH}
+    echo "Removing old application ..."
     rm -rf ${APPLICATION_PATH}
-    echo -n "Cloning the repo"
+    echo "Cloning the repo"
     su -s /bin/sh $USER -c "git clone git@github.com:noelcurtis/wootstar-server-bl.git"
-    echo -n "Setting up config"
+    echo "Setting up config"
     cp $APPS_PATH/wootstar-server-bl/conf/application.aws.conf $APPS_PATH/wootstar-server-bl/conf/application.conf
     cp $APPS_PATH/wootstar-server-bl/conf/logger-prod.xml $APPS_PATH/wootstar-server-bl/conf/logger.xml
-    echo -n "clean compile stage ..."
+    echo "clean compile stage ..."
     su -s /bin/sh $USER -c "${PLAY} clean compile stage"
-    echo -n "running the app ..."
+    echo "running the app ..."
     su -s /bin/sh $USER -c "${APPLICATION_PATH}/target/universal/stage/bin/wootstar-server-bl &"
-    echo -n "Done!"
+    echo "Done!"
     RETVAL=$?
 
 	if [ $RETVAL -eq 0 ]; then
