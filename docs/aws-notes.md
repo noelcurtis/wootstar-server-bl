@@ -14,12 +14,12 @@
 *   *wootstar-app-worker* is the worker for the app
 *   it is responsible for making requests to woot and updating the REDIS cache
 *   like all the servers this server is configured with 2 status alarms
-    *   wootstar-bl-worker-1-CPU-Utilization - High CPU Utilization
-    *   wootstar-bl-worker-1-High-Status-Check-Failed-Any - Health status failed
+    *   __wootstar-bl-worker-1-CPU-Utilization__ - High CPU Utilization
+    *   __wootstar-bl-worker-1-High-Status-Check-Failed-Any__ - Health status failed
 *   An email will be sent out if any of these alarms go off  - you should be *scared*!
 
 
-## Node Configuration
+## Node Configuration - Auto Scaling
 *   Nodes are configured in an *auto-scaling group*
 *   The Group has a required level of 2 nodes, which means 2 nodes will always be up
 *   The max scaling factor is 6 nodes, which means there can be upto 6 active nodes at any time
@@ -28,5 +28,8 @@
 *   < 10% scale down
 *   Based on CPU utilization AWS should maintain the correct number of nodes
 *   This way we can make sure that at peak hours we server traffic appropriately.
+*   The following status alarms can be thrown from auto scaling group
+    *   __wootstar-bl-node-group-LOW-CPU-Utilization__ - Low CPU Utilization
+    *   __wootstar-bl-node-group-HIGH-CPU-Utilization__ - HIGH CPU Utilization - _BEWARE!!_
 
 
