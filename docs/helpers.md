@@ -43,32 +43,18 @@ Alias:importkey  Password:importkey
 ## Test Hash
 *   hello:7805a2d65710e365ae645a8157bf4687d3922ee46146d1ea889b2ea8beec2188
 
+##  AWS scheduled scaling configuration
 
+# List group details
+aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names wootstar-bl-node-group
 
-Header host
-[info] application - Value wootstar-lb-1-510642144.us-east-1.elb.amazonaws.com
-[info] application - Header X-Forwarded-For
-[info] application - Value 54.242.54.176
-[info] application - Header Connection
-[info] application - Value keep-alive
-[info] application - Header Accept
-[info] application - Value */*
-[info] application - Header X-Forwarded-Port
-[info] application - Value 80
-[info] application - Header X-Forwarded-Proto
-[info] application - Value http
-[info] application - Header User-Agent
-[info] application - Value NING/1.0
-[info] application - Responding with events count: 10
+# Assign a scheduled scaling for your group
+put-scheduled-update-group-action --auto-scaling-group-name wootstar-bl-node-group --scheduled-action-name Daily-ScaleUP --recurrence "30 5 * * *" --desired-capacity 5
 
+# Describe your scheduled scaling
+aws autoscaling describe-scheduled-actions --auto-scaling-group-name wootstar-bl-node-group
 
-//            Map<String, String[]> headers = ctx.request().headers();
-//            for(String k : headers.keySet())
-//            {
-//                Logger.info("Header " + k);
-//                for(String v : headers.get(k))
-//                {
-//                    Logger.info("Value " + v);
-//                }
-//            }
+# See if your scheduled scaling happened
+aws autoscaling describe-scaling-activities --auto-scaling-group-name wootstar-bl-node-group
+
 
