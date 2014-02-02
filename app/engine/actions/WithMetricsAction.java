@@ -1,6 +1,7 @@
 package engine.actions;
 
 import com.codahale.metrics.Timer;
+import engine.metrics.ActiveUsersMonitor;
 import play.Logger;
 import play.libs.F;
 import play.mvc.Action;
@@ -18,6 +19,7 @@ public class WithMetricsAction extends Action<WithMetrics>
         try
         {
             Logger.info(ctx.request().toString());
+            ActiveUsersMonitor.processRequest(ctx.request());
             return delegate.call(ctx);
         } finally
         {

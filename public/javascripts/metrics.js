@@ -15,9 +15,14 @@ $(function(){
 
 function requestMetrics()
 {
+    console.log("running");
+    $(".loader").show();
     $.getJSON("/admin/metrics", function (data){
+        $(".loader").hide();
         allMetrics = data;
+        $(".host-name").html(allMetrics.hostName);
         populateData();
+        window.setTimeout(requestMetrics, 10000);
     });
 }
 
@@ -202,6 +207,8 @@ function drawRequestRateChart(allMetrics)
 
 function populateLatency(allMetrics, timerId)
 {
+    $(".active-users").html(allMetrics.activeUsers).addClass("ok");
+
     if (typeof allMetrics["timers"][timerId.replace("-", ".")] == 'undefined') return;
     var meanR = convertNanoToSeconds(allMetrics["timers"][timerId.replace("-", ".")]["snapshot"]["mean"]);
     var medianR = convertNanoToSeconds(allMetrics["timers"][timerId.replace("-", ".")]["snapshot"]["median"])

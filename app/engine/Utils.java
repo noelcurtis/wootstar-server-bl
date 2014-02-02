@@ -19,6 +19,8 @@ import java.util.zip.GZIPOutputStream;
 
 public class Utils
 {
+    public static final String activeUsersKey = "active-users";
+
     public static final int defaultSortOrder = 99999999;
 
     public static final int defaultWidth = 368;

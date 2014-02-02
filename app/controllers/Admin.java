@@ -1,9 +1,11 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import engine.Utils;
 import engine.WootObjectMapper;
 import engine.actions.WithSsl;
+import engine.metrics.ActiveUsersMonitor;
 import play.libs.F;
 import play.libs.WS;
 import play.mvc.Controller;
@@ -24,7 +26,10 @@ public class Admin extends Controller
     {
         try
         {
-            return ok(WootStarMetrics().getMapper().valueToTree(WootStarMetrics().getMetricsRegistry()));
+            final JsonNode node = WootStarMetrics().getMapper().valueToTree(WootStarMetrics().getMetricsRegistry());
+            ((ObjectNode)node).put("activeUsers", ActiveUsersMonitor.getActiveUsers());
+            ((ObjectNode)node).put("hostName", Utils.getHostName());
+            return ok(node);
         }
         catch (Exception ex)
         {
