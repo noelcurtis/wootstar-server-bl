@@ -27,10 +27,11 @@ public class ActiveUsersMonitor
         if (headers.containsKey("Host"))
         {
             hostAddress = headers.get("Host")[0];
-            if (headers.containsKey("X-Forwarded-For"))
-            {
-                hostAddress = headers.get("X-Forwarded-For")[0];
-            }
+        }
+
+        if (headers.containsKey("X-Forwarded-For"))
+        {
+            hostAddress = headers.get("X-Forwarded-For")[0];
         }
 
         // if no host exists return

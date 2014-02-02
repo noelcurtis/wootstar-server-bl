@@ -18,10 +18,10 @@ function requestMetrics()
     console.log("running");
     $(".loader").show();
     $.getJSON("/admin/metrics", function (data){
-        $(".loader").hide();
         allMetrics = data;
         $(".host-name").html(allMetrics.hostName);
         populateData();
+        $(".loader").hide();
         window.setTimeout(requestMetrics, 10000);
     });
 }
@@ -41,28 +41,26 @@ function drawCacheHitRatioChart(allMetrics)
     $(".hits").html(allMetrics["counters"]["hits.counter"].count);
     $(".calls").html(allMetrics["counters"]["calls.counter"].count);
     $(".cache-hit-ratio").html(cacheHitRatio + "%");
-    if (cacheHitChart == null)
-    {
-        var ctx = $(".cache-hit-chart").get(0).getContext("2d");
-        cacheHitChart = new Chart(ctx);
+    $(".cache-hit-chart").attr("height", 150).attr("width", 150);
+    var ctx = $(".cache-hit-chart").get(0).getContext("2d");
+    cacheHitChart = new Chart(ctx);
 
-        var c = colorSet.ok;
-        if (cacheHitRatio < 50)
-        {
-            c = colorSet.warn;
-        }
-        var data = [
-            {
-                value: cacheHitRatio,
-                color: c
-            },
-            {
-                value: 100 - cacheHitRatio,
-                color: colorSet.neutral
-            }
-        ];
-        cacheHitChart.Doughnut(data);
+    var c = colorSet.ok;
+    if (cacheHitRatio < 50)
+    {
+        c = colorSet.warn;
     }
+    var data = [
+        {
+            value: cacheHitRatio,
+            color: c
+        },
+        {
+            value: 100 - cacheHitRatio,
+            color: colorSet.neutral
+        }
+    ];
+    cacheHitChart.Doughnut(data, {animation: false});
 }
 
 function drawMemoryChart(allMetrics)
@@ -82,23 +80,21 @@ function drawMemoryChart(allMetrics)
     }
 
     $(".used-heap").css("color", c).html(uh + "%");
-    if (memoryChart == null)
-    {
-        var ctx = $(".heap-utilization").get(0).getContext("2d");
-        memoryChart = new Chart(ctx);
+    $(".heap-utilization").attr("height", 150).attr("width", 150);
+    var ctx = $(".heap-utilization").get(0).getContext("2d");
+    memoryChart = new Chart(ctx);
 
-        var data = [
-            {
-                value: parseInt(usedHeap * 100),
-                color: c
-            },
-            {
-                value: 100 - parseInt(usedHeap * 100),
-                color: colorSet.neutral
-            }
-        ];
-        memoryChart.Doughnut(data);
-    }
+    var data = [
+        {
+            value: parseInt(usedHeap * 100),
+            color: c
+        },
+        {
+            value: 100 - parseInt(usedHeap * 100),
+            color: colorSet.neutral
+        }
+    ];
+    memoryChart.Doughnut(data, {animation: false});
 }
 
 function drawRequestRateChart(allMetrics)
@@ -107,98 +103,96 @@ function drawRequestRateChart(allMetrics)
     var requestPerMinuteFifteen = convertPerSecToPerMin(allMetrics["timers"]["allrequests.timer"]["fifteenMinuteRate"]);
     var requestPerMinuteOne = convertPerSecToPerMin(allMetrics["timers"]["allrequests.timer"]["oneMinuteRate"]);
 
-    if (requestRateChart == null)
-    {
-        var ctx = $(".request-rate").get(0).getContext("2d");
-        requestRateChart = new Chart(ctx);
+    $(".request-rate").attr("height", 150).attr("width", 150);
+    var ctx = $(".request-rate").get(0).getContext("2d");
+    requestRateChart = new Chart(ctx);
 
-        var options = {
+    var options = {
 
-            //Boolean - If we show the scale above the chart data
-            scaleOverlay : false,
+        //Boolean - If we show the scale above the chart data
+        scaleOverlay : false,
 
-            //Boolean - If we want to override with a hard coded scale
-            scaleOverride : false,
+        //Boolean - If we want to override with a hard coded scale
+        scaleOverride : false,
 
-            //** Required if scaleOverride is true **
-            //Number - The number of steps in a hard coded scale
-            scaleSteps : null,
-            //Number - The value jump in the hard coded scale
-            scaleStepWidth : null,
-            //Number - The scale starting value
-            scaleStartValue : null,
+        //** Required if scaleOverride is true **
+        //Number - The number of steps in a hard coded scale
+        scaleSteps : null,
+        //Number - The value jump in the hard coded scale
+        scaleStepWidth : null,
+        //Number - The scale starting value
+        scaleStartValue : null,
 
-            //String - Colour of the scale line
-            scaleLineColor : "rgba(0,0,0,0)",
+        //String - Colour of the scale line
+        scaleLineColor : "rgba(0,0,0,0)",
 
-            //Number - Pixel width of the scale line
-            scaleLineWidth : 1,
+        //Number - Pixel width of the scale line
+        scaleLineWidth : 1,
 
-            //Boolean - Whether to show labels on the scale
-            scaleShowLabels : false,
+        //Boolean - Whether to show labels on the scale
+        scaleShowLabels : false,
 
-            //Interpolated JS string - can access value
-            scaleLabel : "<%=value%>",
+        //Interpolated JS string - can access value
+        scaleLabel : "<%=value%>",
 
-            //String - Scale label font declaration for the scale label
-            scaleFontFamily : "'Arial'",
+        //String - Scale label font declaration for the scale label
+        scaleFontFamily : "'Arial'",
 
-            //Number - Scale label font size in pixels
-            scaleFontSize : 12,
+        //Number - Scale label font size in pixels
+        scaleFontSize : 12,
 
-            //String - Scale label font weight style
-            scaleFontStyle : "normal",
+        //String - Scale label font weight style
+        scaleFontStyle : "normal",
 
-            //String - Scale label font colour
-            scaleFontColor : "#666",
+        //String - Scale label font colour
+        scaleFontColor : "#666",
 
-            ///Boolean - Whether grid lines are shown across the chart
-            scaleShowGridLines : false,
+        ///Boolean - Whether grid lines are shown across the chart
+        scaleShowGridLines : false,
 
-            //String - Colour of the grid lines
-            scaleGridLineColor : "rgba(0,0,0,.05)",
+        //String - Colour of the grid lines
+        scaleGridLineColor : "rgba(0,0,0,.05)",
 
-            //Number - Width of the grid lines
-            scaleGridLineWidth : 0,
+        //Number - Width of the grid lines
+        scaleGridLineWidth : 0,
 
-            //Boolean - If there is a stroke on each bar
-            barShowStroke : true,
+        //Boolean - If there is a stroke on each bar
+        barShowStroke : true,
 
-            //Number - Pixel width of the bar stroke
-            barStrokeWidth : 2,
+        //Number - Pixel width of the bar stroke
+        barStrokeWidth : 2,
 
-            //Number - Spacing between each of the X value sets
-            barValueSpacing : 5,
+        //Number - Spacing between each of the X value sets
+        barValueSpacing : 5,
 
-            //Number - Spacing between data sets within X values
-            barDatasetSpacing : 1,
+        //Number - Spacing between data sets within X values
+        barDatasetSpacing : 1,
 
-            //Boolean - Whether to animate the chart
-            animation : true,
+        //Boolean - Whether to animate the chart
+        animation : false,
 
-            //Number - Number of animation steps
-            animationSteps : 60,
+        //Number - Number of animation steps
+        animationSteps : 60,
 
-            //String - Animation easing effect
-            animationEasing : "easeOutQuart",
+        //String - Animation easing effect
+        animationEasing : "easeOutQuart",
 
-            //Function - Fires when the animation is complete
-            onAnimationComplete : null
+        //Function - Fires when the animation is complete
+        onAnimationComplete : null
 
-        }
-
-        var data = {
-            labels : ["mean", "15", "1"],
-            datasets : [
-                {
-                    fillColor : "#46426B",
-                    strokeColor : "rgba(220,220,220,1)",
-                    data : [requestPerMinuteMean, requestPerMinuteFifteen, requestPerMinuteOne]
-                }
-            ]
-        };
-        requestRateChart.Bar(data, options);
     }
+
+    var data = {
+        labels : ["mean", "15", "1"],
+        datasets : [
+            {
+                fillColor : "#46426B",
+                strokeColor : "rgba(220,220,220,1)",
+                data : [requestPerMinuteMean, requestPerMinuteFifteen, requestPerMinuteOne]
+            }
+        ]
+    };
+    requestRateChart.Bar(data, options);
 
     $(".request-minute-mean").html(requestPerMinuteMean);
     $(".request-minute-fifteen").html(requestPerMinuteFifteen);
