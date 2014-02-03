@@ -19,7 +19,6 @@ public class WithMetricsAction extends Action<WithMetrics>
         try
         {
             Logger.info(ctx.request().toString());
-            ActiveUsersMonitor.processRequest(ctx.request());
             return delegate.call(ctx);
         } finally
         {

@@ -27,7 +27,7 @@ public class Admin extends Controller
         try
         {
             final JsonNode node = WootStarMetrics().getMapper().valueToTree(WootStarMetrics().getMetricsRegistry());
-            ((ObjectNode)node).put("activeUsers", ActiveUsersMonitor.getActiveUsers());
+            ((ObjectNode)node).put("activeUsers", "N/A");
             ((ObjectNode)node).put("hostName", Utils.getHostName());
             return ok(node);
         }
