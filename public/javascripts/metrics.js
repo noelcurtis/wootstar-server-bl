@@ -121,7 +121,7 @@ function drawRequestRateChart(allMetrics)
         //Number - The value jump in the hard coded scale
         scaleStepWidth : null,
         //Number - The scale starting value
-        scaleStartValue : null,
+        scaleStartValue : 0,
 
         //String - Colour of the scale line
         scaleLineColor : "rgba(0,0,0,0)",
@@ -130,7 +130,7 @@ function drawRequestRateChart(allMetrics)
         scaleLineWidth : 1,
 
         //Boolean - Whether to show labels on the scale
-        scaleShowLabels : false,
+        scaleShowLabels : true,
 
         //Interpolated JS string - can access value
         scaleLabel : "<%=value%>",
