@@ -1,2 +1,4 @@
 User-agent: *
 Disallow: /admin/
+Disallow: /apiv1/
+Disallow: /assets/
