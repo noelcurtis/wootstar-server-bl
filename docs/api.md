@@ -56,7 +56,6 @@ Pass If-None-Match with returned ETag
 *   method: POST
 *   headers
     *   Authorization: timestamp:secret
-    *   Content-Type: application/json
 *   body: Nothing
 
 
@@ -65,5 +64,4 @@ Pass If-None-Match with returned ETag
 *   method: POST
 *   headers
     *   Authorization: timestamp:secret
-    *   Content-Type: application/json
 *   body: Nothing
