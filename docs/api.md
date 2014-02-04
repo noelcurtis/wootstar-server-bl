@@ -47,3 +47,23 @@ Pass If-None-Match with returned ETag
     *   Authorization: timestamp:secret
     *   Content-Type: application/json
 *   body: Any RAW JSON you want to update the settings to
+
+
+## Metrics API
+
+### Start Session
+*   url: /metrics/startsession
+*   method: POST
+*   headers
+    *   Authorization: timestamp:secret
+    *   Content-Type: application/json
+*   body: Nothing
+
+
+### End Session
+*   url: /metrics/endsession
+*   method: POST
+*   headers
+    *   Authorization: timestamp:secret
+    *   Content-Type: application/json
+*   body: Nothing

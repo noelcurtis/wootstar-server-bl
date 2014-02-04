@@ -201,7 +201,8 @@ function drawRequestRateChart(allMetrics)
 
 function populateLatency(allMetrics, timerId)
 {
-    $(".active-users").html(allMetrics.activeUsers).addClass("ok");
+    $(".active-users").html(allMetrics.activeUsers.count).addClass("ok");
+    $(".active-users-timing").html(Math.abs(allMetrics.activeUsers.averageActiveMillis / 1000)).addClass("ok");
 
     if (typeof allMetrics["timers"][timerId.replace("-", ".")] == 'undefined') return;
     var meanR = convertNanoToSeconds(allMetrics["timers"][timerId.replace("-", ".")]["snapshot"]["mean"]);

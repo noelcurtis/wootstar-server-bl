@@ -9,6 +9,7 @@ import models.*;
 import org.apache.commons.codec.binary.Base64;
 import play.Logger;
 import play.libs.Json;
+import play.mvc.Http;
 
 import java.io.*;
 import java.util.HashMap;
@@ -203,4 +204,20 @@ public class Utils
         }
         return null;
     }
+
+    public static String getHost(Http.Request request){
+        Map<String, String[]> headers = request.headers();
+        String hostAddress = null;
+        if (headers.containsKey("Host"))
+        {
+            hostAddress = headers.get("Host")[0];
+        }
+
+        if (headers.containsKey("X-Forwarded-For"))
+        {
+            hostAddress = headers.get("X-Forwarded-For")[0];
+        }
+        return Strings.nullToEmpty(hostAddress);
+    }
+
 }
