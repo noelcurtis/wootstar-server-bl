@@ -55,17 +55,18 @@ public class ApplicationTest {
     @Test
     public void loadTest() throws Exception
     {
-        int interval = 1000;
+        int interval = 500;
         int offset = 10;
-        int limit = 1;
-        String endpoint = "https://www.wootstar.com/apiv1/events";
+        int limit = 10000;
+        //String endpoint = "https://www.wootstar.com/apiv1/events";
+        String endpoint = "http://localhost:9000/apiv1/events";
         final String auth = "hello:7805a2d65710e365ae645a8157bf4687d3922ee46146d1ea889b2ea8beec2188";
         final Results r = new Results();
 
         for (int i=0; i< limit; i++)
         {
                 Thread.sleep(interval); // wait
-                WS.WSRequestHolder wsHolder= WS.url(endpoint);
+                WS.WSRequestHolder wsHolder= WS.url(endpoint).setQueryParameter("id", "cc07cd84-93ff-4019-b2c4-583078fb0c70");
                 final long time = System.currentTimeMillis();
                 wsHolder.setHeader("Authorization", auth).get().map(new Function<WS.Response, Object>()
                 {

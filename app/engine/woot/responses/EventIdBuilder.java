@@ -19,10 +19,10 @@ public class EventIdBuilder implements WootReponseBuilder
     public EventIdBuilder(String eventId)
     {
         this.eventId = eventId;
-        Event foundEvent = EventsHelper.getEventById(this.eventId);
+        final Event foundEvent = EventsHelper.getEventById(this.eventId);
         if (foundEvent != null)
         {
-            engine.data.apiv1.Event mappedEvent = new engine.data.apiv1.Event(foundEvent, false);
+            final engine.data.apiv1.Event mappedEvent = new engine.data.apiv1.Event(foundEvent, false);
             JsonNode eventAsJson = WootObjectMapper.WootMapper().valueToTree(mappedEvent);
             this.etag = Hashing.sha256().hashString(eventAsJson.toString()).toString();
             this.response = eventAsJson;

@@ -69,7 +69,7 @@ public class ApiV1 extends ControllerEx
 
     private static Result all()
     {
-        WootReponseBuilder b = new AllEventsBuilder();
+        final WootReponseBuilder b = new AllEventsBuilder();
         if (eTagTest(b.getEtag()))
         {
             return noChange(); // no change in data
@@ -86,7 +86,7 @@ public class ApiV1 extends ControllerEx
 
     private static Result byId(String id)
     {
-        WootReponseBuilder b = new EventIdBuilder(id);
+        final WootReponseBuilder b = new EventIdBuilder(id);
         if (eTagTest(b.getEtag()))
         {
             return noChange(); // no change in data
@@ -103,7 +103,7 @@ public class ApiV1 extends ControllerEx
 
     private static Result byType(String type)
     {
-        WootReponseBuilder b = new EventTypeBuilder(type);
+        final WootReponseBuilder b = new EventTypeBuilder(type);
         if (eTagTest(b.getEtag()))
         {
             return noChange(); // no change in data
