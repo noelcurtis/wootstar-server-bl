@@ -8,6 +8,9 @@ import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
 import engine.Utils;
 import engine.actions.SecuredAction;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.joda.time.Period;
 import org.junit.*;
 
 import play.libs.WS;
@@ -52,7 +55,7 @@ public class ApplicationTest {
         assertThat(SecuredAction.isSecure("hello:" + hashed, "qBPExhPs?C[?LZ]t2;rU8;vG[rpJF9dBBjNEwJU>@LpQ;Zs3c3DOQ]e9A^8bF;s<"));
     }
 
-    @Test
+    //@Test
     public void loadTest() throws Exception
     {
         int interval = 500;
@@ -93,4 +96,14 @@ public class ApplicationTest {
         System.out.println("Failed " + r.failedRequests);
     }
 
+
+    @Test
+    public void testTime()
+    {
+        final DateTime time = new DateTime();
+        org.joda.time.Duration duration = new org.joda.time.Duration(time, time.plusDays(1).toDateMidnight());
+        // Add 5 hours for UTC + 1 hour for 1:00am
+        duration = duration.plus(3600000*5);
+        System.out.println(duration.getStandardSeconds());
+    }
 }
