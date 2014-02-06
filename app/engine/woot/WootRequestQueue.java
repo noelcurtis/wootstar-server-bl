@@ -76,7 +76,7 @@ public class WootRequestQueue
             activeRequests.add(c);
             if (Play.isProd())
             {
-                t +=30; // increment for 4 minute offset so updates are distributed in production.
+                t +=30; // increment for 30 sec offset so updates are distributed in production.
             }
         }
         // schedule a restart
