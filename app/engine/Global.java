@@ -24,7 +24,11 @@ public class Global extends GlobalSettings
             try
             {
                 WootStarMetrics();
+                // Schedule all the requests
                 RequestQueue().scheduleRequests();
+                // schedule a restart
+                RequestQueue().scheduleRestart();
+                // Schedule clear active users
                 RequestQueue().scheduleClearActiveUsers();
             }
             catch(Exception ex)

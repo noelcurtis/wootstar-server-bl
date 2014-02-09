@@ -81,8 +81,6 @@ public class WootRequestQueue
                 t +=30; // increment for 30 sec offset so updates are distributed in production.
             }
         }
-        // schedule a restart
-        //RequestQueue().scheduleRestart();
     }
 
     /**
@@ -140,7 +138,7 @@ public class WootRequestQueue
         final DateTime time = new DateTime();
         org.joda.time.Duration duration = new org.joda.time.Duration(time, time.plusDays(1).toDateMidnight());
         // Add 5 hours for UTC + 1 hour for 1:00am
-        duration = duration.plus(3600000*6);
+        duration = duration.plus(3600000*5);
         Logger.info("Scheduling a restart after " + duration.getStandardSeconds() + " seconds");
         Cancellable c = Akka.system().scheduler().schedule(
                 Duration.create(duration.getStandardSeconds(), TimeUnit.SECONDS),

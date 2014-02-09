@@ -5,7 +5,7 @@ import play.Project._
 object ApplicationBuild extends Build {
 
   val appName         = "wootstar-server-bl"
-  val appVersion      = "1.4"
+  val appVersion      = "1.5"
 
   val appDependencies = Seq(
     // Add your project dependencies here,
