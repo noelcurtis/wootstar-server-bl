@@ -80,7 +80,7 @@ public class WootRequestQueue
             }
         }
         // schedule a restart
-        RequestQueue().scheduleRestart();
+        //RequestQueue().scheduleRestart();
     }
 
     public void cancelRequests()
