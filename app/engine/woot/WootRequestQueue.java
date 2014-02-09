@@ -1,6 +1,7 @@
 package engine.woot;
 
 import akka.actor.Cancellable;
+import engine.metrics.ActiveUsersMonitor;
 import org.joda.time.DateTime;
 import play.Logger;
 import play.Play;
@@ -17,6 +18,7 @@ public class WootRequestQueue
 
     private final List<WootRequest> requests;
     private List<Cancellable> activeRequests;
+    private Cancellable cleanActiveUsers;
 
     public static WootRequestQueue RequestQueue()
     {
@@ -83,6 +85,32 @@ public class WootRequestQueue
         //RequestQueue().scheduleRestart();
     }
 
+    /**
+     * Use to schedule clear active users, every 5 hours
+     */
+    public void scheduleClearActiveUsers()
+    {
+        cleanActiveUsers = Akka.system().scheduler().schedule(
+                Duration.create(0, TimeUnit.SECONDS),
+                Duration.create(5, TimeUnit.HOURS), new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    ActiveUsersMonitor.cleanActiveUsers();
+                }
+                catch (Exception ex)
+                {
+                    Logger.error("Error scheduling requests " + ex.toString());
+                    ex.printStackTrace();
+                }
+
+            }
+        }, Akka.system().dispatcher());
+    }
+
     public void cancelRequests()
     {
         Logger.info("Cancelling requests");
@@ -91,6 +119,14 @@ public class WootRequestQueue
             c.cancel();
         }
         activeRequests = new ArrayList<Cancellable>();
+    }
+
+    public void cancelCleanActiveUsers()
+    {
+        if (cleanActiveUsers != null)
+        {
+            cleanActiveUsers.cancel();
+        }
     }
 
     public List<WootRequest> getRequests()

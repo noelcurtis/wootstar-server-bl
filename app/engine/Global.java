@@ -25,6 +25,7 @@ public class Global extends GlobalSettings
             {
                 WootStarMetrics();
                 RequestQueue().scheduleRequests();
+                RequestQueue().scheduleClearActiveUsers();
             }
             catch(Exception ex)
             {
@@ -40,6 +41,7 @@ public class Global extends GlobalSettings
     {
         Logger.info("Application shutdown...");
         RequestQueue().cancelRequests();
+        RequestQueue().cancelCleanActiveUsers();
         JedisManager.SharedJedisManager().getPool().destroy();
     }
 

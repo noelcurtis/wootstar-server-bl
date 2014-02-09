@@ -59,6 +59,7 @@ public class ActiveUsersMonitor
 
     public static void cleanActiveUsers()
     {
+        Logger.info("Removing all active users.");
         JedisManager.SharedJedisManager().del(Utils.activeUsersKey);
     }
 }
