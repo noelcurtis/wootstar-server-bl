@@ -56,4 +56,9 @@ public class ActiveUsersMonitor
             return new ActiveUsersData(0, 0);
         }
     }
+
+    public static void cleanActiveUsers()
+    {
+        JedisManager.SharedJedisManager().del(Utils.activeUsersKey);
+    }
 }

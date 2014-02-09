@@ -145,6 +145,23 @@ public class JedisManager
         }
     }
 
+    public void del(String key)
+    {
+        Jedis jedis = SharedJedisManager().getPool().getResource();
+        try
+        {
+            jedis.del(key);
+        }
+        catch (Exception ex)
+        {
+            Logger.error("Error deleting from Redis for key:" + key);
+        }
+        finally
+        {
+            SharedJedisManager().getPool().returnResource(jedis);
+        }
+    }
+
     public void flush()
     {
         Jedis jedis = SharedJedisManager().getPool().getResource();

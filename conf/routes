@@ -14,6 +14,7 @@ GET         /apiv1/settings              controllers.ApiV1.settings
 GET         /admin                       controllers.Admin.index
 GET         /admin/metrics               controllers.Admin.metrics
 GET         /admin/apistatus             controllers.Admin.apiStatus
+POST        /admin/clearactiveusers      controllers.Admin.clearActiveUsers
 
 #Metrics
 POST        /metrics/startsession        controllers.Metrics.startSession

@@ -62,4 +62,11 @@ public class Admin extends Controller
         );
         return resultPromise;
     }
+
+    @WithSsl
+    public static Result clearActiveUsers()
+    {
+        ActiveUsersMonitor.cleanActiveUsers();
+        return ok();
+    }
 }
