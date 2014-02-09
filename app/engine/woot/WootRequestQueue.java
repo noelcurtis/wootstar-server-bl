@@ -137,7 +137,7 @@ public class WootRequestQueue
         // note that time is UTC on EC-2 instances
         final DateTime time = new DateTime();
         org.joda.time.Duration duration = new org.joda.time.Duration(time, time.plusDays(1).toDateMidnight());
-        // Add 5 hours for UTC + 1 hour for 1:00am
+        // Add 5 hours for UTC for 12:00am
         duration = duration.plus(3600000*5);
         Logger.info("Scheduling a restart after " + duration.getStandardSeconds() + " seconds");
         Cancellable c = Akka.system().scheduler().schedule(
