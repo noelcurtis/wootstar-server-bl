@@ -5,7 +5,6 @@ import play.GlobalSettings;
 import play.Logger;
 import play.libs.F;
 import play.mvc.Http;
-import play.mvc.Result;
 import play.mvc.SimpleResult;
 
 import static engine.metrics.Metrics.WootStarMetrics;
@@ -27,7 +26,7 @@ public class Global extends GlobalSettings
                 // Schedule all the requests
                 RequestQueue().scheduleRequests();
                 // schedule a restart
-                RequestQueue().scheduleRestart();
+                RequestQueue().scheduleDailyRefresh();
                 // Schedule clear active users
                 RequestQueue().scheduleClearActiveUsers();
             }
