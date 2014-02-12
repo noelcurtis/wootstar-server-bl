@@ -9,16 +9,14 @@ import play.libs.Akka;
 import scala.concurrent.duration.Duration;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class WootRequestQueue
 {
     private static WootRequestQueue sharedInstance;
 
-    private final Map<WootApiHelpers.EventType,WootRequest> requests;
+    private final List<WootRequest> requests;
     private List<Cancellable> activeRequests;
     private Cancellable cleanActiveUsers;
 
@@ -34,17 +32,17 @@ public class WootRequestQueue
     private WootRequestQueue()
     {
         activeRequests = new ArrayList<Cancellable>();
-        requests = new HashMap<WootApiHelpers.EventType, WootRequest>();
+        requests = new ArrayList<WootRequest>();
 
-        requests.put(WootApiHelpers.EventType.Daily, new WootRequest(WootApiHelpers.EventType.Daily, null)); // 10 min refresh cycle
-        requests.put(WootApiHelpers.EventType.WootOff, new WootRequest(7000l, WootApiHelpers.EventType.WootOff, null)); // 7 second refresh cycle
-        requests.put(WootApiHelpers.EventType.Moofi, new WootRequest(3600000l, WootApiHelpers.EventType.Moofi, null)); // 1 hour refresh cycle
-        requests.put(WootApiHelpers.EventType.Reckoning, new WootRequest(3600000l, WootApiHelpers.EventType.Reckoning, null)); // 1 hour refresh cycle
+        requests.add(new WootRequest(WootApiHelpers.EventType.Daily, null)); // 10 min refresh cycle
+        requests.add(new WootRequest(7000l, WootApiHelpers.EventType.WootOff, null)); // 7 second refresh cycle
+        requests.add(new WootRequest(3600000l, WootApiHelpers.EventType.Moofi, null)); // 1 hour refresh cycle
+        requests.add(new WootRequest(3600000l, WootApiHelpers.EventType.Reckoning, null)); // 1 hour refresh cycle
 
         // woot plus all sites individually
         for (WootApiHelpers.Site s : WootApiHelpers.Site.values())
         {
-            requests.put(WootApiHelpers.EventType.WootPlus, new WootRequest(WootApiHelpers.EventType.WootPlus, s)); // 10 min refresh cycle
+            requests.add(new WootRequest(WootApiHelpers.EventType.WootPlus, s)); // 10 min refresh cycle
         }
 
         // .. add some more requests here !!
@@ -54,7 +52,7 @@ public class WootRequestQueue
     {
         //JedisManager.SharedJedisManager().flush();
         int t = 0;
-        for (final WootRequest r : requests.values())
+        for (final WootRequest r : requests)
         {
             Logger.info("Scheduling request " + r.toString());
             Cancellable c = Akka.system().scheduler().schedule(
@@ -131,7 +129,7 @@ public class WootRequestQueue
 
     public List<WootRequest> getRequests()
     {
-        return new ArrayList<WootRequest>(requests.values());
+        return new ArrayList<WootRequest>(requests);
     }
 
 
@@ -151,9 +149,9 @@ public class WootRequestQueue
             {
                 try
                 {
-                    for (int i = 0; i < 10; i++)
+                    for (int i = 0; i < 60; i++)
                     {
-                        WootGetterZ g = new WootGetterZ(requests.get(WootApiHelpers.EventType.Daily));
+                        WootGetterZ g = new WootGetterZ(new WootRequest(WootApiHelpers.EventType.Daily, null));
                         g.getEvents();
                         Thread.sleep(10000L);
                     }
