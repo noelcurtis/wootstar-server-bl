@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonIgnoreProperties({"Stats", "EstimatedShipDate", "Artist", "DiscussionUrl", "WineryDetails"})
+@JsonIgnoreProperties({"Stats", "EstimatedShipDate", "Artist", "WineryDetails"})
 public class Offer implements Serializable
 {
     private String Id;
@@ -28,6 +28,7 @@ public class Offer implements Serializable
     private String Title;
     private String Url;
     private String WriteUp;
+    private String DiscussionUrl;
 
     private Event event;
 
@@ -253,5 +254,17 @@ public class Offer implements Serializable
     public void setWriteUp(String writeUp)
     {
         WriteUp = writeUp;
+    }
+
+    @JsonProperty("DiscussionUrl")
+    public String getDiscussionUrl()
+    {
+        return DiscussionUrl;
+    }
+
+    @JsonProperty("DiscussionUrl")
+    public void setDiscussionUrl(String discussionUrl)
+    {
+        DiscussionUrl = discussionUrl;
     }
 }

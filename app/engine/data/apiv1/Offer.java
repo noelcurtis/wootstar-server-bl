@@ -27,6 +27,7 @@ public class Offer
     public String Title;
     public String Url;
     public String WriteUp;
+    public String DiscussionUrl;
 
     @JsonIgnore
     public Offer(models.Offer offerModel)
@@ -66,6 +67,7 @@ public class Offer
             Title = offerModel.getTitle();
             Url = offerModel.getUrl();
             WriteUp = offerModel.getWriteUp();
+            DiscussionUrl = offerModel.getDiscussionUrl();
         }
     }
 }
