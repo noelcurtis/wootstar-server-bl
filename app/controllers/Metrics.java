@@ -12,6 +12,7 @@ public class Metrics extends ControllerEx
     public static Result startSession()
     {
         ActiveUsersMonitor.startSession(request());
+        response().setContentType("application/json");
         return ok();
     }
 
@@ -20,6 +21,7 @@ public class Metrics extends ControllerEx
     public static Result endSession()
     {
         ActiveUsersMonitor.endSession(request());
+        response().setContentType("application/json");
         return ok();
     }
 }
