@@ -1,6 +1,7 @@
 package engine.woot;
 
 import akka.actor.Cancellable;
+import engine.JedisManager;
 import engine.metrics.ActiveUsersMonitor;
 import org.joda.time.DateTime;
 import play.Logger;
@@ -50,7 +51,7 @@ public class WootRequestQueue
 
     public void scheduleRequests()
     {
-        //JedisManager.SharedJedisManager().flush();
+        JedisManager.SharedJedisManager().flush();
         int t = 0;
         for (final WootRequest r : requests)
         {

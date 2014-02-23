@@ -164,6 +164,7 @@ public class JedisManager
 
     public void flush()
     {
+        Logger.info("Flushig Redis cache!");
         Jedis jedis = SharedJedisManager().getPool().getResource();
         try
         {
