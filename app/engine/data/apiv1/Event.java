@@ -52,6 +52,11 @@ public class Event
                 for (models.Offer o : dataOffers)
                 {
                     Offer offer = new Offer(o);
+                    // Add discussion URL to WootPlus events in the offer
+                    if (dataEvent instanceof WootPlus)
+                    {
+                        offer.DiscussionUrl = ((WootPlus) dataEvent).getDiscussionUrl();
+                    }
                     Offers.add(offer);
                     this.MainPhoto = offer.MainPhoto;
                 }
