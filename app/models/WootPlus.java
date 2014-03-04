@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@JsonIgnoreProperties({"Subtitle", "DiscussionUrl"})
+@JsonIgnoreProperties({"Subtitle"})
 public class WootPlus extends Event
 {
     private String ManufacturerText;
@@ -17,6 +17,7 @@ public class WootPlus extends Event
 
     private String Url;
     private String Text;
+    private String DiscussionUrl;
 
     @JsonProperty("ManufacturerText")
     public String getManufacturerText()
@@ -76,5 +77,17 @@ public class WootPlus extends Event
     public void setText(String text)
     {
         Text = text;
+    }
+
+    @JsonProperty("DiscussionUrl")
+    public String getDiscussionUrl()
+    {
+        return DiscussionUrl;
+    }
+
+    @JsonProperty("DiscussionUrl")
+    public void setDiscussionUrl(String discussionUrl)
+    {
+        DiscussionUrl = discussionUrl;
     }
 }
