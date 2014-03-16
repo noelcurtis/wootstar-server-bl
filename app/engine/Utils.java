@@ -21,6 +21,7 @@ import java.util.zip.GZIPOutputStream;
 public class Utils
 {
     public static final String activeUsersKey = "active-users";
+    public static final String dataGetterKey = "data-getter";
 
     public static final int defaultSortOrder = 99999999;
 
@@ -220,4 +221,8 @@ public class Utils
         return Strings.nullToEmpty(hostAddress);
     }
 
+
+    public static boolean eventsAreBeingUpdated() {
+        return false;
+    }
 }

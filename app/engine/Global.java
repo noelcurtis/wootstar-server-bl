@@ -18,25 +18,7 @@ public class Global extends GlobalSettings
     {
         JedisManager.SharedJedisManager();
         Logger.info("Application startup...");
-        if (app.configuration().getBoolean("datagetter.enabled"))
-        {
-            try
-            {
-                WootStarMetrics();
-                // Schedule all the requests
-                RequestQueue().scheduleRequests();
-                // schedule a restart
-                RequestQueue().scheduleDailyRefresh();
-                // Schedule clear active users
-                RequestQueue().scheduleClearActiveUsers();
-            }
-            catch(Exception ex)
-            {
-                Logger.error(ex.toString());
-                ex.printStackTrace();
-            }
-
-        }
+        WootStarMetrics();
     }
 
     @Override

@@ -2,6 +2,7 @@ package engine.woot;
 
 import akka.actor.Cancellable;
 import engine.JedisManager;
+import engine.Utils;
 import engine.metrics.ActiveUsersMonitor;
 import org.joda.time.DateTime;
 import play.Logger;
@@ -20,6 +21,7 @@ public class WootRequestQueue
     private final List<WootRequest> requests;
     private List<Cancellable> activeRequests;
     private Cancellable cleanActiveUsers;
+    private boolean isDataGetter = false;
 
     public static WootRequestQueue RequestQueue()
     {
@@ -52,6 +54,7 @@ public class WootRequestQueue
     public void scheduleRequests()
     {
 //        JedisManager.SharedJedisManager().flush();
+        isDataGetter = true;
         int t = 0;
         for (final WootRequest r : requests)
         {
@@ -113,11 +116,16 @@ public class WootRequestQueue
     public void cancelRequests()
     {
         Logger.info("Cancelling requests");
+        boolean done = true;
         for (Cancellable c : activeRequests)
         {
-            c.cancel();
+            done = c.cancel();
         }
-        activeRequests = new ArrayList<Cancellable>();
+        if (done)
+        {
+            activeRequests = new ArrayList<Cancellable>();
+        }
+        Logger.error("Error cancelling requests!");
     }
 
     public void cancelCleanActiveUsers()
@@ -162,6 +170,41 @@ public class WootRequestQueue
                     Logger.error("Error restarting requests " + ex.toString());
                     ex.printStackTrace();
                 }
+            }
+        }, Akka.system().dispatcher());
+    }
+
+    public void scheduleDataGetterCheck()
+    {
+        Cancellable c = Akka.system().scheduler().schedule(
+                Duration.create(10, TimeUnit.SECONDS),
+                Duration.create(0, TimeUnit.MILLISECONDS), new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    // If you are not the datagetter, try and become the data getter
+                    if(!isDataGetter)
+                    {
+                        if (!Utils.eventsAreBeingUpdated() && JedisManager.SharedJedisManager().iCanBeDataGetter())
+                        {
+                            // Schedule all the requests
+                            RequestQueue().scheduleRequests();
+                            // schedule a restart
+                            RequestQueue().scheduleDailyRefresh();
+                            // Schedule clear active users
+                            RequestQueue().scheduleClearActiveUsers();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.error("Error scheduling data getter check " + ex.toString());
+                    ex.printStackTrace();
+                }
+
             }
         }, Akka.system().dispatcher());
     }

@@ -180,4 +180,25 @@ public class JedisManager
             SharedJedisManager().getPool().returnResource(jedis);
         }
     }
+
+    public boolean iCanBeDataGetter()
+    {
+        Logger.info("Trying to Aquire lock!");
+        Jedis jedis = SharedJedisManager().getPool().getResource();
+        try
+        {
+            Long result = jedis.setnx(Utils.dataGetterKey, Utils.getHostName());
+            return result == null;
+        }
+        catch (Exception ex)
+        {
+
+            Logger.error("Error flushing DB");
+        }
+        finally
+        {
+            SharedJedisManager().getPool().returnResource(jedis);
+        }
+        return false;
+    }
 }

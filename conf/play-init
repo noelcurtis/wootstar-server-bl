@@ -3,7 +3,7 @@
 # description: Play start/shutdown script
 # processname: play
 #
-# Instalation:
+# Installation:
 # copy file to /etc/init.d
 # chmod +x /etc/init.d/play
 # chkconfig --add /etc/init.d/play

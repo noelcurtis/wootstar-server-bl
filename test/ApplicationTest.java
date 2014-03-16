@@ -55,21 +55,21 @@ public class ApplicationTest {
         assertThat(SecuredAction.isSecure("hello:" + hashed, "qBPExhPs?C[?LZ]t2;rU8;vG[rpJF9dBBjNEwJU>@LpQ;Zs3c3DOQ]e9A^8bF;s<"));
     }
 
-    //@Test
+    @Test
     public void loadTest() throws Exception
     {
-        int interval = 500;
+        int interval = 40;
         int offset = 10;
         int limit = 10000;
         //String endpoint = "https://www.wootstar.com/apiv1/events";
-        String endpoint = "http://localhost:9000/apiv1/events";
+        final String endpoint = "http://localhost:9000/apiv1/events";
         final String auth = "hello:7805a2d65710e365ae645a8157bf4687d3922ee46146d1ea889b2ea8beec2188";
         final Results r = new Results();
 
-        for (int i=0; i< limit; i++)
+        for (int i=0; i < limit; i++)
         {
                 Thread.sleep(interval); // wait
-                WS.WSRequestHolder wsHolder= WS.url(endpoint).setQueryParameter("id", "cc07cd84-93ff-4019-b2c4-583078fb0c70");
+                WS.WSRequestHolder wsHolder= WS.url(endpoint);
                 final long time = System.currentTimeMillis();
                 wsHolder.setHeader("Authorization", auth).get().map(new Function<WS.Response, Object>()
                 {
@@ -97,7 +97,7 @@ public class ApplicationTest {
     }
 
 
-    @Test
+    //@Test
     public void testTime()
     {
         final DateTime time = new DateTime();
