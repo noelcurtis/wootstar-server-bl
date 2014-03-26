@@ -136,6 +136,7 @@ public class WootRequestQueue
 
     public void scheduleDailyRefresh()
     {
+        Logger.info("Scheduling Daily refresh");
         // note that time is UTC on EC-2 instances
         final DateTime time = new DateTime();
         org.joda.time.Duration duration = new org.joda.time.Duration(time, time.plusDays(1).toDateMidnight());
@@ -150,6 +151,7 @@ public class WootRequestQueue
             {
                 try
                 {
+                    Logger.info("Daily refresh starting");
                     for (int i = 0; i < 60; i++)
                     {
                         WootGetterZ g = new WootGetterZ(new WootRequest(WootApiHelpers.EventType.Daily, null));

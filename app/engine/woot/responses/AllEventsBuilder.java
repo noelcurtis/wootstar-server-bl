@@ -54,7 +54,7 @@ public class AllEventsBuilder implements WootReponseBuilder
                 final long ct = System.currentTimeMillis();
                 Logger.debug("Creating cached object for eventType " + request.eventType + " site " + request.site);
                 List<Event> allEvents =  EventsHelper.getEventsRedis(request);
-                Logger.info("Done getting events: " + (System.currentTimeMillis() - ct) + "ms");
+                Logger.debug("Done getting events: " + (System.currentTimeMillis() - ct) + "ms");
                 List<engine.data.apiv1.Event> mappedEvents = new ArrayList<engine.data.apiv1.Event>();
                 // map events so they can be rendered in json
                 for (models.Event e : allEvents)
@@ -73,7 +73,7 @@ public class AllEventsBuilder implements WootReponseBuilder
                 // create a new cached object
                 play.cache.Cache.set(cacheIdentifier, new CachedObject(mappedEvents, null, checkpoint));
                 allMappedEvents.addAll(mappedEvents);
-                Logger.info("Done creating cached object: " + (System.currentTimeMillis() - ct) + "ms");
+                Logger.debug("Done creating cached object: " + (System.currentTimeMillis() - ct) + "ms");
             }
         }
 
