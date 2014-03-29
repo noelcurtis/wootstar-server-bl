@@ -101,7 +101,10 @@ public class ApplicationTest {
     public void testTime()
     {
         final DateTime time = new DateTime();
+        System.out.println(time);
+        System.out.println(time.plusDays(1).toDateMidnight());
         org.joda.time.Duration duration = new org.joda.time.Duration(time, time.plusDays(1).toDateMidnight());
+        System.out.println(duration.getStandardHours());
         // Add 5 hours for UTC + 1 hour for 1:00am
         duration = duration.plus(3600000*5);
         System.out.println(duration.getStandardSeconds());

@@ -136,12 +136,12 @@ public class WootRequestQueue
 
     public void scheduleDailyRefresh()
     {
-        Logger.info("Scheduling Daily refresh");
         // note that time is UTC on EC-2 instances
         final DateTime time = new DateTime();
         org.joda.time.Duration duration = new org.joda.time.Duration(time, time.plusDays(1).toDateMidnight());
         // Add 5 hours for UTC for 1:00am
         duration = duration.plus(3600000*5);
+        Logger.info("Scheduling daily refresh " + duration.getStandardSeconds() + " seconds from now");
         Cancellable c = Akka.system().scheduler().schedule(
                 Duration.create(duration.getStandardSeconds(), TimeUnit.SECONDS),
                 Duration.create(24, TimeUnit.HOURS), new Runnable()
