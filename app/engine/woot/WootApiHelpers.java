@@ -16,7 +16,8 @@ public class WootApiHelpers
 //    kids.woot.com
 //    home.woot.com
 //    sport.woot.com
-//    tech.woot.com
+//    electronics.woot.com
+//    computers.woot.com
 //    pop.woot.com
 //    tools.woot.com
 //    accessories.woot.com
@@ -30,7 +31,8 @@ public class WootApiHelpers
         kids("kids.woot.com"),
         home("home.woot.com"),
         sport("sport.woot.com"),
-        tech("tech.woot.com"),
+        electronics("electronics.woot.com"),
+        computers("computers.woot.com"),
         pop("pop.woot.com"),
         tools("tools.woot.com"),
         accessories("accessories.woot.com");

@@ -32,15 +32,16 @@ public class Utils
     {
         eventSortOrder = new HashMap<String, Integer>();
         eventSortOrder.put("www.woot.com", 1);
-        eventSortOrder.put("wine.woot.com", 10);
+        eventSortOrder.put("wine.woot.com", 11);
         eventSortOrder.put("shirt.woot.com", 3);
-        eventSortOrder.put("sellout.woot.com", 7);
-        eventSortOrder.put("kids.woot.com", 9);
+        eventSortOrder.put("sellout.woot.com", 8);
+        eventSortOrder.put("kids.woot.com", 10);
         eventSortOrder.put("home.woot.com",2);
         eventSortOrder.put("sport.woot.com", 4);
-        eventSortOrder.put("tech.woot.com", 6);
-        eventSortOrder.put("pop.woot.com", 11);
-        eventSortOrder.put("tools.woot.com", 8);
+        eventSortOrder.put("electronics.woot.com", 6);
+        eventSortOrder.put("computers.woot.com", 7);
+        eventSortOrder.put("pop.woot.com", 12);
+        eventSortOrder.put("tools.woot.com", 9);
         eventSortOrder.put("accessories.woot.com", 5);
     }
 

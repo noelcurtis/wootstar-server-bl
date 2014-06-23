@@ -40,10 +40,17 @@ public class Settings
         siteDetails.add(node);
 
         node = mapper.createObjectNode();
-        node.put("site", "tech.woot.com");
-        node.put("color", "108487");
-        node.put("cell_title", "tech!");
-        node.put("woot_plus_title", "tech+");
+        node.put("site", "electronics.woot.com");
+        node.put("color", "108486");
+        node.put("cell_title", "electronics!");
+        node.put("woot_plus_title", "electronics+");
+        siteDetails.add(node);
+
+        node = mapper.createObjectNode();
+        node.put("site", "computers.woot.com");
+        node.put("color", "019eb2");
+        node.put("cell_title", "computers!");
+        node.put("woot_plus_title", "computers+");
         siteDetails.add(node);
 
         node = mapper.createObjectNode();
