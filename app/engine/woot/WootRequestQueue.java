@@ -141,7 +141,7 @@ public class WootRequestQueue
         org.joda.time.Duration duration = new org.joda.time.Duration(time, time.plusDays(1).toDateMidnight());
         // TODO: Update to correctly determine DST dynamically
         // Add 6 hours for UTC for 1:00am
-        duration = duration.plus(3600000*6);
+        duration = duration.plus(3600000*5);
         Logger.info("Scheduling daily refresh " + duration.getStandardSeconds() + " seconds from now");
         Cancellable c = Akka.system().scheduler().schedule(
                 Duration.create(duration.getStandardSeconds(), TimeUnit.SECONDS),
